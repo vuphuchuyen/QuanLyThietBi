@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vph.qltb">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo_admin"
+        android:label="B304 - Thiết bị"
+        android:roundIcon="@drawable/logo_admin"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.QuanLyThietBi" >
+    <activity
+        android:name="com.vph.qltb.Scan.Scan"
+        android:exported="true" />
+    <activity
+        android:name="com.vph.qltb.Scan.ScanActivity"
+        android:exported="true" >
+    </activity>
+    <activity
+        android:name="com.vph.qltb.ThietBi.ThietBi"
+        android:exported="true" />
+    <activity
+        android:name="com.vph.qltb.ThietBi.ChucNangTBActivity"
+        android:exported="true" />
+    <activity
+        android:name="com.vph.qltb.Menu.MenuActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+    <activity
+        android:name="com.vph.qltb.SinhVien.DangKy.PhieuDangKy"
+        android:exported="true" />
+    <activity
+        android:name="com.vph.qltb.SinhVien.DangKy.SinhVienDK"
+        android:exported="true" />
+    <activity
+        android:name="com.vph.qltb.SinhVien.Muon.SinhVienM"
+        android:exported="true" />
+    </application>
+</manifest>

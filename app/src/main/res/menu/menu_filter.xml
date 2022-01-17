@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Module"
+        android:title="Module" />
+    <item
+        android:id="@+id/Laptop"
+        android:title="Laptop" />
+    <item
+        android:id="@+id/Camera"
+        android:title="Camera"/>
+    <item
+        android:id="@+id/Off_Filter"
+        android:title="Tắt lọc" />
+</menu>

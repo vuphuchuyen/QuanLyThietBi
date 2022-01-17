@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SinhVien.DangKy.PhieuDangKy">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <Button
+            android:id="@+id/btnQuaylaiMenu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_quaylai" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:background="@color/xanh_nhạt">
+        <TextView
+
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đăng ký mượn thiết bị"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="MSSV"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:textStyle="bold"
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số điện thoại"
+            android:textSize="20sp" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtMSSV"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="number"
+                android:maxLines="1"
+                android:text="000000000" />
+            <EditText
+                android:layout_marginLeft="30dp"
+                android:id="@+id/edtSDT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:hint="Nhập số điện thoại"
+                android:maxLength="10"
+                android:maxLines="1" />
+        </LinearLayout>
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tên Sinh Viên"
+            android:textSize="20sp" />
+
+        <EditText
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="Nhập tên sinh viên"
+            android:id="@+id/edtTenSV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lớp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="Nhập lớp"
+            android:id="@+id/edtLop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thiết bị"
+            android:textSize="20sp" />
+
+        <EditText
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:hint="Nhập tên thiết bị"
+            android:id="@+id/edtThietBi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
+
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số lượng"
+            android:textSize="20sp" />
+
+        <EditText
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:inputType="number"
+            android:hint="Nhập số lượng thiết bị muốn mượn"
+            android:id="@+id/edtSoluong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start|top" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Ngày mượn"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Ngày trả"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:inputType="date"
+                android:id="@+id/edtNgayMuon"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Ngày mượn"
+                android:maxLines="3" />
+
+            <EditText
+                android:inputType="date"
+                android:layout_marginLeft="30dp"
+                android:id="@+id/edtNgayTra"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Ngày trả"
+                android:maxLines="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <CheckBox
+                android:id="@+id/chkCamKet"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:text="Tôi cam kết giữ gìn thiết bị cẩn thận"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="52dp"
+                android:background="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.645"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnXacnhan"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="52dp"
+                android:background="@drawable/ic_done"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.321"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
