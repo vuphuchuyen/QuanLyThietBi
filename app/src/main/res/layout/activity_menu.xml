@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Menu.MenuActivity"
+    tools:context=".Menu.MenuLoginMSSV"
     android:fitsSystemWindows="true"
     >
     <androidx.drawerlayout.widget.DrawerLayout
@@ -45,6 +45,16 @@
                     android:layout_gravity="center"
                     android:text="Xin chào" />
                 <TextView
+                    android:id="@+id/txtTenSinhVien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="Tên Sinh Viên"
+                    android:textColor="@color/red"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+                <TextView
                     android:textStyle="bold"
                     android:textColor="@color/red"
                     android:paddingTop="10dp"
@@ -53,9 +63,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="MSSV hiển thị ở đây" />
-
-        </LinearLayout>
+                    android:text="MSSV" />
+            </LinearLayout>
 
         </LinearLayout>
         <com.google.android.material.navigation.NavigationView

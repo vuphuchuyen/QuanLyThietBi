@@ -5,6 +5,16 @@
       <map>
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danh_sach_thiet_bi.xml" value="0.2" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danhsach_sv_dangky.xml" value="0.16983695652173914" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_menu.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_phieu_dang_ky.xml" value="0.4" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_scan.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_them.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_danhsach_sv.xml" value="0.16304347826086957" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_thietbi.xml" value="0.16304347826086957" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/item_list_menu.xml" value="0.25" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/nav_header.xml" value="0.25" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/question.xml" value="0.25" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/zoom_image.xml" value="0.25" />
       </map>
     </option>
   </component>

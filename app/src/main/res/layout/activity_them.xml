@@ -68,17 +68,28 @@
             android:layout_height="wrap_content"
             android:text="Số lượng"
             android:textSize="20sp" />
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
     <EditText
         android:ellipsize="end"
         android:maxLines="1"
         android:inputType="number"
         android:hint="Nhập số lượng thiết bị"
         android:id="@+id/edtSoluong"
-        android:layout_width="match_parent"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:ems="10" />
 
+        android:ems="10" />
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_up"/>
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_down"/>
+        </LinearLayout>
         <TextView
             android:textStyle="bold"
             android:id="@+id/textView4"
@@ -87,7 +98,7 @@
             android:text="Thông tin"
             android:textSize="20sp" />
 
-    <EditText
+        <EditText
         android:ellipsize="end"
         android:maxLines="3"
         android:hint="Nhập thông tin thiết bị"

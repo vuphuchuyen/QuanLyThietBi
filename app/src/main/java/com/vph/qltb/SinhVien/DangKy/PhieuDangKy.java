@@ -1,5 +1,6 @@
 package com.vph.qltb.SinhVien.DangKy;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -11,13 +12,18 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.vph.qltb.Menu.MenuActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.Menu.MenuLoginMSSV;
+import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PhieuDangKy extends AppCompatActivity {
@@ -28,9 +34,7 @@ public class PhieuDangKy extends AppCompatActivity {
     Calendar calendar = Calendar.getInstance(); // Lấy thời gian hiện tại
     SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy"); //Format hiển thị ngày/tháng/năm
 
-    FirebaseDatabase rootNode;
     DatabaseReference reference;
-    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +42,46 @@ public class PhieuDangKy extends AppCompatActivity {
         setContentView(R.layout.activity_phieu_dang_ky);
         addControls();
         addEvents();
-        AnButton();
+        autoFill();
     }
-    private void AnButton() {
 
+    private void autoFill() {
+        reference = FirebaseDatabase
+                .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference();
+        if(MenuLoginScan.scan == null){
+            mssv.setText(MenuLoginMSSV.login.getText().toString());
+        }else{
+            mssv.setText(MenuLoginScan.scan.getText().toString());
+        }
+        String MSSV = mssv.getText().toString();
+        reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.hasChild(MSSV)) {
+                    final String getSV = snapshot.child(MSSV).child("sinhvien").getValue(String.class);
+                    final String getSDT = snapshot.child(MSSV).child("sdt").getValue(String.class);
+                    final String getLop = snapshot.child(MSSV).child("lop").getValue(String.class);
+                    sinhvien.setText(getSV);
+                    sdt.setText(getSDT);
+                    lop.setText(getLop);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
     }
 
     private void addEvents() {
         //ko thay đổi
-        mssv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                show();
 
-            }
-        });
         //Quay về Menu
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-
             }
         });
         //Pick ngày mượn
@@ -127,6 +149,8 @@ public class PhieuDangKy extends AppCompatActivity {
                 Them();
             }
         });
+
+
     }
 
     private void show() {
@@ -135,7 +159,9 @@ public class PhieuDangKy extends AppCompatActivity {
 
     private void Them() {
         if(chkCamKet.isChecked()){
-            reference = rootNode.getReference("DanhSachDangKy");
+            reference = FirebaseDatabase
+                    .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("DanhSachDangKy");
 
 
             //Get all the values
@@ -170,11 +196,8 @@ public class PhieuDangKy extends AppCompatActivity {
     }
 
     private void addControls() {
-        rootNode = FirebaseDatabase.getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/");
         lop = findViewById(R.id.edtLop);
         mssv = findViewById(R.id.edtMSSV);
-
-
         chkCamKet = findViewById(R.id.chkCamKet);
         soluong = findViewById(R.id.edtSoluong);
         sinhvien = findViewById(R.id.edtTenSV);
@@ -186,6 +209,5 @@ public class PhieuDangKy extends AppCompatActivity {
         btnXacNhan = findViewById(R.id.btnXacnhan);
         btnXoa = findViewById(R.id.btnClear);
 
-        mssv.setText(MenuActivity.hienthiketqua.getText().toString());
     }
 }

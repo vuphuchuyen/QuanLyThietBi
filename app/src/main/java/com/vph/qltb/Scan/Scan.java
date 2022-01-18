@@ -1,12 +1,19 @@
 package com.vph.qltb.Scan;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
-import com.vph.qltb.Menu.MenuActivity;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -14,13 +21,16 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.vph.qltb.Menu.MenuLoginScan;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class Scan extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     ZXingScannerView scannerView;
-    
+    DatabaseReference reference = FirebaseDatabase
+            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,22 +63,41 @@ public class Scan extends AppCompatActivity implements ZXingScannerView.ResultHa
     public void handleResult(Result rawResult) {
         String results = rawResult.getText();
 
-        ScanActivity.scanError.setText(results);
+        LoginActivity.scanError.setText(results);
         Bundle bundle = new Bundle();
-        bundle.putString("ketqua", results);
+        bundle.putString("scan", results);
 
         onBackPressed();
-        if (results.length()==9) {
-                Intent intent = new Intent(Scan.this, MenuActivity.class);
-                intent.putExtra("Data", bundle);
-                startActivity(intent);
-                finish();
+//        if (results.length()==9) {
+//                Intent intent = new Intent(Scan.this, MenuLoginScan.class);
+//                intent.putExtra("Data", bundle);
+//                startActivity(intent);
+//                finish();
+//        }
+        reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Kiểm tra nếu MSSV tồn tại
+                if(snapshot.hasChild(results)){
+                    Toast.makeText(Scan.this,"Scan thành công!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Scan.this, MenuLoginScan.class);
+                    intent.putExtra("Data", bundle);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(Scan.this,"MSSV sai!",Toast.LENGTH_SHORT).show();
+                    LoginActivity.scanError.setText("Không thành công!");
+                }
+            }
 
-        }
-        else{
-            ScanActivity.scanError.setText("Không thành công!");
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
     @Override
     protected void onPause() {
         super.onPause();
