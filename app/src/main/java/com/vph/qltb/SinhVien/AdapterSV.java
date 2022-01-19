@@ -1,15 +1,18 @@
 package com.vph.qltb.SinhVien;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.rpc.context.AttributeContext;
 import com.vph.qltb.R;
 
 import java.util.List;
@@ -42,7 +45,7 @@ public class AdapterSV extends ArrayAdapter<ModuleSV> {
         TextView ngayMuon = (TextView) convertView.findViewById(R.id.NgayMuon);
         TextView hanTra = (TextView) convertView.findViewById(R.id.HanTra);
         TextView lop = (TextView) convertView.findViewById(R.id.Lop) ;
-
+        ImageButton Accept = convertView.findViewById(R.id.btnAccept);
         //CheckBox Check = (CheckBox) convertView.findViewById(R.id.CheckNM);
 
         //Tự tăng STT

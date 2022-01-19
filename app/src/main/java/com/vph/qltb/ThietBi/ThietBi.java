@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
@@ -26,12 +27,12 @@ public class ThietBi extends AppCompatActivity {
 
 
     SearchView searchView;
-    Button btnBack, btnRestart,btnLoc, btnThem;
+    ImageButton btnBack, btnRestart, btnThem;
+    Button btnLoc;
+    static Button btnXoa;
     ListView listView;
     ArrayList<ModuleTB> dsThietBi;
-    DatabaseReference reference;
-
-
+    public static DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +44,11 @@ public class ThietBi extends AppCompatActivity {
 
     }
     private void addControls() {
-
         searchView = findViewById(R.id.search);
-
-
-
         btnThem = findViewById(R.id.btnThem);
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnRestart = findViewById(R.id.btnRestartTB);
         btnLoc = findViewById(R.id.btnLoc);
-
-
-
         listView = findViewById(R.id.lvthietbi);
         dsThietBi = new ArrayList<>();
 
@@ -85,7 +79,6 @@ public class ThietBi extends AppCompatActivity {
     }
 
 
-
     private void addEvents() {
         //Tải lại trang
         btnRestart.setOnClickListener(new View.OnClickListener() {
@@ -98,10 +91,11 @@ public class ThietBi extends AppCompatActivity {
         btnThem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ThietBi.this, ChucNangTBActivity.class);
+                Intent intent = new Intent(ThietBi.this, ThemTB.class);
                 startActivity(intent);
             }
         });
+
         //Quay lại Menu
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +103,6 @@ public class ThietBi extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        //Phóng to và thu nhỏ hình ảnh
 
 
         //Tìm kiếm thiết bị theo tên
@@ -201,7 +194,9 @@ public class ThietBi extends AppCompatActivity {
                 dropDownMenu.show();
             }
         });
+
     }
+
     public void Restart(){
         Intent intent = new Intent(this,ThietBi.class);
         startActivity(intent);

@@ -13,7 +13,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -25,7 +24,7 @@ import com.vph.qltb.Menu.MenuLoginScan;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
-public class Scan extends AppCompatActivity implements ZXingScannerView.ResultHandler{
+public class ScanHelper extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     ZXingScannerView scannerView;
     DatabaseReference reference = FirebaseDatabase
@@ -69,7 +68,7 @@ public class Scan extends AppCompatActivity implements ZXingScannerView.ResultHa
 
         onBackPressed();
 //        if (results.length()==9) {
-//                Intent intent = new Intent(Scan.this, MenuLoginScan.class);
+//                Intent intent = new Intent(ScanHelper.this, MenuLoginScan.class);
 //                intent.putExtra("Data", bundle);
 //                startActivity(intent);
 //                finish();
@@ -79,14 +78,14 @@ public class Scan extends AppCompatActivity implements ZXingScannerView.ResultHa
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Kiểm tra nếu MSSV tồn tại
                 if(snapshot.hasChild(results)){
-                    Toast.makeText(Scan.this,"Scan thành công!",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Scan.this, MenuLoginScan.class);
+                    Toast.makeText(ScanHelper.this,"ScanHelper thành công!",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ScanHelper.this, MenuLoginScan.class);
                     intent.putExtra("Data", bundle);
                     startActivity(intent);
                     finish();
                 }
                 else{
-                    Toast.makeText(Scan.this,"MSSV sai!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScanHelper.this,"MSSV sai!",Toast.LENGTH_SHORT).show();
                     LoginActivity.scanError.setText("Không thành công!");
                 }
             }

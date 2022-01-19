@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <Button
+        <ImageButton
+
+            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnQuaylaiMenu"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -198,47 +200,48 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
-        <Button
+        <ImageButton
 
+            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnRestartNM"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/ic_reload"
             />
 
-        <Button
+<!--        <Button-->
 
-            android:id="@+id/btnThem"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_add"
-            />
-        <Button
+<!--            android:id="@+id/btnThem"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:background="@drawable/ic_add"-->
+<!--            />-->
+<!--        <Button-->
 
-            android:id="@+id/btnFix"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_fix"
-            />
-        <Button
+<!--            android:id="@+id/btnFix"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:background="@drawable/ic_fix"-->
+<!--            />-->
+<!--        <Button-->
 
-            android:id="@+id/btnXoa"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_delete"
-            />
+<!--            android:id="@+id/btnXoa"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:background="@drawable/ic_delete"-->
+<!--            />-->
 
 
 

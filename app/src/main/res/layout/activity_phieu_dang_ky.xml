@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <Button
+        <ImageButton
+            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnQuaylaiMenu"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -87,6 +88,7 @@
                 android:ellipsize="end"
                 android:hint="Nhập số điện thoại"
                 android:maxLength="10"
+                android:enabled="false"
                 android:maxLines="1" />
         </LinearLayout>
 
@@ -102,6 +104,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="Nhập tên sinh viên"
+            android:enabled="false"
             android:id="@+id/edtTenSV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,6 +121,8 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:hint="Nhập lớp"
+
+            android:enabled="false"
             android:id="@+id/edtLop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,14 +166,20 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:gravity="start|top" />
-        <Button
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/ic_up"/>
-        <Button
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:background="@drawable/ic_down"/>
+
+            <ImageButton
+                android:id="@+id/upDK"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_up"
+                android:backgroundTint="#FF6200EE" />
+
+            <ImageButton
+                android:id="@+id/downDK"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/ic_down"
+                android:backgroundTint="#FF6200EE" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -245,7 +256,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <Button
+        <ImageButton
+            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnClear"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -257,7 +269,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageButton
+            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnXacnhan"
             android:layout_width="50dp"
             android:layout_height="50dp"

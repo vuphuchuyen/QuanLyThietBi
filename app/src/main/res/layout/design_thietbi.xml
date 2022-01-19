@@ -4,33 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.QuanLyThietBi"
     tools:ignore="MissingClass,MissingConstraints"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".ThietBi.ThietBi"
     >
 
-    <Button
+
+    <ImageButton
+        android:backgroundTint="#FF6200EE"
+        android:id="@+id/btnXoaTB"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:backgroundTint="#FF6200EE"
         android:id="@+id/Big"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/ic_zoom_in"
+        android:background="@drawable/ic_zoomout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.997"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/Small"
+    <ImageButton
+        android:backgroundTint="#FF6200EE"
+        android:id="@+id/btnFix"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="64dp"
-        android:background="@drawable/ic_zoom_out"
+        android:layout_gravity="center_horizontal"
+
+        android:layout_marginTop="48dp"
+        android:background="@drawable/ic_fix"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -159,32 +177,5 @@
 
 
     </TableLayout>
-
-    <TextView
-        android:textColor="@color/black"
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="91dp"
-        android:text="Chọn"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-
-        android:id="@+id/check"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="80dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

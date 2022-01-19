@@ -1,36 +1,34 @@
 package com.vph.qltb.SinhVien.DangKy;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PhieuDangKy extends AppCompatActivity {
-    public static Button btnBack, btnXoa, btnXacNhan;
     EditText sinhvien, sdt, mssv, tenthietbi, soluong, ngaymuon, hantra, lop;
     CheckBox chkCamKet;
-
+    ImageButton btnBack, btnXoa, btnXacNhan, btnUp, btnDown;
     Calendar calendar = Calendar.getInstance(); // Lấy thời gian hiện tại
     SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy"); //Format hiển thị ngày/tháng/năm
 
@@ -49,9 +47,9 @@ public class PhieuDangKy extends AppCompatActivity {
         reference = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference();
-        if(MenuLoginScan.scan == null){
+        if (MenuLoginScan.scan == null) {
             mssv.setText(MenuLoginMSSV.login.getText().toString());
-        }else{
+        } else {
             mssv.setText(MenuLoginScan.scan.getText().toString());
         }
         String MSSV = mssv.getText().toString();
@@ -67,11 +65,13 @@ public class PhieuDangKy extends AppCompatActivity {
                     lop.setText(getLop);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
     }
 
     private void addEvents() {
@@ -91,9 +91,9 @@ public class PhieuDangKy extends AppCompatActivity {
                 DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int M, int d) {
-                        calendar.set(calendar.YEAR,y);
-                        calendar.set(calendar.MONTH,M);
-                        calendar.set(calendar.DATE,d);
+                        calendar.set(Calendar.YEAR, y);
+                        calendar.set(Calendar.MONTH, M);
+                        calendar.set(Calendar.DATE, d);
                         ngaymuon.setText(sdfD.format(calendar.getTime()));
                     }
                 };
@@ -114,9 +114,9 @@ public class PhieuDangKy extends AppCompatActivity {
                 DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int y, int M, int d) {
-                        calendar.set(calendar.YEAR,y);
-                        calendar.set(calendar.MONTH,M);
-                        calendar.set(calendar.DATE,d);
+                        calendar.set(Calendar.YEAR, y);
+                        calendar.set(Calendar.MONTH, M);
+                        calendar.set(Calendar.DATE, d);
                         hantra.setText(sdfD.format(calendar.getTime()));
                     }
                 };
@@ -131,9 +131,9 @@ public class PhieuDangKy extends AppCompatActivity {
             }
         });
         //Xóa danh sách vừa nhập
-        btnXoa.setOnClickListener(new View.OnClickListener(){
+        btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 sdt.setText("");
                 lop.setText("");
                 sinhvien.setText("");
@@ -143,22 +143,48 @@ public class PhieuDangKy extends AppCompatActivity {
                 hantra.setText("");
             }
         });
+        //Đồng ý thêm
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Them();
             }
         });
+        String num = soluong.getText().toString();
+        //Tăng số lượng
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (num.isEmpty()) {
+                } else {
+                    int plus = Integer.parseInt(num);
+                    plus += 1;
+                    soluong.setText(String.valueOf(plus));
+                }
+            }
+        });
+        //Giảm số lượng
+        btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (num.isEmpty()) {
 
+                } else {
+                    int down = Integer.parseInt(num);
+                    down -= 1;
+                    soluong.setText(String.valueOf(down));
+                }
+            }
+        });
 
     }
 
     private void show() {
-        Toast.makeText(this,"Vị trí này không thể sửa",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Vị trí này không thể sửa", Toast.LENGTH_SHORT).show();
     }
 
     private void Them() {
-        if(chkCamKet.isChecked()){
+        if (chkCamKet.isChecked()) {
             reference = FirebaseDatabase
                     .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("DanhSachDangKy");
@@ -173,13 +199,12 @@ public class PhieuDangKy extends AppCompatActivity {
             String ngayMuon = ngaymuon.getText().toString();
             String ngayTra = hantra.getText().toString();
             String MSSV = mssv.getText().toString();
-            ModuleSV moduleSV = new ModuleSV(TenSV, Lop, SDT, MSSV,SoLuong,ThietBi,ngayMuon,ngayTra);
+            ModuleSV moduleSV = new ModuleSV(TenSV, Lop, SDT, MSSV, SoLuong, ThietBi, ngayMuon, ngayTra);
 
 
-            if( Lop.isEmpty() || TenSV.isEmpty() || ThietBi.isEmpty() || SoLuong.isEmpty() || SDT.isEmpty() ||ngayTra.isEmpty() || ngayMuon.isEmpty()) {
+            if (Lop.isEmpty() || TenSV.isEmpty() || ThietBi.isEmpty() || SoLuong.isEmpty() || SDT.isEmpty() || ngayTra.isEmpty() || ngayMuon.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 reference.push().setValue(moduleSV);
                 sdt.setText("");
@@ -190,8 +215,8 @@ public class PhieuDangKy extends AppCompatActivity {
                 ngaymuon.setText("");
                 hantra.setText("");
             }
-        }else{
-            Toast.makeText(this,"Bạn chưa ấn vào cam kết", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Bạn chưa ấn vào cam kết", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -208,6 +233,7 @@ public class PhieuDangKy extends AppCompatActivity {
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnXacNhan = findViewById(R.id.btnXacnhan);
         btnXoa = findViewById(R.id.btnClear);
-
+        btnUp = findViewById(R.id.upDK);
+        btnDown = findViewById(R.id.downDK);
     }
 }

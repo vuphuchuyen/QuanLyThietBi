@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,10 +27,10 @@ import java.util.ArrayList;
 public class SinhVienDK extends AppCompatActivity {
 
     EditText mssv, sdt, sinhvien, tenthietbi, soluong, ngaymuon, hantra, stt;
-
+    ImageButton btnRestartDK, btnBack;
     ListView lvDanKy;
     ArrayList<ModuleSV> dsDangKy;
-    Button btnRestartDK, btnBack, btnThem, btnXoa;
+    Button  btnThem, btnXoa;
     CheckBox checkBox;
 
 
@@ -40,11 +41,11 @@ public class SinhVienDK extends AppCompatActivity {
         setContentView(R.layout.activity_danhsach_sv_dangky);
         addControls();
         addEvents();
-
         hienthiDanhSach();
     }
 
     private void addEvents() {
+
         btnRestartDK.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -87,10 +88,6 @@ public class SinhVienDK extends AppCompatActivity {
 
     private void addControls() {
 
-
-        //btnXoa = findViewById(R.id.btnXoa);
-        //btnThem = findViewById(R.id.btnThem);
-        //checkBox = findViewById(R.id.CheckNM);
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnRestartDK = findViewById(R.id.btnRestartDK);
         lvDanKy = findViewById(R.id.lvNguoiMuon);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,14 +16,16 @@ import com.vph.qltb.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ChucNangTBActivity extends AppCompatActivity {
+public class ThemTB extends AppCompatActivity {
 
     EditText ten, soluong, thongtin, hinhanh;
-    Button btnthem, btnBack, btnXoa, btnCheckImg;
+    ImageButton btnthem, btnBack, btnXoa,  btnUpdate, btnUp, btnDown;
+    Button btnCheckImg;
     ImageView checkImg;
-
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+
+
 
 
     @Override
@@ -58,7 +61,7 @@ public class ChucNangTBActivity extends AppCompatActivity {
                 soluong.setText("");
                 thongtin.setText("");
                 hinhanh.setText("");
-                Glide.with(ChucNangTBActivity.this)
+                Glide.with(ThemTB.this)
                         .load(R.drawable.ic_holder)
                         .into(checkImg);
             }
@@ -67,15 +70,42 @@ public class ChucNangTBActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(ChucNangTBActivity.this, ThietBi.class);
-                startActivity(intent);
+                onBackPressed();
+            }
+        });
+
+
+        //Tăng số lượng
+        btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String num = soluong.getText().toString();
+                if(num.isEmpty()){
+                    soluong.setText("1");
+                }else{
+                   int plus = Integer.parseInt(num);
+                   plus +=1;
+                   soluong.setText(String.valueOf(plus));
+                }
+            }
+        });
+        btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String num = soluong.getText().toString();
+                if(num.isEmpty()){
+                    soluong.setText("1");
+                }else{
+                    int down = Integer.parseInt(num);
+                    down -=1;
+                    soluong.setText(String.valueOf(down));
+                }
             }
         });
     }
+
     private void ThemThietBi(){
         reference = rootNode.getReference("DanhSachThietBi");
-
-
         //Get all the values
         String Ten = ten.getText().toString();
         String SoLuong = soluong.getText().toString();
@@ -90,12 +120,12 @@ public class ChucNangTBActivity extends AppCompatActivity {
         }
         else {
             Toast.makeText(this, "Thêm thiết bị thành công!", Toast.LENGTH_SHORT).show();
-            reference.push().setValue(moduleTB);
+            reference.child(String.valueOf(Ten)).setValue(moduleTB);
             ten.setText("");
             soluong.setText("");
             thongtin.setText("");
             hinhanh.setText("");
-            Glide.with(ChucNangTBActivity.this)
+            Glide.with(ThemTB.this)
                     .load(R.drawable.ic_holder)
                     .into(checkImg);
         }
@@ -105,7 +135,7 @@ public class ChucNangTBActivity extends AppCompatActivity {
         if(url.isEmpty()){
             Toast.makeText(this,"Địa chỉ trống!",Toast.LENGTH_SHORT).show();
         }else{
-            Glide.with(ChucNangTBActivity.this)
+            Glide.with(ThemTB.this)
                     .load(url)
                     .centerCrop()
                     .error(R.drawable.ic_error)
@@ -121,12 +151,13 @@ public class ChucNangTBActivity extends AppCompatActivity {
         soluong = findViewById(R.id.edtSoluong);
         thongtin = findViewById(R.id.edtThongtin);
         hinhanh = findViewById(R.id.edtNgayMuon);
-
+        btnUpdate = findViewById(R.id.btnFix);
         btnCheckImg = findViewById(R.id.btnCheckImg);
         btnthem = findViewById(R.id.btnXacnhan);
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnXoa = findViewById(R.id.btnClear);
-
+        btnUp = findViewById(R.id.up);
+        btnDown = findViewById(R.id.down);
         checkImg = findViewById(R.id.ImgReview);
 
 

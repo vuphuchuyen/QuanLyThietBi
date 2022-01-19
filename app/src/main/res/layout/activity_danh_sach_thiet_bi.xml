@@ -7,6 +7,8 @@
     tools:context=".ThietBi.ThietBi"
     tools:ignore="MissingConstraints"
     android:orientation="vertical"
+
+    android:theme="@style/Theme.QuanLyThietBi"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -14,7 +16,8 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <Button
+        <ImageButton
+            android:backgroundTint="#6A00FF"
             android:id="@+id/btnQuaylaiMenu"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -22,12 +25,15 @@
             android:background="@drawable/ic_quaylai" />
 
         <SearchView
+
             android:id="@+id/search"
             android:layout_width="247dp"
             android:layout_height="45dp"
             android:iconifiedByDefault="false"
             android:queryHint="Tìm kiếm thiết bị"
-            tools:layout_editor_absoluteY="3dp" />
+            tools:layout_editor_absoluteY="3dp" >
+
+        </SearchView>
 
         <Button
             android:id="@+id/btnLoc"
@@ -35,6 +41,9 @@
             android:layout_height="match_parent"
             android:text="Lọc" />
     </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -77,47 +86,27 @@
         android:gravity="center"
         >
 
-        <Button
+        <ImageButton
 
             android:id="@+id/btnRestartTB"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
             android:background="@drawable/ic_reload"
-            />
+            android:backgroundTint="#6A00FF" />
 
-        <Button
+        <ImageButton
 
             android:id="@+id/btnThem"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_add"
-            />
-        <Button
-
-            android:id="@+id/btnFix"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_fix"
+            android:background="@drawable/ic_addlist"
+            android:backgroundTint="#6A00FF"
             />
 
-        <Button
-            android:id="@+id/btnXoa"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/ic_delete"
-            />
 
     </LinearLayout>
 

@@ -31,14 +31,14 @@
                 android:gravity="center"
                 android:padding="1dp"
                 android:text="STT" />
-            <CheckBox
-                android:checked="false"
-                android:background="@color/white"
-                android:id="@+id/CheckNM"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
 
+            <ImageButton
+                android:id="@+id/btnAccept"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="1dp"
+                android:background="@color/white"
+                android:src="@drawable/ic_accept"
                 android:gravity="center"
                 android:padding="1dp"/>
             <TextView

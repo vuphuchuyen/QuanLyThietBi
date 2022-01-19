@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vph.qltb">
+    package="com.vph.qltb" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo_admin"
@@ -10,42 +13,49 @@
         android:roundIcon="@drawable/logo_admin"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi" >
-    <activity
-        android:name="com.vph.qltb.Scan.Scan"
-        android:exported="true" />
-    <activity
-        android:name="com.vph.qltb.Scan.LoginActivity"
-        android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name="com.vph.qltb.ThietBi.ThietBi"
-        android:exported="true" />
-    <activity
-        android:name="com.vph.qltb.ThietBi.ChucNangTBActivity"
-        android:exported="true" />
-    <activity
-        android:name="com.vph.qltb.Menu.MenuLoginMSSV"
-        android:exported="true">
-
-    </activity>
         <activity
-            android:name="com.vph.qltb.Menu.MenuLoginScan"
-            android:exported="true">
+            android:name=".ThietBi.UpdateTB"
+            android:exported="true" />
+        <activity
+            android:name=".ThietBi.ZoomActivity"
+            android:exported="true"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
+        <activity
+            android:name=".Scan.ScanHelper"
+            android:exported="true" />
+        <activity
+            android:name=".Scan.LoginActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-    <activity
-        android:name="com.vph.qltb.SinhVien.DangKy.PhieuDangKy"
-        android:exported="true" />
-    <activity
-        android:name="com.vph.qltb.SinhVien.DangKy.SinhVienDK"
-        android:exported="true" />
-    <activity
-        android:name="com.vph.qltb.SinhVien.Muon.SinhVienM"
-        android:exported="true" />
+        <activity
+            android:name=".ThietBi.ThietBi"
+            android:exported="true" />
+        <activity
+            android:name=".ThietBi.ThemTB"
+            android:exported="true" />
+        <activity
+            android:name=".Menu.MenuLoginMSSV"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".Menu.MenuLoginScan"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".SinhVien.DangKy.PhieuDangKy"
+            android:exported="true" />
+        <activity
+            android:name=".SinhVien.DangKy.SinhVienDK"
+            android:exported="true" />
+        <activity
+            android:name=".SinhVien.Muon.SinhVienM"
+            android:exported="true" />
     </application>
+
 </manifest>
