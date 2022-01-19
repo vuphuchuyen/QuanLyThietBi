@@ -1,6 +1,7 @@
 package com.vph.qltb.SinhVien.DangKy;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -62,6 +63,7 @@ public class SinhVienDK extends AppCompatActivity {
 
     }
 
+
     private void hienthiDanhSach() {
         reference = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -87,7 +89,6 @@ public class SinhVienDK extends AppCompatActivity {
     }
 
     private void addControls() {
-
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnRestartDK = findViewById(R.id.btnRestartDK);
         lvDanKy = findViewById(R.id.lvNguoiMuon);

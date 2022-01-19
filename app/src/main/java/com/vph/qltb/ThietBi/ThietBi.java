@@ -27,7 +27,7 @@ public class ThietBi extends AppCompatActivity {
 
 
     SearchView searchView;
-    ImageButton btnBack, btnRestart, btnThem;
+    ImageButton btnBack, btnRestart, btnThem, btnChange;
     Button btnLoc;
     static Button btnXoa;
     ListView listView;
@@ -52,7 +52,7 @@ public class ThietBi extends AppCompatActivity {
         listView = findViewById(R.id.lvthietbi);
         dsThietBi = new ArrayList<>();
 
-
+        btnChange = findViewById(R.id.btnChange);
 
     }
     private void hienthiDanhSach() {
@@ -194,6 +194,8 @@ public class ThietBi extends AppCompatActivity {
                 dropDownMenu.show();
             }
         });
+        //Thay đổi kiểu hiển thị
+
 
     }
 

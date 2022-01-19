@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vph.qltb" >
+    package="com.vph.qltb">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +12,10 @@
         android:label="B304 - Thiết bị"
         android:roundIcon="@drawable/logo_admin"
         android:supportsRtl="true"
-        android:theme="@style/Theme.QuanLyThietBi" >
+        android:theme="@style/Theme.QuanLyThietBi">
+        <activity
+            android:name=".SinhVien.DangKy.PhieuDangKy_Bundle"
+            android:exported="false" />
         <activity
             android:name=".ThietBi.UpdateTB"
             android:exported="true" />
@@ -26,7 +29,7 @@
             android:exported="true" />
         <activity
             android:name=".Scan.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,12 +44,10 @@
             android:exported="true" />
         <activity
             android:name=".Menu.MenuLoginMSSV"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".Menu.MenuLoginScan"
-            android:exported="true" >
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".SinhVien.DangKy.PhieuDangKy"
             android:exported="true" />

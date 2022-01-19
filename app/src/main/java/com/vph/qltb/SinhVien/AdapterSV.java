@@ -1,27 +1,40 @@
 package com.vph.qltb.SinhVien;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.rpc.context.AttributeContext;
 import com.vph.qltb.R;
+import com.vph.qltb.SinhVien.DangKy.SinhVienDK;
+import com.vph.qltb.ThietBi.ZoomActivity;
 
 import java.util.List;
 
 
 public class AdapterSV extends ArrayAdapter<ModuleSV> {
 
+    Context context;
+
     public AdapterSV(@NonNull Context context, int resource, @NonNull List<ModuleSV> objects) {
         super(context, resource, objects);
+        this.context = context;
     }
 
 
@@ -60,6 +73,37 @@ public class AdapterSV extends ArrayAdapter<ModuleSV> {
         tenthietbiM.setText(moduleSV.getTenthietbi());
         ngayMuon.setText(moduleSV.getNgaymuon());
         hanTra.setText(moduleSV.getHantra());
+
+        //
+        ImageButton btnAccept = convertView.findViewById(R.id.btnAccept);
+        DatabaseReference reference = FirebaseDatabase
+                .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("DanhSachDangKy");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                btnAccept.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Thông báo!").setIcon(R.drawable.question);
+                        builder.setMessage("Đồng ý cho "
+                                + moduleSV.getSinhvien()
+                                + " mượn này mượn thiết bị "
+                                + moduleSV.getTenthietbi()
+                                + " ?");
+                        builder.setPositiveButton("OK", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error){
+            }
+        });
+
 
         return convertView;
     }

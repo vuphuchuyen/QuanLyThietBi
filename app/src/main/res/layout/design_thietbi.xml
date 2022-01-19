@@ -14,15 +14,15 @@
 
 
     <ImageButton
-        android:backgroundTint="#FF6200EE"
         android:id="@+id/btnXoaTB"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_delete"
+        android:backgroundTint="#FF6200EE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
+        app:layout_constraintHorizontal_bias="0.207"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,14 +39,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:backgroundTint="#FF6200EE"
         android:id="@+id/btnFix"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
 
-        android:layout_marginTop="48dp"
         android:background="@drawable/ic_fix"
+        android:backgroundTint="#FF6200EE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
@@ -177,5 +177,16 @@
 
 
     </TableLayout>
+
+    <Button
+        android:id="@+id/btnMuon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Mượn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.squareup.picasso.Picasso;
 import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.vph.qltb.R;
 import com.vph.qltb.Scan.LoginActivity;
+import com.vph.qltb.SinhVien.DangKy.PhieuDangKy_Bundle;
 
 import java.util.List;
 
@@ -129,6 +131,29 @@ public class AdapterTB extends ArrayAdapter {
 
             }
         });
+        //Mượn Tb trực tiếp
+        Button Muon = convertView.findViewById(R.id.btnMuon);
+        ThietBi.reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Muon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("KQMuon", moduleTB.getTen());
+                        if (snapshot.hasChild(moduleTB.getTen())) {
+                            Intent intent = new Intent(context, PhieuDangKy_Bundle.class);
+                            intent.putExtra("Muon", bundle);
+                            context.startActivity(intent);
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //Chức năng Zoom
         ImageButton Zoom = convertView.findViewById(R.id.Big);
         String HinhAnh = moduleTB.getHinhanh();
@@ -146,10 +171,7 @@ public class AdapterTB extends ArrayAdapter {
                                 intent.putExtra("ZoomIMG", bundle);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 context.startActivity(intent);
-
-
                     }
-
                 });
 
             }

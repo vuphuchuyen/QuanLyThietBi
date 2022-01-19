@@ -106,7 +106,14 @@
             android:background="@drawable/ic_addlist"
             android:backgroundTint="#6A00FF"
             />
-
+        <ImageButton
+            android:id="@+id/btnChange"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/ic_eye"
+            android:backgroundTint="#6A00FF" />
 
     </LinearLayout>
 
