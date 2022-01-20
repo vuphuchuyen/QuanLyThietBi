@@ -1,4 +1,4 @@
-package com.vph.qltb.Scan;
+package com.vph.qltb.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;

@@ -150,12 +150,15 @@ public class PhieuDangKy extends AppCompatActivity {
                 Them();
             }
         });
-        String num = soluong.getText().toString();
+
         //Tăng số lượng
         btnUp.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                String num = soluong.getText().toString();
                 if (num.isEmpty()) {
+                    soluong.setText("1");
                 } else {
                     int plus = Integer.parseInt(num);
                     plus += 1;
@@ -165,10 +168,12 @@ public class PhieuDangKy extends AppCompatActivity {
         });
         //Giảm số lượng
         btnDown.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                String num = soluong.getText().toString();
                 if (num.isEmpty()) {
-
+                    soluong.setText("1");
                 } else {
                     int down = Integer.parseInt(num);
                     down -= 1;

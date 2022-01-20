@@ -14,6 +14,8 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.vph.qltb.Menu.MenuLoginMSSV;
+import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,10 +41,59 @@ public class ThietBi extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_danh_sach_thiet_bi);
         addControls();
+        Role();
         hienthiDanhSach();
         addEvents();
 
     }
+    //Kiểm tra role phân quyền
+    private void Role() {
+            if (MenuLoginScan.scan == null) {
+                String check = MenuLoginMSSV.login.getText().toString();
+                DatabaseReference reference = FirebaseDatabase
+                        .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("DanhSachSinhVien");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String Role = snapshot.child(check).child("role").getValue(String.class);
+                        if (Role.equals("admin")) {
+                            btnThem.setVisibility(View.VISIBLE);
+                        } else {
+                            btnThem.setVisibility(View.GONE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+            } else {
+                String check = MenuLoginScan.scan.getText().toString();
+                DatabaseReference reference = FirebaseDatabase
+                        .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                        .getReference("DanhSachSinhVien");
+                reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String Role = snapshot.child(check).child("role").getValue(String.class);
+                        if (Role.equals("admin")) {
+                            btnThem.setVisibility(View.VISIBLE);
+                        } else {
+                            btnThem.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+
+    }
+
     private void addControls() {
         searchView = findViewById(R.id.search);
         btnThem = findViewById(R.id.btnThem);
@@ -51,7 +102,6 @@ public class ThietBi extends AppCompatActivity {
         btnLoc = findViewById(R.id.btnLoc);
         listView = findViewById(R.id.lvthietbi);
         dsThietBi = new ArrayList<>();
-
         btnChange = findViewById(R.id.btnChange);
 
     }
@@ -100,7 +150,8 @@ public class ThietBi extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+
+                finish();
             }
         });
 

@@ -1,6 +1,7 @@
 package com.vph.qltb.ThietBi;
 
 public class ModuleTB {
+
     String  ten, soluong, thongtin, hinhanh;
     public ModuleTB(String ten, String soluong, String thongtin, String hinhanh) {
         this.ten = ten;

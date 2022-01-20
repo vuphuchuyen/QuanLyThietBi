@@ -25,10 +25,10 @@
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
-            android:name=".Scan.ScanHelper"
+            android:name=".Login.ScanHelper"
             android:exported="true" />
         <activity
-            android:name=".Scan.LoginActivity"
+            android:name=".Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

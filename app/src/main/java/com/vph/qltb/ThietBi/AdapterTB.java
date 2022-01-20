@@ -22,11 +22,13 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.vph.qltb.Menu.MenuLoginMSSV;
+import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
-import com.vph.qltb.Scan.LoginActivity;
 import com.vph.qltb.SinhVien.DangKy.PhieuDangKy_Bundle;
 
 import java.util.List;
@@ -110,19 +112,20 @@ public class AdapterTB extends ArrayAdapter {
                 });
         //Update
         ImageButton Update = convertView.findViewById(R.id.btnFix);
+
         ThietBi.reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("UpdateKQ", moduleTB.getTen());
-                        if (snapshot.hasChild(moduleTB.getTen())) {
-                            Intent intent = new Intent(context, UpdateTB.class);
-                            intent.putExtra("Update", bundle);
-                            context.startActivity(intent);
-                        }
+                      Bundle bundle = new Bundle();
+                       bundle.putString("UpdateKQ", moduleTB.getTen());
+                       if (snapshot.hasChild(moduleTB.getTen())) {
+                           Intent intent = new Intent(context, UpdateTB.class);
+                           intent.putExtra("Update", bundle);
+                           context.startActivity(intent);
+                      }
                     }
                 });
             }
@@ -173,25 +176,64 @@ public class AdapterTB extends ArrayAdapter {
                                 context.startActivity(intent);
                     }
                 });
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        //Kiểm tra Role
+        if (MenuLoginScan.scan == null) {
+            String check = MenuLoginMSSV.login.getText().toString();
+            DatabaseReference reference= FirebaseDatabase
+                    .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("DanhSachSinhVien");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String Role = snapshot.child(check).child("role").getValue(String.class);
+                        if (Role.equals("admin")) {
+                            Xoa.setVisibility(View.VISIBLE);
+                            Update.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            Xoa.setVisibility(View.GONE);
+                            Update.setVisibility(View.GONE);
+                        }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-//        Zoom_in.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                builder.setView(R.layout.zoom);
-//
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//            }
-//        });
+                }
+            });
+
+        } else {
+            String check = MenuLoginScan.scan.getText().toString();
+            DatabaseReference reference= FirebaseDatabase
+                    .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("DanhSachSinhVien");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String Role = snapshot.child(check).child("role").getValue(String.class);
+                    if (Role.equals("admin")) {
+                        Xoa.setVisibility(View.VISIBLE);
+                        Update.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        Xoa.setVisibility(View.GONE);
+                        Update.setVisibility(View.GONE);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
+
+        }
+
+
         return convertView;
     }
 

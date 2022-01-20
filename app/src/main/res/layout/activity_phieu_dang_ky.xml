@@ -276,7 +276,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="52dp"
-            android:background="@drawable/ic_done"
+            android:background="@drawable/ic_addlist"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toStartOf="parent"

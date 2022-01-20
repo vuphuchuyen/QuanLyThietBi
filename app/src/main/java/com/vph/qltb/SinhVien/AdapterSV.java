@@ -89,13 +89,14 @@ public class AdapterSV extends ArrayAdapter<ModuleSV> {
                         builder.setTitle("Thông báo!").setIcon(R.drawable.question);
                         builder.setMessage("Đồng ý cho "
                                 + moduleSV.getSinhvien()
-                                + " mượn này mượn thiết bị "
+                                + " mượn thiết bị "
                                 + moduleSV.getTenthietbi()
-                                + " ?");
-                        builder.setPositiveButton("OK", null);
+                                + " ?"
+                                +"\nNgày mượn: "+moduleSV.getNgaymuon()
+                                +"\nHạn trả: "+moduleSV.getHantra());
+                        builder.setPositiveButton("Đồng ý", null);
                         AlertDialog dialog = builder.create();
                         dialog.show();
-
                     }
                 });
             }

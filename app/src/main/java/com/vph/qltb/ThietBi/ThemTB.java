@@ -75,7 +75,7 @@ public class ThemTB extends AppCompatActivity {
         });
 
 
-        //Tăng số lượng
+        //Tăng số lượng nhấn đơn
         btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,10 @@ public class ThemTB extends AppCompatActivity {
                 }
             }
         });
+
     }
+
+
 
     private void ThemThietBi(){
         reference = rootNode.getReference("DanhSachThietBi");

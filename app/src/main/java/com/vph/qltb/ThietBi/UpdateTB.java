@@ -20,6 +20,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UpdateTB extends AppCompatActivity {
 
     EditText ten, soluong, thongtin, hinhanh;
@@ -30,7 +33,6 @@ public class UpdateTB extends AppCompatActivity {
     DatabaseReference reference = FirebaseDatabase
             .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("DanhSachThietBi");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +115,7 @@ public class UpdateTB extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onBackPressed();
+                finish();
             }
         });
         //Chỉnh sửa thiết bị
@@ -138,14 +140,15 @@ public class UpdateTB extends AppCompatActivity {
         String SoLuong = soluong.getText().toString();
         String ThongTin = thongtin.getText().toString();
         String HinhAnh = hinhanh.getText().toString();
-
-        ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh);
-        Toast.makeText(this, "Cập nhật thiết bị thành công!", Toast.LENGTH_SHORT).show();
-        reference.child(String.valueOf(Ten)).setValue(moduleTB);
-        Glide.with(UpdateTB.this)
-                .load(R.drawable.ic_holder)
-                .into(checkImg);
-
+        ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin,HinhAnh);
+        if( Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() ||HinhAnh.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            reference.child(Ten).setValue(moduleTB);
+            Toast.makeText(UpdateTB.this, "Cập nhật thiết bị thành công!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     public void CheckInImg() {
