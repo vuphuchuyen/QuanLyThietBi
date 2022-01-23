@@ -4,98 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingClass,MissingConstraints"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true"
+    tools:context=".SinhVien.DanhSach.HoSoSV">
 
-    >
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/xanh_nhạt"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hồ sơ sinh viên"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ImageButton
-        android:visibility="invisible"
-        android:id="@+id/btnXoaTB"
+        android:id="@+id/btnHsBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/ic_delete"
-        android:backgroundTint="#FF6200EE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:backgroundTint="#FF6200EE"
-        android:id="@+id/Big"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/ic_zoomout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnFix"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-
-        android:background="@drawable/ic_fix"
-        android:backgroundTint="#FF6200EE"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.043"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/HinhAnhtb"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:background="@drawable/ic_quaylai"
+        android:backgroundTint="#6A00FF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/arduino" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnHsNoti"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_noti"
+        android:backgroundTint="#6A00FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.323"
+        app:layout_constraintStart_toStartOf="@+id/btnHsBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnHsMail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_mail"
+        android:backgroundTint="#6A00FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.574"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:id="@+id/tableLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
         android:paddingTop="10dp"
         android:paddingBottom="5dp"
-        app:layout_constraintTop_toBottomOf="@+id/HinhAnhtb"
-        tools:layout_editor_absoluteX="10dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STT "
+                android:text="MSSV "
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="36dp"
                 tools:layout_editor_absoluteY="159dp" />
 
             <TextView
-
                 android:id="@+id/txtHsMSSV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="null"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="159dp" />
 
@@ -106,21 +105,22 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên thiết bị: "
+                android:text="Tên sinh viên: "
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="35dp"
                 tools:layout_editor_absoluteY="196dp" />
 
             <TextView
-
                 android:id="@+id/txtHsTenSV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Arduino"
+                android:text="null"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="196dp" />
 
@@ -133,21 +133,22 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số lượng: "
+                android:text="Lớp: "
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="214dp"
                 tools:layout_editor_absoluteY="196dp" />
 
             <TextView
-
                 android:id="@+id/txtHsLop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
+                android:text="null"
+                android:textSize="16sp"
                 tools:layout_editor_absoluteX="303dp"
                 tools:layout_editor_absoluteY="196dp" />
         </TableRow>
@@ -157,42 +158,75 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:textSize="16sp"
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thông tin: "
+                android:text="Số điện thoại: "
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="213dp"
                 tools:layout_editor_absoluteY="159dp" />
 
             <TextView
-
                 android:id="@+id/txtHsSDT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Tảng vi mạch"
+                android:text="null"
+                android:textSize="16sp"
+                tools:layout_editor_absoluteX="298dp"
+                tools:layout_editor_absoluteY="159dp" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textSize="16sp"
+                android:id="@+id/textView911"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số thiết bị đã mượn:  "
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="213dp"
+                tools:layout_editor_absoluteY="159dp" />
+
+            <TextView
+                android:textSize="16sp"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:id="@+id/txtHsTBMuon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="0"
                 tools:layout_editor_absoluteX="298dp"
                 tools:layout_editor_absoluteY="159dp" />
         </TableRow>
 
-
     </TableLayout>
 
     <Button
-        android:visibility="invisible"
-        android:id="@+id/btnMuon"
+        android:id="@+id/btnHsMuon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="256dp"
         android:text="Mượn"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:backgroundTint="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnHsUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:text="Sửa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

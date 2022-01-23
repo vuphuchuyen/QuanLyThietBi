@@ -161,15 +161,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:backgroundTint="#FF6200EE"
                 android:id="@+id/btnXacnhan"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="44dp"
+                android:layout_marginTop="48dp"
                 android:background="@drawable/ic_addlist"
+                android:backgroundTint="#FF6200EE"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.728"
+                app:layout_constraintHorizontal_bias="0.811"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

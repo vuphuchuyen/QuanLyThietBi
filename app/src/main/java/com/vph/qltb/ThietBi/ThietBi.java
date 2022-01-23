@@ -1,9 +1,13 @@
 package com.vph.qltb.ThietBi;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.vph.qltb.Login.LoginActivity;
 import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
@@ -31,7 +36,6 @@ public class ThietBi extends AppCompatActivity {
     SearchView searchView;
     ImageButton btnBack, btnRestart, btnThem, btnChange;
     Button btnLoc;
-    static Button btnXoa;
     ListView listView;
     ArrayList<ModuleTB> dsThietBi;
     public static DatabaseReference reference;
@@ -255,8 +259,64 @@ public class ThietBi extends AppCompatActivity {
         startActivity(intent);
         finish();
         Toast.makeText(this,"Trang đã được tải lại",Toast.LENGTH_SHORT).show();
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isConnected()) {
 
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThietBi.this);
+            builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
+            builder.setMessage("Vui lòng kiểm tra lại kết nối Internet của bạn!");
+            builder.setNegativeButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (isConnected()) {
+
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThietBi.this);
+            builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
+            builder.setMessage("Vui lòng kiểm tra lại kết nối Internet của bạn!");
+            builder.setNegativeButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (isConnected()) {
+
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThietBi.this);
+            builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
+            builder.setMessage("Vui lòng kiểm tra lại kết nối Internet của bạn!");
+            builder.setNegativeButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+    }
+
+    //Kiểm tra kết nối internet
+    boolean isConnected(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
+    }
 }

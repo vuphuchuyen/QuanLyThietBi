@@ -8,7 +8,7 @@
     android:orientation="vertical"
 
     android:fitsSystemWindows="true"
-    tools:context=".SinhVien.DangKy.PhieuDangKy">
+    tools:context=".SinhVien.ChucNang.PhieuDangKy">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,88 +45,6 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="MSSV"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_marginLeft="30dp"
-                android:textStyle="bold"
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Số điện thoại"
-                android:textSize="20sp" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/edtMSSV"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:ems="10"
-                android:enabled="false"
-                android:inputType="number"
-                android:maxLines="1"
-                android:text="000000000" />
-            <EditText
-                android:layout_marginLeft="30dp"
-                android:id="@+id/edtSDT"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:hint="Nhập số điện thoại"
-                android:maxLength="10"
-                android:enabled="false"
-                android:maxLines="1" />
-        </LinearLayout>
-
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tên Sinh Viên"
-            android:textSize="20sp" />
-
-        <EditText
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:hint="Nhập tên sinh viên"
-            android:enabled="false"
-            android:id="@+id/edtTenSV"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/textView12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lớp"
-            android:textSize="20sp" />
-
-        <EditText
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:hint="Nhập lớp"
-
-            android:enabled="false"
-            android:id="@+id/edtLop"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
 
 
         <TextView
@@ -136,16 +54,25 @@
             android:layout_height="wrap_content"
             android:text="Thiết bị"
             android:textSize="20sp" />
-
-        <EditText
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:hint="Nhập tên thiết bị"
-            android:id="@+id/edtThietBi"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/edtThietBi"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="10"
+                android:hint="Nhập tên thiết bị"
+                android:maxLines="1" />
+            <Button
+                android:id="@+id/btnChonTbMuon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chọn" />
+        </LinearLayout>
         <TextView
             android:textStyle="bold"
             android:id="@+id/textView4"
@@ -156,16 +83,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:inputType="number"
-            android:hint="Nhập số lượng thiết bị muốn mượn"
-            android:id="@+id/edtSoluong"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="start|top" />
+
+            <EditText
+                android:id="@+id/edtSoluong"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="Nhập số lượng thiết bị muốn mượn"
+                android:inputType="number"
+                android:maxLines="3" />
 
             <ImageButton
                 android:id="@+id/upDK"
@@ -257,28 +185,28 @@
         android:paddingRight="10dp">
 
         <ImageButton
-            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnClear"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/ic_delete"
+            android:backgroundTint="#FF6200EE"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.645"
+            app:layout_constraintHorizontal_bias="0.634"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:backgroundTint="#FF6200EE"
             android:id="@+id/btnXacnhan"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/ic_addlist"
+            android:backgroundTint="#FF6200EE"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.321"
+            app:layout_constraintHorizontal_bias="0.326"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

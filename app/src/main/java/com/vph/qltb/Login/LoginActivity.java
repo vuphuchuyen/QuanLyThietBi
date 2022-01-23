@@ -120,7 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                     //Kiểm tra nếu MSSV/MK tồn tại
                     if (snapshot.hasChild(MSSV)) {
                         final String getMK = snapshot.child(MSSV).child("matkhau").getValue(String.class);
-                        if (getMK.equals(MK)) {
+                         if (getMK.equals(MK)) {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this, MenuLoginMSSV.class);
                             intent.putExtra("Data", bundle);

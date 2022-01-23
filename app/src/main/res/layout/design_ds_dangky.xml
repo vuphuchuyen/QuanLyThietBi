@@ -52,27 +52,31 @@
                 android:gravity="center"
                 android:padding="1dp"
                 android:text="Sinh viên" />
+
             <TextView
-                android:background="@color/white"
                 android:id="@+id/Lop"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-
                 android:layout_marginBottom="1dp"
+
+                android:background="@color/white"
                 android:gravity="center"
                 android:padding="1dp"
                 android:text="Lớp" />
+
             <TextView
 
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/white"
                 android:id="@+id/SDTM"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-
+                android:layout_marginHorizontal="1dp"
                 android:layout_marginBottom="1dp"
+
+                android:background="@color/white"
                 android:gravity="center"
                 android:padding="1dp"
+                android:password="false"
+                android:phoneNumber="false"
                 android:text="0123456789" />
             <TextView
                 android:background="@color/white"
@@ -123,11 +127,11 @@
                 android:text="Ngày mượn" />
 
             <TextView
-                android:background="@color/white"
                 android:id="@+id/HanTra"
+                android:background="@color/white"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
-
+                android:padding="1dp"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
                 android:gravity="center"

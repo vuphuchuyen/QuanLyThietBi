@@ -78,7 +78,7 @@ public class ScanHelper extends AppCompatActivity implements ZXingScannerView.Re
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Kiểm tra nếu MSSV tồn tại
                 if(snapshot.hasChild(results)){
-                    Toast.makeText(ScanHelper.this,"ScanHelper thành công!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScanHelper.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ScanHelper.this, MenuLoginScan.class);
                     intent.putExtra("Data", bundle);
                     startActivity(intent);

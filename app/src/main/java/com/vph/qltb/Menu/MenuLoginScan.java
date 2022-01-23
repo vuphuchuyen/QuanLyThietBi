@@ -1,5 +1,6 @@
 package com.vph.qltb.Menu;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -20,10 +22,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.Login.LoginActivity;
 import com.vph.qltb.R;
-import com.vph.qltb.SinhVien.DangKy.PhieuDangKy;
-import com.vph.qltb.SinhVien.DangKy.SinhVienDK;
-import com.vph.qltb.SinhVien.Muon.SinhVienM;
+import com.vph.qltb.SinhVien.DanhSach.HoSoSV;
+import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
+import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
+import com.vph.qltb.SinhVien.DanhSach.DsMuon;
 import com.vph.qltb.ThietBi.ThietBi;
 
 import java.util.ArrayList;
@@ -39,9 +43,9 @@ public class MenuLoginScan extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
-    ListView lvMain, lvSub;
-    ArrayList<ItemMenu> dsMain, dsSub;
-    MenuAdapter adapter1, adapter2;
+    ListView lvMain, lvSub, lvSystem;
+    ArrayList<ItemMenu> dsMain, dsSub, dsSystem;
+    MenuAdapter adapterMain, adapterSub, adapterSystem;
 
 
     @Override
@@ -55,11 +59,12 @@ public class MenuLoginScan extends AppCompatActivity {
         lvMain = (ListView) findViewById(R.id.lvMain);
         lvSub = (ListView) findViewById(R.id.lvSub);
         tensinhvien = findViewById(R.id.txtTenSinhVien);
+        lvSystem = findViewById(R.id.lvSystem);
         ScanResult();
         actionToolBar();
         MenuMain();
         //MenuSub();
-
+        System();
     }
 
     private void ScanResult() {
@@ -85,11 +90,11 @@ public class MenuLoginScan extends AppCompatActivity {
     private void MenuMain() {
         dsMain= new ArrayList<>();
         dsMain.add(new ItemMenu("Danh sách thiết bị", R.drawable.ic_thietbi));
-        dsMain.add(new ItemMenu("Danh sách người mượn", R.drawable.ic_list));
+        dsMain.add(new ItemMenu("Danh sách mượn", R.drawable.ic_list));
         dsMain.add(new ItemMenu("Danh sách đăng ký", R.drawable.ic_dangky));
         dsMain.add(new ItemMenu("Đăng ký mượn", R.drawable.ic_hand));
-        adapter2 = new MenuAdapter(this, R.layout.item_list_menu, dsMain);
-        lvMain.setAdapter(adapter2);
+        adapterMain = new MenuAdapter(this, R.layout.item_list_menu, dsMain);
+        lvMain.setAdapter(adapterMain);
 
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,11 +105,11 @@ public class MenuLoginScan extends AppCompatActivity {
                         startActivity(dstb);
                         break;
                     case 1:
-                        Intent dsnm = new Intent(MenuLoginScan.this, SinhVienM.class);
+                        Intent dsnm = new Intent(MenuLoginScan.this, DsMuon.class);
                         startActivity(dsnm);
                         break;
                     case 2:
-                        Intent dsdk = new Intent(MenuLoginScan.this, SinhVienDK.class);
+                        Intent dsdk = new Intent(MenuLoginScan.this, DsDangKy.class);
                         startActivity(dsdk);
                         break;
                     case 3:
@@ -120,24 +125,20 @@ public class MenuLoginScan extends AppCompatActivity {
         dsSub= new ArrayList<>();
         dsSub.add(new ItemMenu("Số ngẫu nhiên", R.drawable.ic_num));
         dsSub.add(new ItemMenu("Bánh quay may mắn", R.drawable.ic_laban));
-        adapter1 = new MenuAdapter(this, R.layout.item_list_menu, dsSub);
-        lvSub.setAdapter(adapter1);
+        dsSub.add(new ItemMenu("Đăng xuất",R.drawable.ic_exit));
+        adapterSub = new MenuAdapter(this, R.layout.item_list_menu, dsSub);
+        lvSub.setAdapter(adapterSub);
 
         lvSub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int sub, long id) {
                 switch (sub){
                     case 0:
-                        //Intent dstb = new Intent(MenuLoginMSSV.this, ThietBi.class);
-                        //startActivity(dstb);
                         update();
                         break;
                     case 1:
-                        //Intent dsnm = new Intent(MenuLoginMSSV.this, SinhVienM.class);
-                        //startActivity(dsnm);
                         update();
                         break;
-
                 }
             }
         });
@@ -145,7 +146,45 @@ public class MenuLoginScan extends AppCompatActivity {
     public  void update(){
         Toast.makeText(this,"Tính năng đang cập nhật!",Toast.LENGTH_SHORT).show();
     }
+    private void System(){
+        dsSystem= new ArrayList<>();
+        dsSystem.add(new ItemMenu("Hồ sơ sinh viên",R.drawable.ic_nguoimuon));
+        dsSystem.add(new ItemMenu("Hệ thống",R.drawable.ic_setting));
+        dsSystem.add(new ItemMenu("Đăng xuất",R.drawable.ic_exit));
+        adapterSystem = new MenuAdapter(this, R.layout.item_list_menu, dsSystem);
+        lvSystem.setAdapter(adapterSystem);
 
+        lvSystem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int system, long id) {
+                switch (system){
+                    case 0:
+                        Intent hssv = new Intent(MenuLoginScan.this, HoSoSV.class);
+                        startActivity(hssv);
+                        break;
+                    case 1:
+                        update();
+                        break;
+                    case 2:
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MenuLoginScan.this);
+                        builder.setTitle("Thông báo!").setIcon(R.drawable.question);
+                        builder.setMessage("Bạn muốn đăng xuất?");
+                        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent exit = new Intent(MenuLoginScan.this, LoginActivity.class);
+                                startActivity(exit);
+                                finish();
+                            }
+                        });
+                        builder.setPositiveButton("NO", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        break;
+                }
+            }
+        });
+    }
 
     private void actionToolBar() {
         setSupportActionBar(toolbar);

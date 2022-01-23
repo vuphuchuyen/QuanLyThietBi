@@ -8,7 +8,6 @@
     android:fitsSystemWindows="true"
     >
     <androidx.drawerlayout.widget.DrawerLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
@@ -16,6 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:orientation="vertical">
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -35,15 +35,16 @@
                     android:src="@drawable/ic_lachong" />
 
                 <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/red"
-                    android:paddingTop="10dp"
-                    android:textSize="20dp"
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Xin chào" />
+                    android:paddingTop="10dp"
+                    android:text="Thư viện thiết bị B304"
+                    android:textColor="@color/red"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/txtTenSinhVien"
                     android:layout_width="wrap_content"
@@ -53,20 +54,24 @@
                     android:text="Tên Sinh Viên"
                     android:textColor="@color/red"
                     android:textSize="20dp"
-                    android:textStyle="bold" />
-                <TextView
                     android:textStyle="bold"
-                    android:textColor="@color/red"
-                    android:paddingTop="10dp"
-                    android:textSize="20dp"
+                    android:visibility="invisible" />
+
+                <TextView
                     android:id="@+id/MSSV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="MSSV" />
+                    android:paddingTop="10dp"
+                    android:text="MSSV"
+                    android:textColor="@color/red"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
             </LinearLayout>
 
         </LinearLayout>
+
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -76,6 +81,7 @@
             android:id="@+id/navigationView"
             android:layout_marginTop="10dp"
             >
+
             <TextView
                 android:textColor="@color/red"
                 android:layout_marginTop="180dp"
@@ -102,7 +108,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lvSub"/>
+            <TextView
+                android:textColor="@color/black"
+                android:layout_marginTop="470dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="System"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15dp"/>
+            <ListView
+                android:layout_marginTop="490dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lvSystem"/>
         </com.google.android.material.navigation.NavigationView>
+
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>

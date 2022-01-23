@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +28,7 @@ import com.squareup.picasso.Picasso;
 import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
-import com.vph.qltb.SinhVien.DangKy.PhieuDangKy_Bundle;
+import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy_Bundle;
 
 import java.util.List;
 
@@ -52,12 +51,11 @@ public class AdapterTB extends ArrayAdapter {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.design_thietbi, parent, false);
         }
 
-        TextView STT = convertView.findViewById(R.id.stttb);
-        TextView Ten = convertView.findViewById(R.id.tentb);
-        TextView SL = convertView.findViewById(R.id.soluongtb);
-        TextView TT = convertView.findViewById(R.id.thongtintb);
+        TextView STT = convertView.findViewById(R.id.txtHsMSSV);
+        TextView Ten = convertView.findViewById(R.id.txtHsTenSV);
+        TextView SL = convertView.findViewById(R.id.txtHsLop);
+        TextView TT = convertView.findViewById(R.id.txtHsSDT);
         ImageView img = convertView.findViewById(R.id.HinhAnhtb);
-
         //Tự tăng STT
         int stt = position + 1;
         STT.setText(String.valueOf(stt));
@@ -65,6 +63,7 @@ public class AdapterTB extends ArrayAdapter {
         Ten.setText(moduleTB.getTen());
         SL.setText(moduleTB.getSoluong());
         TT.setText(moduleTB.getThongtin());
+        String key = moduleTB.getId();
         Picasso.get().load(moduleTB.getHinhanh())
                 .placeholder(R.drawable.ic_holder)
                 .error(R.drawable.ic_error)
@@ -72,7 +71,7 @@ public class AdapterTB extends ArrayAdapter {
         //Xóa
         ImageButton Xoa = convertView.findViewById(R.id.btnXoaTB);
         ThietBi.reference
-                .child(String.valueOf(moduleTB.getTen()))
+                .child(String.valueOf(key))
                 .orderByChild(String.valueOf(stt))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -92,12 +91,7 @@ public class AdapterTB extends ArrayAdapter {
                                         }
                                     }
                                 });
-                                builder.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
-                                    }
-                                });
+                                builder.setPositiveButton("NO", null);
                                 AlertDialog dialog = builder.create();
                                 dialog.show();
                             }
@@ -119,13 +113,14 @@ public class AdapterTB extends ArrayAdapter {
                 Update.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                      Bundle bundle = new Bundle();
-                       bundle.putString("UpdateKQ", moduleTB.getTen());
-                       if (snapshot.hasChild(moduleTB.getTen())) {
-                           Intent intent = new Intent(context, UpdateTB.class);
-                           intent.putExtra("Update", bundle);
-                           context.startActivity(intent);
-                      }
+                        Bundle bundle = new Bundle();
+                        bundle.putString("UpdateKQ", String.valueOf(key));
+                        if (snapshot.hasChild(String.valueOf(key))) {
+                            Intent intent = new Intent(context, UpdateTB.class);
+                            intent.putExtra("Update", bundle);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }
                     }
                 });
             }
@@ -142,16 +137,29 @@ public class AdapterTB extends ArrayAdapter {
                 Muon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("KQMuon", moduleTB.getTen());
-                        if (snapshot.hasChild(moduleTB.getTen())) {
-                            Intent intent = new Intent(context, PhieuDangKy_Bundle.class);
-                            intent.putExtra("Muon", bundle);
-                            context.startActivity(intent);
-                        }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setTitle("Thông báo!").setIcon(R.drawable.question);
+                        builder.setMessage("Bạn có chắc muốn mượn thiết bị " + moduleTB.getTen() + " không ?");
+                        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("KQMuon", moduleTB.getTen());
+                                if (snapshot.hasChild(String.valueOf(key))) {
+                                    Intent intent = new Intent(context, PhieuDangKy_Bundle.class);
+                                    intent.putExtra("Muon", bundle);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(intent);
+                                }
+                            }
+                        });
+                        builder.setPositiveButton("NO", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
                     }
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -170,13 +178,14 @@ public class AdapterTB extends ArrayAdapter {
                 Zoom.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                                Intent intent = new Intent(context, ZoomActivity.class);
-                                intent.putExtra("ZoomIMG", bundle);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                context.startActivity(intent);
+                        Intent intent = new Intent(context, ZoomActivity.class);
+                        intent.putExtra("ZoomIMG", bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
                     }
                 });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -185,31 +194,7 @@ public class AdapterTB extends ArrayAdapter {
         //Kiểm tra Role
         if (MenuLoginScan.scan == null) {
             String check = MenuLoginMSSV.login.getText().toString();
-            DatabaseReference reference= FirebaseDatabase
-                    .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                    .getReference("DanhSachSinhVien");
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String Role = snapshot.child(check).child("role").getValue(String.class);
-                        if (Role.equals("admin")) {
-                            Xoa.setVisibility(View.VISIBLE);
-                            Update.setVisibility(View.VISIBLE);
-                        }
-                        else{
-                            Xoa.setVisibility(View.GONE);
-                            Update.setVisibility(View.GONE);
-                        }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
-        } else {
-            String check = MenuLoginScan.scan.getText().toString();
-            DatabaseReference reference= FirebaseDatabase
+            DatabaseReference reference = FirebaseDatabase
                     .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("DanhSachSinhVien");
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -219,12 +204,40 @@ public class AdapterTB extends ArrayAdapter {
                     if (Role.equals("admin")) {
                         Xoa.setVisibility(View.VISIBLE);
                         Update.setVisibility(View.VISIBLE);
-                    }
-                    else{
+                        Muon.setVisibility(View.GONE);
+                    } else {
                         Xoa.setVisibility(View.GONE);
                         Update.setVisibility(View.GONE);
+                        Muon.setVisibility(View.VISIBLE);
                     }
                 }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+        } else {
+            String check = MenuLoginScan.scan.getText().toString();
+            DatabaseReference reference = FirebaseDatabase
+                    .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                    .getReference("DanhSachSinhVien");
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String Role = snapshot.child(check).child("role").getValue(String.class);
+                    if (Role.equals("admin")) {
+                        Xoa.setVisibility(View.VISIBLE);
+                        Update.setVisibility(View.VISIBLE);
+                        Muon.setVisibility(View.GONE);
+                    } else {
+                        Xoa.setVisibility(View.GONE);
+                        Update.setVisibility(View.GONE);
+                        Muon.setVisibility(View.VISIBLE);
+                    }
+                }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
@@ -232,11 +245,8 @@ public class AdapterTB extends ArrayAdapter {
 
 
         }
-
-
         return convertView;
     }
-
 
 
 }

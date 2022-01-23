@@ -1,8 +1,13 @@
 package com.vph.qltb.ThietBi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,9 +17,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 import com.vph.qltb.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 
 public class ThemTB extends AppCompatActivity {
 
@@ -108,48 +115,80 @@ public class ThemTB extends AppCompatActivity {
 
 
     private void ThemThietBi(){
-        reference = rootNode.getReference("DanhSachThietBi");
-        //Get all the values
-        String Ten = ten.getText().toString();
-        String SoLuong = soluong.getText().toString();
-        String ThongTin = thongtin.getText().toString();
-        String HinhAnh = hinhanh.getText().toString();
+        if(isConnected()) {
+            reference = rootNode.getReference("DanhSachThietBi");
+            //Get all the values
+            String key = reference.push().getKey();
+            String Ten = ten.getText().toString();
+            String SoLuong = soluong.getText().toString();
+            String ThongTin = thongtin.getText().toString();
+            String HinhAnh = hinhanh.getText().toString();
 
-        ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin,HinhAnh);
+            ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh, key);
 
 
-        if( Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() ||HinhAnh.isEmpty()) {
-            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            if (Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() || HinhAnh.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            } else {
+                AlertDialog.Builder builder =new AlertDialog.Builder(ThemTB.this)
+                        .setTitle("Thông báo!")
+                        .setIcon(R.drawable.question)
+                        .setMessage("Đồng ý thêm thiết bị "+Ten
+                            + "\nSố lượng: "+SoLuong
+                            +"\nThông tin: "+ThongTin)
+
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ThemTB.this, "Thêm thiết bị thành công!", Toast.LENGTH_SHORT).show();
+                                reference.child(key).setValue(moduleTB);
+                                ten.setText("");
+                                soluong.setText("");
+                                thongtin.setText("");
+                                hinhanh.setText("");
+                                Glide.with(ThemTB.this)
+                                        .load(R.drawable.ic_holder)
+                                        .into(checkImg);
+                            }
+                        }).setPositiveButton("NO", null);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
         }
-        else {
-            Toast.makeText(this, "Thêm thiết bị thành công!", Toast.LENGTH_SHORT).show();
-            reference.child(String.valueOf(Ten)).setValue(moduleTB);
-            ten.setText("");
-            soluong.setText("");
-            thongtin.setText("");
-            hinhanh.setText("");
-            Glide.with(ThemTB.this)
-                    .load(R.drawable.ic_holder)
-                    .into(checkImg);
+        else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemTB.this);
+            builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
+            builder.setMessage("Vui lòng kiểm tra lại kết nối Internet của bạn!");
+            builder.setNegativeButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
     public void CheckInImg(){
-        String url = hinhanh.getText().toString();
-        if(url.isEmpty()){
-            Toast.makeText(this,"Địa chỉ trống!",Toast.LENGTH_SHORT).show();
+        if(isConnected()) {
+            String url = hinhanh.getText().toString();
+            if (url.isEmpty()) {
+                Toast.makeText(this, "Địa chỉ trống!", Toast.LENGTH_SHORT).show();
+            } else {
+                Glide.with(ThemTB.this)
+                        .load(url)
+                        .centerCrop()
+                        .error(R.drawable.ic_error)
+                        .placeholder(R.drawable.ic_error)
+                        .into(checkImg);
+            }
         }else{
-            Glide.with(ThemTB.this)
-                    .load(url)
-                    .centerCrop()
-                    .error(R.drawable.ic_error)
-                    .placeholder(R.drawable.ic_error)
-                    .into(checkImg);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemTB.this);
+            builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
+            builder.setMessage("Vui lòng kiểm tra lại kết nối Internet của bạn!");
+            builder.setNegativeButton("OK", null);
+            AlertDialog dialog = builder.create();
+            dialog.show();
         }
     }
 
     private void addControls(){
         rootNode = FirebaseDatabase.getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/");
-
         ten = findViewById(R.id.edtTen);
         soluong = findViewById(R.id.edtSoluong);
         thongtin = findViewById(R.id.edtThongtin);
@@ -162,7 +201,18 @@ public class ThemTB extends AppCompatActivity {
         btnUp = findViewById(R.id.up);
         btnDown = findViewById(R.id.down);
         checkImg = findViewById(R.id.ImgReview);
+    }
+    //Kiểm tra kết nối internet
+    boolean isConnected(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-
+        if(networkInfo!=null){
+            if(networkInfo.isConnected())
+                return true;
+            else
+                return false;
+        }else
+            return false;
     }
 }

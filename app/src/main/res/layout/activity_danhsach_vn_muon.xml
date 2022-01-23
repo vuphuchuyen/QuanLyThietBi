@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SinhVien.Muon.SinhVienM"
+    tools:context=".SinhVien.DanhSach.DsMuon"
     tools:ignore="MissingConstraints"
     android:orientation="vertical"
     android:fitsSystemWindows="true">
@@ -30,6 +30,9 @@
             android:queryHint="Tìm kiếm sinh viên"
             tools:layout_editor_absoluteY="3dp" />
         <Button
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:backgroundTint="@color/purple_500"
             android:id="@+id/btnLoc"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -79,6 +82,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/DSDKXoa"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="1dp"

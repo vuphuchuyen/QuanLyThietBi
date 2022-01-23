@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SinhVien.DangKy.SinhVienDK"
+    tools:context=".SinhVien.DanhSach.DsDangKy"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,13 +28,14 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:background="@color/xanh_nhạt">
+
         <TextView
 
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Danh sách đăng ký"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -65,6 +66,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/DSDKAccept"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="1dp"
@@ -96,7 +98,6 @@
                     android:text="Lớp"
                     android:textStyle="bold" />
                 <TextView
-
                     android:layout_marginHorizontal="1dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
@@ -120,7 +121,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-
                     android:layout_marginHorizontal="1dp"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
@@ -145,7 +145,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-
                     android:layout_marginHorizontal="1dp"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"

@@ -7,8 +7,6 @@
     tools:context=".ThietBi.ThietBi"
     tools:ignore="MissingConstraints"
     android:orientation="vertical"
-
-    android:theme="@style/Theme.QuanLyThietBi"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -39,7 +37,10 @@
             android:id="@+id/btnLoc"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Lọc" />
+            android:backgroundTint="@color/purple_500"
+            android:text="Lọc"
+            android:textColor="@color/white"
+            android:textStyle="normal|bold" />
     </LinearLayout>
 
 
@@ -72,13 +73,15 @@
 
 
         <ListView
-
+            android:theme="@style/Theme.AppCompat.Light"
             android:id="@+id/lvthietbi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
             android:background="@color/white" />
     </TableLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
