@@ -32,7 +32,7 @@
             android:name=".ThietBi.ZoomActivity"
             android:exported="true"
             android:label=""
-            android:theme="@style/Theme.AppCompat.Dialog" />
+            />
         <activity
             android:name=".Login.ScanHelper"
             android:exported="true" />

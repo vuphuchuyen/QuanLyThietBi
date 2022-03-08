@@ -126,7 +126,6 @@ public class ThemTB extends AppCompatActivity {
 
             ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh, key);
 
-
             if (Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() || HinhAnh.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             } else {
@@ -136,7 +135,6 @@ public class ThemTB extends AppCompatActivity {
                         .setMessage("Đồng ý thêm thiết bị "+Ten
                             + "\nSố lượng: "+SoLuong
                             +"\nThông tin: "+ThongTin)
-
                         .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

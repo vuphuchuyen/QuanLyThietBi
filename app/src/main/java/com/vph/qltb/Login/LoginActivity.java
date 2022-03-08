@@ -114,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (MK.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Mật khẩu trống", Toast.LENGTH_SHORT).show();
         } else {
-            reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     //Kiểm tra nếu MSSV/MK tồn tại

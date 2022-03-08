@@ -95,7 +95,7 @@ public class HoSoSV extends AppCompatActivity {
                 mssv.setText(MenuLoginScan.scan.getText().toString());
             }
             String HsMSSV = mssv.getText().toString();
-            reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.hasChild(HsMSSV)) {

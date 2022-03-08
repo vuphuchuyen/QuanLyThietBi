@@ -173,13 +173,13 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                         .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                         .getReference();
                 //values
-                String key = reference.child("DanhSachDangKy").push().getKey();
+                String key = reference.push().getKey();
                 String ThietBi = tenthietbi.getText().toString();
                 String SoLuong = soluong.getText().toString();
                 String ngayMuon = ngaymuon.getText().toString();
                 String ngayTra = hantra.getText().toString();
                 if (MenuLoginScan.scan == null) {
-                    reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
 
                         String Mssv = MenuLoginMSSV.login.getText().toString();
                         @Override
@@ -201,11 +201,12 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                                     builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            reference.child("DanhSachDangKy").push().setValue(moduleSV);
+                                            reference.child("DanhSachDangKy").child(key).setValue(moduleSV);
                                             tenthietbi.setText("");
                                             soluong.setText("");
-                                            ngaymuon.setText("");
-                                            hantra.setText("");
+                                            String date = sdfD.format(calendar.getTime());
+                                            ngaymuon.setText(date);
+                                            hantra.setText(date);
                                             Toast.makeText(PhieuDangKy_Bundle.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
@@ -214,7 +215,6 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                                     dialog.show();
                                 }
                             }
-
                         }
 
                         @Override
@@ -225,7 +225,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                 }
                 else {
                     String Mssv = MenuLoginScan.scan.getText().toString();
-                    reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(Mssv)) {
@@ -245,11 +245,12 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                                     builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            reference.child("DanhSachDangKy").push().setValue(moduleSV);
+                                            reference.child("DanhSachDangKy").child(key).setValue(moduleSV);
                                             tenthietbi.setText("");
                                             soluong.setText("");
-                                            ngaymuon.setText("");
-                                            hantra.setText("");
+                                            String date = sdfD.format(calendar.getTime());
+                                            ngaymuon.setText(date);
+                                            hantra.setText(date);
                                             Toast.makeText(PhieuDangKy_Bundle.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                                         }
                                     });

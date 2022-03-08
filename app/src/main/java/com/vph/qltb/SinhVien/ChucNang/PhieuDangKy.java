@@ -183,7 +183,7 @@ public class PhieuDangKy extends AppCompatActivity {
                 String ngayMuon = ngaymuon.getText().toString();
                 String ngayTra = hantra.getText().toString();
                 if (MenuLoginScan.scan == null) {
-                    reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                         String Mssv = MenuLoginMSSV.login.getText().toString();
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -207,8 +207,9 @@ public class PhieuDangKy extends AppCompatActivity {
                                             reference.child("DanhSachDangKy").child(key).setValue(moduleSV);
                                             tenthietbi.setText("");
                                             soluong.setText("");
-                                            ngaymuon.setText("");
-                                            hantra.setText("");
+                                            String date = sdfD.format(calendar.getTime());
+                                            ngaymuon.setText(date);
+                                            hantra.setText(date);
                                             Toast.makeText(PhieuDangKy.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                                         }
                                     });
@@ -228,7 +229,7 @@ public class PhieuDangKy extends AppCompatActivity {
                 }
                 else {
                     String Mssv = MenuLoginScan.scan.getText().toString();
-                    reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+                    reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(Mssv)) {
@@ -249,11 +250,12 @@ public class PhieuDangKy extends AppCompatActivity {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
 
-                                            reference.child("DanhSachDangKy").push().setValue(moduleSV);
+                                            reference.child("DanhSachDangKy").child(key).setValue(moduleSV);
                                             tenthietbi.setText("");
                                             soluong.setText("");
-                                            ngaymuon.setText("");
-                                            hantra.setText("");
+                                            String date = sdfD.format(calendar.getTime());
+                                            ngaymuon.setText(date);
+                                            hantra.setText(date);
                                             Toast.makeText(PhieuDangKy.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                                         }
                                     });

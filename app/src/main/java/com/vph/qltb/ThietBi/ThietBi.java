@@ -56,7 +56,7 @@ public class ThietBi extends AppCompatActivity {
                 String check = MenuLoginMSSV.login.getText().toString();
                 DatabaseReference reference = FirebaseDatabase
                         .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                        .getReference("DanhSachSinhVien");
+                        .getReference("Account");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -78,7 +78,7 @@ public class ThietBi extends AppCompatActivity {
                 String check = MenuLoginScan.scan.getText().toString();
                 DatabaseReference reference = FirebaseDatabase
                         .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                        .getReference("DanhSachSinhVien");
+                        .getReference("Account");
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

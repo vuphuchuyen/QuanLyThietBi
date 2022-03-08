@@ -73,7 +73,7 @@ public class ScanHelper extends AppCompatActivity implements ZXingScannerView.Re
 //                startActivity(intent);
 //                finish();
 //        }
-        reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Kiểm tra nếu MSSV tồn tại

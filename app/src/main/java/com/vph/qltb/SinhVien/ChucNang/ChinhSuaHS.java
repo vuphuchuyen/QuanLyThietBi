@@ -47,7 +47,7 @@ public class ChinhSuaHS extends AppCompatActivity {
     private void autofill() {
         reference = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("DanhSachSinhVien");
+                .getReference("Account");
         if (MenuLoginScan.scan == null) {
             mssv.setText(MenuLoginMSSV.login.getText().toString());
         } else {
@@ -93,7 +93,7 @@ public class ChinhSuaHS extends AppCompatActivity {
         if(isConnected()){
             reference = FirebaseDatabase
                     .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                    .getReference("DanhSachSinhVien");
+                    .getReference("Account");
             //Get all the values
             String Ten = ten.getText().toString();
             String Lop = lop.getText().toString();

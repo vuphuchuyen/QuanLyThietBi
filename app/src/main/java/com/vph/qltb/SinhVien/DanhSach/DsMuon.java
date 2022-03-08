@@ -51,7 +51,7 @@ public class DsMuon extends AppCompatActivity {
         //Kiểm tra role
         DatabaseReference refSV = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-                .getReference("DanhSachSinhVien");
+                .getReference("Account");
         if (MenuLoginScan.scan == null) {
             String check = MenuLoginMSSV.login.getText().toString();
             refSV.addListenerForSingleValueEvent(new ValueEventListener() {
