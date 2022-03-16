@@ -1,12 +1,5 @@
 package com.vph.qltb.Menu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,22 +9,26 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.Login.LoginActivity;
-import com.vph.qltb.SinhVien.DanhSach.HoSoSV;
-import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
-import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
-import com.vph.qltb.SinhVien.DanhSach.DsMuon;
-
-import com.vph.qltb.ThietBi.ThietBi;
 import com.vph.qltb.R;
-
-
-import com.google.android.material.navigation.NavigationView;
+import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
+import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
+import com.vph.qltb.SinhVien.DanhSach.DsMuon;
+import com.vph.qltb.SinhVien.DanhSach.HoSoSV;
+import com.vph.qltb.ThietBi.ThietBi;
 
 import java.util.ArrayList;
 
@@ -81,6 +78,7 @@ public class MenuLoginMSSV extends AppCompatActivity {
                     tensinhvien.setText(getMK);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -89,7 +87,7 @@ public class MenuLoginMSSV extends AppCompatActivity {
     }
 
     private void MenuMain() {
-        dsMain= new ArrayList<>();
+        dsMain = new ArrayList<>();
         dsMain.add(new ItemMenu("Danh sách thiết bị", R.drawable.ic_thietbi));
         dsMain.add(new ItemMenu("Danh sách mượn", R.drawable.ic_list));
         dsMain.add(new ItemMenu("Danh sách đăng ký", R.drawable.ic_dangky));
@@ -100,7 +98,7 @@ public class MenuLoginMSSV extends AppCompatActivity {
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int main, long id) {
-                switch (main){
+                switch (main) {
                     case 0:
                         Intent dstb = new Intent(MenuLoginMSSV.this, ThietBi.class);
                         startActivity(dstb);
@@ -123,21 +121,22 @@ public class MenuLoginMSSV extends AppCompatActivity {
     }
 
 
-    public  void update(){
-        Toast.makeText(this,"Tính năng đang cập nhật!",Toast.LENGTH_SHORT).show();
+    public void update() {
+        Toast.makeText(this, "Tính năng đang cập nhật!", Toast.LENGTH_SHORT).show();
     }
-    private void System(){
-        dsSystem= new ArrayList<>();
-        dsSystem.add(new ItemMenu("Hồ sơ sinh viên",R.drawable.ic_nguoimuon));
-        dsSystem.add(new ItemMenu("Hệ thống",R.drawable.ic_setting));
-        dsSystem.add(new ItemMenu("Đăng xuất",R.drawable.ic_exit));
+
+    private void System() {
+        dsSystem = new ArrayList<>();
+        dsSystem.add(new ItemMenu("Hồ sơ sinh viên", R.drawable.ic_nguoimuon));
+        dsSystem.add(new ItemMenu("Hệ thống", R.drawable.ic_setting));
+        dsSystem.add(new ItemMenu("Đăng xuất", R.drawable.ic_exit));
         adapterSystem = new MenuAdapter(this, R.layout.item_list_menu, dsSystem);
         lvSystem.setAdapter(adapterSystem);
 
         lvSystem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int system, long id) {
-                switch (system){
+                switch (system) {
                     case 0:
                         Intent hssv = new Intent(MenuLoginMSSV.this, HoSoSV.class);
                         startActivity(hssv);
