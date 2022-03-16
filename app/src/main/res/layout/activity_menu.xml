@@ -100,24 +100,11 @@
                 android:layout_marginTop="370dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sub system"
-                android:layout_gravity="center_horizontal"
-                android:textSize="15dp"/>
-            <ListView
-                android:layout_marginTop="390dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/lvSub"/>
-            <TextView
-                android:textColor="@color/black"
-                android:layout_marginTop="470dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="System"
                 android:layout_gravity="center_horizontal"
                 android:textSize="15dp"/>
             <ListView
-                android:layout_marginTop="490dp"
+                android:layout_marginTop="390dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/lvSystem"/>

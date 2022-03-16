@@ -50,7 +50,7 @@ public class ChinhSuaHS extends AppCompatActivity {
                 .getReference("Account");
         if (MenuLoginScan.scan == null) {
             mssv.setText(MenuLoginMSSV.login.getText().toString());
-        } else {
+        } else if (MenuLoginMSSV.login == null) {
             mssv.setText(MenuLoginScan.scan.getText().toString());
         }
         String HsMSSV = mssv.getText().toString();

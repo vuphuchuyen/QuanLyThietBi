@@ -66,6 +66,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:visibility="invisible"
                     android:id="@+id/DSDKAccept"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"

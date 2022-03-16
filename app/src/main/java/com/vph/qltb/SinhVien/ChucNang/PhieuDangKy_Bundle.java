@@ -65,9 +65,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhieuDangKy_Bundle.this, ThietBi.class);
-                startActivity(intent);
-                finish();
+                onBackPressed();
             }
         });
         //Pick ngày mượn
@@ -178,6 +176,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                 String SoLuong = soluong.getText().toString();
                 String ngayMuon = ngaymuon.getText().toString();
                 String ngayTra = hantra.getText().toString();
+                String tinhtrang = "Đăng ký";
                 if (MenuLoginScan.scan == null) {
                     reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -188,7 +187,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                                 final String getSV = snapshot.child(Mssv).child("sinhvien").getValue(String.class);
                                 final String getSDT = snapshot.child(Mssv).child("sdt").getValue(String.class);
                                 final String getLop = snapshot.child(Mssv).child("lop").getValue(String.class);
-                                ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, Mssv, SoLuong, ThietBi, ngayMuon, ngayTra, key);
+                                ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, Mssv, SoLuong, ThietBi, ngayMuon, ngayTra, tinhtrang, key);
                                 if (ThietBi.isEmpty() || SoLuong.isEmpty() | ngayTra.isEmpty() || ngayMuon.isEmpty()) {
                                     Toast.makeText(PhieuDangKy_Bundle.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -223,7 +222,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                         }
                     });
                 }
-                else {
+                else if (MenuLoginMSSV.login == null) {
                     String Mssv = MenuLoginScan.scan.getText().toString();
                     reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -232,7 +231,7 @@ public class PhieuDangKy_Bundle extends AppCompatActivity {
                                 final String getSV = snapshot.child(Mssv).child("sinhvien").getValue(String.class);
                                 final String getSDT = snapshot.child(Mssv).child("sdt").getValue(String.class);
                                 final String getLop = snapshot.child(Mssv).child("lop").getValue(String.class);
-                                ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, Mssv, SoLuong, ThietBi, ngayMuon, ngayTra,key);
+                                ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, Mssv, SoLuong, ThietBi, ngayMuon, ngayTra, tinhtrang, key);
                                 if (ThietBi.isEmpty() || SoLuong.isEmpty() | ngayTra.isEmpty() || ngayMuon.isEmpty()) {
                                     Toast.makeText(PhieuDangKy_Bundle.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                                 } else {

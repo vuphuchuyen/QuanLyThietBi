@@ -305,7 +305,7 @@ public class ThietBi extends AppCompatActivity {
                     }
                 });
 
-            } else {
+            } else if (MenuLoginMSSV.login == null) {
                 String check = MenuLoginScan.scan.getText().toString();
                 DatabaseReference reference = FirebaseDatabase
                         .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
@@ -486,9 +486,7 @@ public class ThietBi extends AppCompatActivity {
     }
 
     public void Restart(){
-        Intent intent = new Intent(this,ThietBi.class);
-        startActivity(intent);
-        finish();
+        recreate();
         Toast.makeText(this,"Trang đã được tải lại",Toast.LENGTH_SHORT).show();
     }
 

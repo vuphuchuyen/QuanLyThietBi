@@ -7,7 +7,6 @@
     tools:context=".SinhVien.DanhSach.HoSoSV">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="48dp"
@@ -18,10 +17,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hồ sơ sinh viên"
+            android:text="HỒ SƠ SINH VIÊN"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -60,8 +58,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/btnReloadHS"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_reload"
+        android:backgroundTint="#6A00FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TableLayout
-        android:id="@+id/tableLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
@@ -187,7 +196,7 @@
                 android:id="@+id/textView911"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Số thiết bị đã mượn:  "
+                android:text="Số thiết bị đang mượn:  "
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 tools:layout_editor_absoluteX="213dp"
@@ -215,7 +224,7 @@
         android:layout_marginTop="256dp"
         android:text="Mượn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.547"
+        app:layout_constraintHorizontal_bias="0.839"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -229,4 +238,132 @@
         app:layout_constraintHorizontal_bias="0.068"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnHSDoiMK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:text="Đổi MK"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="324dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+           android:gravity="center"
+            android:background="@color/xanh_nhạt"
+            >
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THIẾT BỊ ĐANG MƯỢN"
+                />
+        </TableRow>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/black">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/black">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/blue"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="STT"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/blue"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="SL"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/blue"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="Thiết bị"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:background="@color/blue"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="Ngày mượn"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginHorizontal="1dp"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/blue"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:text="Hạn trả"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <ListView
+                    android:id="@+id/lvHS"
+                    android:layout_width="436dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white">
+
+                </ListView>
+
+            </TableLayout>
+
+        </HorizontalScrollView>
+
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

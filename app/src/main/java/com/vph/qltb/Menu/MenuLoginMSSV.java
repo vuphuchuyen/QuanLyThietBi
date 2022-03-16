@@ -59,7 +59,6 @@ public class MenuLoginMSSV extends AppCompatActivity {
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         lvMain = (ListView) findViewById(R.id.lvMain);
-        lvSub = (ListView) findViewById(R.id.lvSub);
         tensinhvien = findViewById(R.id.txtTenSinhVien);
         lvSystem = findViewById(R.id.lvSystem);
         Login();
@@ -74,7 +73,7 @@ public class MenuLoginMSSV extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("Data");
         login.setText(bundle.getString("ketqua"));
         String mssv = login.getText().toString();
-        reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(mssv)) {
@@ -123,27 +122,7 @@ public class MenuLoginMSSV extends AppCompatActivity {
         });
     }
 
-    private void MenuSub() {
-        dsSub= new ArrayList<>();
-        dsSub.add(new ItemMenu("Số ngẫu nhiên", R.drawable.ic_num));
-        dsSub.add(new ItemMenu("Bánh quay may mắn", R.drawable.ic_laban));
-        adapterSub = new MenuAdapter(this, R.layout.item_list_menu, dsSub);
-        lvSub.setAdapter(adapterSub);
 
-        lvSub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int sub, long id) {
-                switch (sub){
-                    case 0:
-                        update();
-                        break;
-                    case 1:
-                        update();
-                        break;
-                }
-            }
-        });
-    }
     public  void update(){
         Toast.makeText(this,"Tính năng đang cập nhật!",Toast.LENGTH_SHORT).show();
     }

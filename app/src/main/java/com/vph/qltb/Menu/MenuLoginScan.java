@@ -57,7 +57,6 @@ public class MenuLoginScan extends AppCompatActivity {
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.navigationView);
         lvMain = (ListView) findViewById(R.id.lvMain);
-        lvSub = (ListView) findViewById(R.id.lvSub);
         tensinhvien = findViewById(R.id.txtTenSinhVien);
         lvSystem = findViewById(R.id.lvSystem);
         ScanResult();
@@ -72,7 +71,7 @@ public class MenuLoginScan extends AppCompatActivity {
             Bundle bundle = intent.getBundleExtra("Data");
             scan.setText(bundle.getString("scan"));
             String mssv = scan.getText().toString();
-            reference.child("DanhSachSinhVien").addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(mssv)) {
@@ -121,28 +120,7 @@ public class MenuLoginScan extends AppCompatActivity {
         });
     }
 
-    private void MenuSub() {
-        dsSub= new ArrayList<>();
-        dsSub.add(new ItemMenu("Số ngẫu nhiên", R.drawable.ic_num));
-        dsSub.add(new ItemMenu("Bánh quay may mắn", R.drawable.ic_laban));
-        dsSub.add(new ItemMenu("Đăng xuất",R.drawable.ic_exit));
-        adapterSub = new MenuAdapter(this, R.layout.item_list_menu, dsSub);
-        lvSub.setAdapter(adapterSub);
 
-        lvSub.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int sub, long id) {
-                switch (sub){
-                    case 0:
-                        update();
-                        break;
-                    case 1:
-                        update();
-                        break;
-                }
-            }
-        });
-    }
     public  void update(){
         Toast.makeText(this,"Tính năng đang cập nhật!",Toast.LENGTH_SHORT).show();
     }
