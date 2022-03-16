@@ -15,16 +15,16 @@
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
             android:name=".SinhVien.ChucNang.DoiMK"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.ChucNang.ChinhSuaHS"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.DanhSach.HoSoSV"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.ChucNang.PhieuDangKy_Bundle"
-            android:exported="false" />
+            android:exported="true"/>
         <activity
             android:name=".ThietBi.UpdateTB"
             android:exported="true" />
@@ -32,6 +32,7 @@
             android:name=".ThietBi.ZoomActivity"
             android:exported="true"
             android:label=""
+            android:theme="@style/Dialog.NoActionBar"
             />
         <activity
             android:name=".Login.ScanHelper"
@@ -47,7 +48,7 @@
         </activity>
         <activity
             android:name=".ThietBi.ThietBi"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".ThietBi.ThemTB"
             android:exported="true" />
@@ -61,7 +62,8 @@
             android:exported="true" />
         <activity
             android:name=".SinhVien.ChucNang.PhieuDangKy"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.QuanLyThietBi"/>
         <activity
             android:name=".SinhVien.DanhSach.DsDangKy"
             android:exported="true" />

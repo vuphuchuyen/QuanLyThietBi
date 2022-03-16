@@ -3,19 +3,15 @@ package com.vph.qltb.SinhVien.ChucNang;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,14 +27,9 @@ import com.vph.qltb.Menu.MenuLoginMSSV;
 import com.vph.qltb.Menu.MenuLoginScan;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
-import com.vph.qltb.ThietBi.AdapterTB;
-import com.vph.qltb.ThietBi.ModuleTB;
-import com.vph.qltb.ThietBi.ThietBi;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PhieuDangKy extends AppCompatActivity {
     EditText tenthietbi, soluong, ngaymuon, hantra;

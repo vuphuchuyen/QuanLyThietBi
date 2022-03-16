@@ -9,7 +9,6 @@
     android:paddingRight="10dp"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-
     >
 
 
@@ -181,7 +180,6 @@
     </TableLayout>
 
     <Button
-        android:visibility="invisible"
         android:id="@+id/btnMuon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -189,7 +187,6 @@
         android:text="Mượn"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:backgroundTint="@color/purple_500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
