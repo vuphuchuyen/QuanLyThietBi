@@ -19,6 +19,7 @@ import com.vph.qltb.R;
 
 public class ZoomActivity extends AppCompatActivity {
     ImageView Zoom;
+    ImageButton btnExit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

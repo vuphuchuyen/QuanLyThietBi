@@ -101,7 +101,7 @@
                 android:id="@+id/txtHsMSSV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="null"
+                android:text="no data"
                 android:textSize="16sp"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="159dp" />
@@ -127,7 +127,7 @@
                 android:id="@+id/txtHsTenSV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="null"
+                android:text="no data"
                 android:textSize="16sp"
                 tools:layout_editor_absoluteX="131dp"
                 tools:layout_editor_absoluteY="196dp" />
@@ -155,7 +155,7 @@
                 android:id="@+id/txtHsLop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="null"
+                android:text="no data"
                 android:textSize="16sp"
                 tools:layout_editor_absoluteX="303dp"
                 tools:layout_editor_absoluteY="196dp" />
@@ -181,7 +181,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="null"
+                android:text="no data"
                 android:textSize="16sp"
                 tools:layout_editor_absoluteX="298dp"
                 tools:layout_editor_absoluteY="159dp" />

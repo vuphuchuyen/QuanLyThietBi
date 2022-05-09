@@ -12,14 +12,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,14 +26,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vph.qltb.Menu.MenuLoginMSSV;
-import com.vph.qltb.Menu.MenuLoginScan;
+import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ChucNang.ChinhSuaHS;
 import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 import com.vph.qltb.SinhVien.ModuleSV;
-import com.vph.qltb.ThietBi.ModuleTB;
-import com.vph.qltb.ThietBi.ThietBi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +51,12 @@ public class HoSoSV extends AppCompatActivity {
         HienThiHoSo();
         ThietBiDangMuon();
         xuLyButton();
+        tinhTongTBDangMuon();
         DemSoThietBiDaMuon();
     }
+
+
+
     public class AdapterHS extends ArrayAdapter<ModuleSV> {
 
         Context context;
@@ -78,7 +77,7 @@ public class HoSoSV extends AppCompatActivity {
             }
             TextView STT = (TextView) convertView.findViewById(R.id.STTHS);
 
-            TextView slM = (TextView) convertView.findViewById(R.id.SLHS);
+           TextView slM = (TextView) convertView.findViewById(R.id.SLHS);
             TextView tenthietbiM = (TextView) convertView.findViewById(R.id.TenThietBiHS);
             TextView ngayMuon = (TextView) convertView.findViewById(R.id.NgayMuonHS);
             TextView hanTra = (TextView) convertView.findViewById(R.id.HanTraHS);
@@ -91,7 +90,6 @@ public class HoSoSV extends AppCompatActivity {
             tenthietbiM.setText(moduleSV.getTenthietbi());
             ngayMuon.setText(moduleSV.getNgaymuon());
             hanTra.setText(moduleSV.getHantra());
-
 
 
             return convertView;
@@ -146,11 +144,7 @@ public class HoSoSV extends AppCompatActivity {
             reference = FirebaseDatabase
                     .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference();
-            if (MenuLoginScan.scan == null) {
-                mssv.setText(MenuLoginMSSV.login.getText().toString());
-            } else if (MenuLoginMSSV.login == null) {
-                mssv.setText(MenuLoginScan.scan.getText().toString());
-            }
+            mssv.setText(Menu.login.getText().toString());
             String HsMSSV = mssv.getText().toString();
             reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -183,6 +177,8 @@ public class HoSoSV extends AppCompatActivity {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     ModuleSV moduleSV = ds.getValue(ModuleSV.class);
                     if(moduleSV.getMssv().toLowerCase().contains(mssv.getText().toString().toLowerCase())) {
+
+
                         dsMuonHS.add(moduleSV);
                     }
 
@@ -239,7 +235,9 @@ public class HoSoSV extends AppCompatActivity {
             dialog.show();
         }
     }
+    private void tinhTongTBDangMuon() {
 
+    }
     @Override
     protected void onStart() {
         super.onStart();

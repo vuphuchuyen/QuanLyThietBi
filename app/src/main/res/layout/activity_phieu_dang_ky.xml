@@ -61,11 +61,11 @@
 
             <EditText
                 android:id="@+id/edtThietBi"
-                android:layout_width="280dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:ems="10"
-                android:hint="Nhập tên thiết bị"
+                android:enabled="false"
                 android:maxLines="1" />
             <Button
                 android:id="@+id/btnChonTbMuon"
@@ -86,10 +86,11 @@
 
             <EditText
                 android:id="@+id/edtSoluong"
-                android:layout_width="290dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:ems="10"
+                android:text="0"
                 android:gravity="start|top"
                 android:hint="Nhập số lượng thiết bị muốn mượn"
                 android:inputType="number"
@@ -109,6 +110,71 @@
                 android:background="@drawable/ic_down"
                 android:backgroundTint="#FF6200EE" />
         </LinearLayout>
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/textView50"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lý do mượn thiết bị"
+                android:textSize="20sp" />
+            <EditText
+                android:inputType="textMultiLine"
+                android:id="@+id/edtLyDo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:text=""
+                android:lines="3"
+                android:gravity="top|left"
+                android:hint="Nêu lý do mà bạn muốn mượn thiết bị này"
+                android:minLines="1"
+                android:maxLines="3" />
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Thành viên"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold" />-->
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radGroup"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="horizontal">-->
+<!--                <RadioButton-->
+<!--                    android:checked="true"-->
+<!--                    android:id="@+id/rad1"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:text="1"/>-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rad2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="2"/>-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rad3"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="3"/>-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rad4"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="4"/>-->
+<!--            <RadioButton-->
+<!--                android:id="@+id/rad5"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="5"/>-->
+<!--            </RadioGroup>-->
+<!--        </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

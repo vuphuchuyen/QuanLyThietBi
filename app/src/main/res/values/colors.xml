@@ -8,7 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#C0C0C0</color>
-    <color name="blue">#3399FF</color>
+    <color name="xám_nhạt">#F4F4F4</color>
+    <color name="blue">#284F9E</color>
     <color name="xanh_nhạt">#75a9f9</color>
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
@@ -16,4 +17,5 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="red">#FF0000</color>
+    <color name="yellow">#FFCD00</color>
 </resources>

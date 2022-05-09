@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,8 +20,7 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vph.qltb.Menu.MenuLoginMSSV;
-import com.vph.qltb.Menu.MenuLoginScan;
+import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
 import com.google.firebase.database.DataSnapshot;
@@ -168,8 +166,9 @@ public class DsMuon extends AppCompatActivity {
                                             final String getTenTB = moduleSV.getTenthietbi();
                                             final String getNgayMuon = moduleSV.getNgaymuon();
                                             final String getHanTra = moduleSV.getHantra();
+                                            final String getLydo = moduleSV.getLydo();
                                             final String getTinhTrang = "Đã trả";
-                                            ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, getMssvM, getSL, getTenTB, getNgayMuon, getHanTra, getTinhTrang, key);
+                                            ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, getMssvM, getSL, getTenTB, getNgayMuon, getHanTra, getTinhTrang, getLydo, key);
                                             refLichSu.child(key).setValue(moduleSV);
                                             for (DataSnapshot dsdk : snapshot.getChildren()) {
                                                 dsdk.getRef().removeValue();
@@ -191,8 +190,7 @@ public class DsMuon extends AppCompatActivity {
             DatabaseReference refSV = FirebaseDatabase
                     .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                     .getReference("Account");
-            if (MenuLoginScan.scan == null) {
-                String check = MenuLoginMSSV.login.getText().toString();
+                String check = Menu.login.getText().toString();
                 refSV.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -210,24 +208,7 @@ public class DsMuon extends AppCompatActivity {
                     }
                 });
 
-            } else if (MenuLoginMSSV.login == null) {
-                String check = MenuLoginScan.scan.getText().toString();
-                refSV.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String Role = snapshot.child(check).child("role").getValue(String.class);
-                        if (Role.equals("admin")) {
-                            btnXoa.setVisibility(View.VISIBLE);
-                        } else {
-                            btnXoa.setVisibility(View.GONE);
-                        }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-            }
             return convertView;
         }
 
@@ -237,8 +218,7 @@ public class DsMuon extends AppCompatActivity {
         DatabaseReference refSV = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Account");
-        if (MenuLoginScan.scan == null) {
-            String check = MenuLoginMSSV.login.getText().toString();
+            String check = Menu.login.getText().toString();
             refSV.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -256,24 +236,6 @@ public class DsMuon extends AppCompatActivity {
                 }
             });
 
-        } else if (MenuLoginMSSV.login == null) {
-            String check = MenuLoginScan.scan.getText().toString();
-            refSV.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String Role = snapshot.child(check).child("role").getValue(String.class);
-                    if (Role.equals("admin")) {
-                        DSM.setVisibility(View.VISIBLE);
-                    } else {
-                        DSM.setVisibility(View.GONE);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-        }
     }
     private void hienthiDanhSach() {
         reference = FirebaseDatabase

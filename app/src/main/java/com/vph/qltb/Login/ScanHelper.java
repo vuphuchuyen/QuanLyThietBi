@@ -20,7 +20,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
-import com.vph.qltb.Menu.MenuLoginScan;
+import com.vph.qltb.Menu.Menu;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -63,24 +63,18 @@ public class ScanHelper extends AppCompatActivity implements ZXingScannerView.Re
         String results = rawResult.getText();
 
         LoginActivity.scanError.setText(results);
-        Bundle bundle = new Bundle();
-        bundle.putString("scan", results);
+        Bundle bundleScan = new Bundle();
+        bundleScan.putString("scan", results);
 
         onBackPressed();
-//        if (results.length()==9) {
-//                Intent intent = new Intent(ScanHelper.this, MenuLoginScan.class);
-//                intent.putExtra("Data", bundle);
-//                startActivity(intent);
-//                finish();
-//        }
         reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Kiểm tra nếu MSSV tồn tại
                 if(snapshot.hasChild(results)){
                     Toast.makeText(ScanHelper.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(ScanHelper.this, MenuLoginScan.class);
-                    intent.putExtra("Data", bundle);
+                    Intent intent = new Intent(ScanHelper.this, Menu.class);
+                    intent.putExtra("DataScan", bundleScan);
                     startActivity(intent);
                     finish();
                 }

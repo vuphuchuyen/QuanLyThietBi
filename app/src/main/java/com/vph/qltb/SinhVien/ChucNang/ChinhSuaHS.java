@@ -6,30 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vph.qltb.Menu.MenuLoginMSSV;
-import com.vph.qltb.Menu.MenuLoginScan;
+import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
-import com.vph.qltb.SinhVien.DanhSach.HoSoSV;
 import com.vph.qltb.SinhVien.ModuleHSSV;
-import com.vph.qltb.SinhVien.ModuleSV;
-import com.vph.qltb.ThietBi.ModuleTB;
-import com.vph.qltb.ThietBi.ThemTB;
 
 public class ChinhSuaHS extends AppCompatActivity {
     EditText mssv, ten, lop, sdt;
@@ -48,11 +40,7 @@ public class ChinhSuaHS extends AppCompatActivity {
         reference = FirebaseDatabase
                 .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("Account");
-        if (MenuLoginScan.scan == null) {
-            mssv.setText(MenuLoginMSSV.login.getText().toString());
-        } else if (MenuLoginMSSV.login == null) {
-            mssv.setText(MenuLoginScan.scan.getText().toString());
-        }
+        mssv.setText(Menu.login.getText().toString());
         String HsMSSV = mssv.getText().toString();
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -85,7 +85,6 @@ public class UpdateTB extends AppCompatActivity {
         soluong = findViewById(R.id.edtSoluong);
         thongtin = findViewById(R.id.edtThongtin);
         hinhanh = findViewById(R.id.edtNgayMuon);
-        btnUpdate = findViewById(R.id.btnFix);
         btnCheckImg = findViewById(R.id.btnCheckImg);
         btnthem = findViewById(R.id.btnXacnhan);
         btnBack = findViewById(R.id.btnQuaylaiMenu);
@@ -155,7 +154,8 @@ public class UpdateTB extends AppCompatActivity {
             String SoLuong = soluong.getText().toString();
             String ThongTin = thongtin.getText().toString();
             String HinhAnh = hinhanh.getText().toString();
-            ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh, key);
+            String Loai = "Điện tử";
+            ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh, Loai, key);
 
             if (Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() || HinhAnh.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();

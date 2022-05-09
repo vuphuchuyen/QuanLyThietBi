@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.assist.AssistStructure;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,7 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.vph.qltb.Menu.MenuLoginMSSV;
+import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 
 
@@ -35,11 +36,11 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference reference = FirebaseDatabase
             .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference();
-
     EditText editMSSV, editMK;
     ImageButton btnQuestion;
     Button btnScan, btnLogin;
     CheckBox chkHienThi, chkSave;
+    public static CheckBox chkSaveLogin;
     String mssv = "mssv";
     public static TextView scanError;
 
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         btnScan=(Button) findViewById(R.id.btnScan);
         btnQuestion = (ImageButton) findViewById(R.id.btnQuestion);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        chkSaveLogin = findViewById(R.id.chkSaveLogin);
         chkSave = findViewById(R.id.chkSave);
         ChucNang();
     }
@@ -61,12 +63,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void ChucNang() {
+
+
         btnQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showtext();
             }
         });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,12 +107,18 @@ public class LoginActivity extends AppCompatActivity {
         String MK = editMK.getText().toString();
         Bundle bundle = new Bundle();
         bundle.putString("ketqua", MSSV);
-        //Lưu MSSV vs MK
+        //Lưu MSSV
         SharedPreferences sharedPreferences = getSharedPreferences(mssv, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("MSSV",editMSSV.getText().toString());
         editor.putBoolean("Save",chkSave.isChecked());
-        editor.commit();
+        editor.apply();
+        //Duy trì đăng nhập
+            SharedPreferences sharedPreferences2 = getSharedPreferences(mssv, MODE_PRIVATE);
+            SharedPreferences.Editor editorLogin = sharedPreferences2.edit();
+            editorLogin.putBoolean("SaveLogin", chkSaveLogin.isChecked());
+
+            editorLogin.apply();
         //Kiểm tra Internet trc khi cho login
         if (MSSV.isEmpty()) {
             Toast.makeText(LoginActivity.this, "MSSV trống", Toast.LENGTH_SHORT).show();
@@ -122,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                         final String getMK = snapshot.child(MSSV).child("matkhau").getValue(String.class);
                          if (getMK.equals(MK)) {
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(LoginActivity.this, MenuLoginMSSV.class);
+                            Intent intent = new Intent(LoginActivity.this, Menu.class);
                             intent.putExtra("Data", bundle);
                             startActivity(intent);
                             finish();
@@ -133,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "MSSV sai!", Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
@@ -170,13 +180,35 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         SharedPreferences sharedPreferences = getSharedPreferences(mssv,MODE_PRIVATE);
         String LuuMSSV = sharedPreferences.getString("MSSV","");
         boolean save = sharedPreferences.getBoolean("Save",false);
-        if(save==true){
+
+        if(save){
+            chkSave.setChecked(true);
             editMSSV.setText(LuuMSSV);
         }
+        SharedPreferences sharedPreferences2 = getSharedPreferences(mssv,MODE_PRIVATE);
+        SharedPreferences.Editor editorLogin = sharedPreferences2.edit();
+        boolean savelogin = sharedPreferences2.getBoolean("SaveLogin",false);
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("False");
+        if(bundle==null){
+            if(savelogin){
+            String MSSV = editMSSV.getText().toString();
+            Bundle bundle2 = new Bundle();
+            bundle2.putString("ketqua", MSSV);
+            Intent intent2 = new Intent(LoginActivity.this, Menu.class);
+            intent2.putExtra("Data", bundle2);
+            startActivity(intent2);
+            finish();
+            }
+        }
+        else{
+            editorLogin.remove("SaveLogin");
+            editorLogin.apply();
+        }
+
 
     }
     //Kiểm tra kết nối internet

@@ -1,9 +1,9 @@
 package com.vph.qltb.SinhVien;
 
 public class ModuleSV {
-    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,ngaymuon,hantra, tinhtrang ,id;
+    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,ngaymuon,hantra, tinhtrang,lydo ,id;
 
-    public ModuleSV(String sinhvien, String lop, String sdt, String mssv, String soluong, String tenthietbi, String ngaymuon, String hantra,String tinhtrang,String id) {
+    public ModuleSV(String sinhvien, String lop, String sdt, String mssv, String soluong, String tenthietbi, String ngaymuon, String hantra,String tinhtrang,String lydo, String id) {
         this.sinhvien = sinhvien;
         this.lop = lop;
         this.sdt = sdt;
@@ -13,11 +13,20 @@ public class ModuleSV {
         this.ngaymuon = ngaymuon;
         this.hantra = hantra;
         this.tinhtrang = tinhtrang;
+        this.lydo = lydo;
         this.id = id;
     }
 
     public ModuleSV(){
 
+    }
+
+    public String getLydo() {
+        return lydo;
+    }
+
+    public void setLydo(String lydo) {
+        this.lydo = lydo;
     }
 
     public String getTinhtrang() {

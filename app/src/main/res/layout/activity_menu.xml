@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Menu.MenuLoginMSSV"
+    tools:context=".Menu.Menu"
     android:fitsSystemWindows="true"
     >
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -46,24 +47,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtTenSinhVien"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Tên Sinh Viên"
-                    android:textColor="@color/red"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:visibility="invisible" />
-
-                <TextView
                     android:id="@+id/MSSV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingTop="10dp"
-                    android:text="MSSV"
                     android:textColor="@color/red"
                     android:textSize="20dp"
                     android:textStyle="bold"
