@@ -1,144 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:ignore="MissingConstraints">
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
 
-        <TableRow
+        <androidx.constraintlayout.widget.ConstraintLayout
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/design_button_blue"
+            android:backgroundTint="@color/yellow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/white"
-                android:id="@+id/STTNM"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
+                android:id="@+id/txtStudent_Name"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/design_button_blue"
+                android:text="Student_Name"
+                android:textAlignment="center"
+                android:textColor="@color/blue"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="STT" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow"
+                android:text="Tên sinh viên"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageButton
-                android:visibility="invisible"
-                android:id="@+id/btnAccept"
-                android:layout_width="40dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStudent_Class"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/design_button_blue"
+                    android:text="Student_Class"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:text="Lớp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStudent_ID"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/design_button_blue"
+                    android:text="Student_ID"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:text="Mã số"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtTotal_Device"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/design_button_blue"
+                    android:text="Total_Device"
+                    android:textAlignment="center"
+                    android:textColor="@color/blue"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/yellow"
+                    android:text="Số thiết bị đang mượn"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnChiTietDangKy"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginBottom="1dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_accept"
-                android:gravity="center"
-                android:padding="1dp"/>
-            <TextView
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/white"
-                android:id="@+id/SinhVienM"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="Sinh viên" />
+                android:layout_marginTop="12dp"
+                android:background="@drawable/design_button_blue"
+                android:backgroundTint="@color/blue"
+                android:text="Chi tiết"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/Lop"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="1dp"
+                android:id="@+id/textNoti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="88dp"
+                android:layout_marginEnd="8dp"
+                android:drawableTop="@android:drawable/ic_dialog_alert"
+                android:drawableTint="@color/red"
+                android:inputType="textMultiLine"
+                android:maxLines="2"
+                android:text="Chờ\nxác nhận"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/red"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                android:background="@color/white"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="Lớp" />
 
-            <TextView
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                android:id="@+id/SDTM"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginBottom="1dp"
-
-                android:background="@color/white"
-                android:gravity="center"
-                android:padding="1dp"
-                android:password="false"
-                android:phoneNumber="false"
-                android:text="0123456789" />
-            <TextView
-                android:background="@color/white"
-                android:id="@+id/MSSVM"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="MSSV" />
-
-            <TextView
-
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/white"
-                android:id="@+id/SLM"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="SL" />
-
-            <TextView
-                android:background="@color/white"
-                android:id="@+id/TenThietBiM"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="Thiết bị" />
-
-            <TextView
-
-                android:layout_marginHorizontal="1dp"
-                android:background="@color/white"
-                android:id="@+id/NgayMuon"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="1dp"
-                android:text="Ngày mượn" />
-
-            <TextView
-                android:id="@+id/HanTra"
-                android:background="@color/white"
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:padding="1dp"
-                android:layout_marginBottom="1dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Hạn trả" />
-
-        </TableRow>
-    </TableLayout>
-    </HorizontalScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

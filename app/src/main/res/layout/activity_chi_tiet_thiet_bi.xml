@@ -13,7 +13,7 @@
         android:layout_width="100dp"
         android:layout_height="45dp"
         android:layout_marginTop="236dp"
-        android:background="@drawable/design_thietbi_1"
+        android:background="@drawable/design_button_blue"
         android:backgroundTint="@color/blue"
         android:text="Mượn"
         android:textColor="@color/white"
@@ -22,7 +22,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
+
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnExit"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -35,7 +37,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtTenThietBi"
+        android:id="@+id/txtDevice_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -48,8 +50,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRestart"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_reload"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imgThietBi"
+        android:id="@+id/Device_Image"
         android:layout_width="175dp"
         android:layout_height="175dp"
         android:layout_marginTop="56dp"
@@ -63,7 +77,8 @@
         app:strokeWidth="10dp" />
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="236dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,30 +87,32 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:id="@+id/imgLove"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/love" />
 
         <TextView
+            android:id="@+id/Number_Love"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:text="0"
             android:textColor="@color/red"
-            android:textSize="40dp"
+            android:textSize="35dp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
 
         android:id="@+id/btnZoom"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="240dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="236dp"
         android:background="@drawable/ic_zoom_in"
         android:backgroundTint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.914"
+        app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -133,21 +150,105 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/txtThongTinThietBi"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="15dp"
-                        android:inputType="textMultiLine"
-                        android:textColor="@color/black"
-                        android:lines="15"
-                        android:maxLines="15"
-                        android:minLines="1"
-                        android:text="Thông tin thiết bị hiển thị ở đây nè!"
-                        android:textSize="20sp" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:id="@+id/txtDevice_Info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/design_button_blue"
+                            android:inputType="textMultiLine"
+                            android:lines="15"
+                            android:maxLines="15"
+                            android:minLines="1"
+                            android:text="Device_Info"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="0dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/xám_nhạt"
+                            android:text="Thông tin thiết bị"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:id="@+id/txtTotal_Number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/design_button_blue"
+                            android:inputType="textMultiLine"
+                            android:text="Device_Number"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="0dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/xám_nhạt"
+                            android:text="Số lượng thiết bị"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textAlignment="center"
+                            android:id="@+id/txtDevice_Type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/design_button_blue"
+                            android:inputType="textMultiLine"
+                            android:text="Device_Type"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:layout_editor_absoluteX="0dp" />
+
+                        <TextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/xám_nhạt"
+                            android:text="Loại thiết bị"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
                 <LinearLayout

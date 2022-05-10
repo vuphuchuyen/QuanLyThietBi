@@ -20,9 +20,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 
@@ -35,10 +34,6 @@ public class UpdateTB extends AppCompatActivity {
     ImageButton btnthem, btnBack, btnUpdate, btnUp, btnDown;
     Button btnCheckImg;
     ImageView checkImg;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference = FirebaseDatabase
-            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference("DanhSachThietBi");
 
 
     @Override
@@ -56,7 +51,7 @@ public class UpdateTB extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("Update");
         String key = bundle.getString("UpdateKQ");
 
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        FireBaseHelper.reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(String.valueOf(key))) {
@@ -170,7 +165,7 @@ public class UpdateTB extends AppCompatActivity {
                         .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                reference.child(String.valueOf(key)).setValue(moduleTB);
+                                FireBaseHelper.reference.child(String.valueOf(key)).setValue(moduleTB);
                                 Toast.makeText(UpdateTB.this, "Cập nhật thiết bị thành công!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }

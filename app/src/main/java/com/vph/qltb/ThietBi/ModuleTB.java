@@ -2,8 +2,7 @@ package com.vph.qltb.ThietBi;
 
 public class ModuleTB {
 
-    String  ten, soluong, thongtin, hinhanh, loai, id;
-    String yeuthich;
+    String  ten, soluong, thongtin, hinhanh, loai, id, role;
     public ModuleTB(String ten, String soluong, String thongtin, String hinhanh, String loai, String id) {
         this.ten = ten;
         this.soluong = soluong;
@@ -13,12 +12,18 @@ public class ModuleTB {
         this.id = id;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public ModuleTB(){
 
     }
-
-    public ModuleTB(String id, String ten){
-        this.id = id;
+    public ModuleTB(String ten){
         this.ten = ten;
     }
 

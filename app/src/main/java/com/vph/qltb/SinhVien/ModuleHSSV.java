@@ -11,11 +11,9 @@ public class ModuleHSSV {
         this.role = role;
         this.matkhau = matkhau;
     }
-
     public ModuleHSSV() {
 
     }
-
     public String getMatkhau() {
         return matkhau;
     }

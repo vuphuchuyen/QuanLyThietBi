@@ -24,18 +24,14 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 
 
 public class LoginActivity extends AppCompatActivity {
 
-    DatabaseReference reference = FirebaseDatabase
-            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference();
     EditText editMSSV, editMK;
     ImageButton btnQuestion;
     Button btnScan, btnLogin;
@@ -125,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         } else if (MK.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Mật khẩu trống", Toast.LENGTH_SHORT).show();
         } else {
-            reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+            FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     //Kiểm tra nếu MSSV/MK tồn tại

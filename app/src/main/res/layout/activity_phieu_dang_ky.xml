@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    tools:ignore="MissingConstraints"
     android:fitsSystemWindows="true"
     tools:context=".SinhVien.ChucNang.PhieuDangKy">
 
@@ -15,27 +15,31 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <ImageButton
-            android:backgroundTint="#FF6200EE"
+        <androidx.appcompat.widget.AppCompatButton
+            android:backgroundTint="@color/blue"
             android:id="@+id/btnQuaylaiMenu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:background="@drawable/ic_quaylai" />
 
     </LinearLayout>
     <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:background="@color/xanh_nhạt">
+        android:background="@drawable/design_button_blue"
+        android:backgroundTint="@color/blue">
         <TextView
 
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đăng ký mượn thiết bị"
+            android:textAllCaps="true"
             android:textSize="20sp"/>
     </LinearLayout>
     <LinearLayout
@@ -47,235 +51,202 @@
         android:paddingRight="10dp">
 
 
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/textView3"
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thiết bị"
-            android:textSize="20sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+
 
             <EditText
                 android:id="@+id/edtThietBi"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/design_button_blue"
                 android:ellipsize="end"
-                android:ems="10"
                 android:enabled="false"
-                android:maxLines="1" />
-            <Button
-                android:id="@+id/btnChonTbMuon"
+                android:text="DEVICE_NAME"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chọn" />
-        </LinearLayout>
-        <TextView
-            android:textStyle="bold"
-            android:id="@+id/textView4"
+                android:background="@color/white"
+
+                android:text="Thiết bị"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="0dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Số lượng"
-            android:textSize="20sp" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_marginTop="15dp">
 
             <EditText
                 android:id="@+id/edtSoluong"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/design_button_blue"
                 android:ellipsize="end"
                 android:ems="10"
-                android:text="0"
                 android:gravity="start|top"
                 android:hint="Nhập số lượng thiết bị muốn mượn"
                 android:inputType="number"
-                android:maxLines="3" />
-
-            <ImageButton
-                android:id="@+id/upDK"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@drawable/ic_up"
-                android:backgroundTint="#FF6200EE" />
-
-            <ImageButton
-                android:id="@+id/downDK"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:background="@drawable/ic_down"
-                android:backgroundTint="#FF6200EE" />
-        </LinearLayout>
+                android:maxLines="3"
+                android:text="1"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
-                android:textStyle="bold"
-                android:id="@+id/textView50"
-                android:layout_width="match_parent"
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lý do mượn thiết bị"
-                android:textSize="20sp" />
+                android:background="@color/white"
+                android:text="Số lượng"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/edtSoluong"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/upDK"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_up"
+                    android:backgroundTint="@color/blue" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/downDK"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ic_down"
+                    android:backgroundTint="@color/blue"
+                    tools:layout_editor_absoluteX="45dp"
+                    tools:layout_editor_absoluteY="0dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_height="wrap_content">
+
             <EditText
-                android:inputType="textMultiLine"
                 android:id="@+id/edtLyDo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/design_button_blue"
                 android:ems="10"
-                android:text=""
-                android:lines="3"
                 android:gravity="top|left"
-                android:hint="Nêu lý do mà bạn muốn mượn thiết bị này"
+                android:hint="Lý do mà bạn muốn mượn thiết bị này"
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:maxLines="3"
                 android:minLines="1"
-                android:maxLines="3" />
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Thành viên"-->
-<!--                android:textSize="20sp"-->
-<!--                android:textStyle="bold" />-->
-<!--            <RadioGroup-->
-<!--                android:id="@+id/radGroup"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:orientation="horizontal">-->
-<!--                <RadioButton-->
-<!--                    android:checked="true"-->
-<!--                    android:id="@+id/rad1"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:text="1"/>-->
-<!--            <RadioButton-->
-<!--                android:id="@+id/rad2"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="2"/>-->
-<!--            <RadioButton-->
-<!--                android:id="@+id/rad3"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="3"/>-->
-<!--            <RadioButton-->
-<!--                android:id="@+id/rad4"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="4"/>-->
-<!--            <RadioButton-->
-<!--                android:id="@+id/rad5"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:text="5"/>-->
-<!--            </RadioGroup>-->
-<!--        </LinearLayout>-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:text=""
+                app:layout_constraintTop_toTopOf="@+id/textView50"
+                tools:layout_editor_absoluteX="0dp" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="150dp"
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ngày mượn"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="Ngày trả"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:inputType="date"
-                android:id="@+id/edtNgayMuon"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Ngày mượn"
-                android:maxLines="3" />
-
-            <EditText
-                android:inputType="date"
-                android:layout_marginLeft="30dp"
-                android:id="@+id/edtNgayTra"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:ems="10"
-                android:gravity="start|top"
-                android:hint="Ngày trả"
-                android:maxLines="3" />
-        </LinearLayout>
+                android:background="@color/white"
+                android:text="Lý do mượn thiết bị"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="2dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
             <CheckBox
                 android:id="@+id/chkCamKet"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textColor="@color/red"
                 android:text="Tôi cam kết giữ gìn thiết bị cẩn thận"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Quy tắc mượn thiết bị"
+                android:textAlignment="textStart"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:id="@+id/Rule"
+                />
+
         </LinearLayout>
 
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
+        android:layout_height="wrap_content"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp">
-
-        <ImageButton
-            android:id="@+id/btnClear"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/ic_delete"
-            android:backgroundTint="#FF6200EE"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.634"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
+        android:paddingRight="10dp"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnXacnhan"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/ic_addlist"
-            android:backgroundTint="#FF6200EE"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.326"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Mượn"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"
+            android:drawableLeft="@drawable/ic_add"
+            android:background="@drawable/design_button_blue"
+            />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginLeft="15dp"
+            android:id="@+id/btnClear"
+            android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
+            android:drawableTint="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_delete"
+            android:background="@drawable/design_button_blue"
+            android:text=" Xóa" />
+
+
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,11 +1,13 @@
 package com.vph.qltb.SinhVien.ChucNang;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,32 +33,32 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
-import com.vph.qltb.ThietBi.ThietBi;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class PhieuDangKy extends AppCompatActivity {
-
-    EditText tenthietbi, soluong, ngaymuon, hantra, lydo;
-    Button btnChon;
+    TextView Rule;
+    EditText tenthietbi, soluong, lydo;
     CheckBox chkCamKet;
-    ImageButton btnBack, btnXoa, btnXacNhan, btnUp, btnDown;
+    Button btnBack, btnXoa, btnXacNhan, btnUp, btnDown;
+
+
+
     Calendar calendar = Calendar.getInstance(); // Lấy thời gian hiện tại
-    SimpleDateFormat sdfD = new SimpleDateFormat("dd/MM/yyyy"); //Format hiển thị ngày/tháng/năm
-    RadioButton rad1, rad2, rad3, rad4, rad5;
-    RadioGroup radGroup;
-    DatabaseReference reference = FirebaseDatabase
-            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference();
+    @SuppressLint("SimpleDateFormat")
+    SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy"); //Format hiển thị ngày/tháng/năm
+    SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
     String CHANNEL_DK_ID = "Thông báo đăng ký";
     NotificationManagerCompat notificationManagerCompat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,18 +91,15 @@ public class PhieuDangKy extends AppCompatActivity {
 
     }
     private void addEvents() {
-        //RadioButton
-
-        //Pick thiết bị
-        btnChon.setOnClickListener(new View.OnClickListener() {
+        //Quy tắc
+        Rule.setPaintFlags(Rule.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        Rule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PhieuDangKy.this, ThietBi.class);
-                startActivity(intent);
-                finish();
+//                Intent rule = getIntent(this, Rule.class);
+//                startActivity(rule);
             }
         });
-
         //Quay về Menu
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,60 +109,56 @@ public class PhieuDangKy extends AppCompatActivity {
         });
 
         //Pick ngày mượn
-        ngaymuon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int y, int M, int d) {
-                        calendar.set(Calendar.YEAR, y);
-                        calendar.set(Calendar.MONTH, M);
-                        calendar.set(Calendar.DATE, d);
-                        ngaymuon.setText(sdfD.format(calendar.getTime()));
-                    }
-                };
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        PhieuDangKy.this,
-                        callback2,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DATE)
-                );
-                datePickerDialog.show();
-            }
-        });
+//        ngaymuon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int y, int M, int d) {
+//                        calendar.set(Calendar.YEAR, y);
+//                        calendar.set(Calendar.MONTH, M);
+//                        calendar.set(Calendar.DATE, d);
+//                        ngaymuon.setText(sdfD.format(calendar.getTime()));
+//                    }
+//                };
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                        PhieuDangKy.this,
+//                        callback2,
+//                        calendar.get(Calendar.YEAR),
+//                        calendar.get(Calendar.MONTH),
+//                        calendar.get(Calendar.DATE)
+//                );
+//                datePickerDialog.show();
+//            }
+//        });
         //Pick ngày trả
-        hantra.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int y, int M, int d) {
-                        calendar.set(Calendar.YEAR, y);
-                        calendar.set(Calendar.MONTH, M);
-                        calendar.set(Calendar.DATE, d);
-                        hantra.setText(sdfD.format(calendar.getTime()));
-                    }
-                };
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        PhieuDangKy.this,
-                        callback2,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DATE)
-                );
-                datePickerDialog.show();
-            }
-        });
+//        hantra.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DatePickerDialog.OnDateSetListener callback2 = new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int y, int M, int d) {
+//                        calendar.set(Calendar.YEAR, y);
+//                        calendar.set(Calendar.MONTH, M);
+//                        calendar.set(Calendar.DATE, d);
+//                    }
+//                };
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(
+//                        PhieuDangKy.this,
+//                        callback2,
+//                        calendar.get(Calendar.YEAR),
+//                        calendar.get(Calendar.MONTH),
+//                        calendar.get(Calendar.DATE)
+//                );
+//                datePickerDialog.show();
+//            }
+//        });
         //Xóa danh sách vừa nhập
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 lydo.setText(null);
-                soluong.setText("0");
-                String date = sdfD.format(calendar.getTime());
-                ngaymuon.setText(date);
-                hantra.setText(date);
+                soluong.setText("1");
                 chkCamKet.setChecked(false);
             }
         });
@@ -203,32 +199,26 @@ public class PhieuDangKy extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 
     private void Muon() {
         if (isConnected()) {
             if (chkCamKet.isChecked()) {
                 //values
-                String key = reference.push().getKey();
+                String ngayMuon = currentDate.format(calendar.getTime());
+                String thoigian = currentTime.format(calendar.getTime());
+                String key = FireBaseHelper.reference.push().getKey();
                 String ThietBi = tenthietbi.getText().toString();
                 String SoLuong = soluong.getText().toString();
-                String ngayMuon = ngaymuon.getText().toString();
-                String ngayTra = hantra.getText().toString();
                 String Lydo = lydo.getText().toString();
-                String tinhtrang = "ĐANG ĐĂNG KÝ MƯỢN";
-                    reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
-                        final String Mssv = Menu.login.getText().toString();
-
+                String tinhtrang = "1";
+                FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+                        final String Mssv = Menu.login;
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(Mssv)) {
-                                final String getSV = snapshot.child(Mssv).child("sinhvien").getValue(String.class);
-                                final String getSDT = snapshot.child(Mssv).child("sdt").getValue(String.class);
-                                final String getLop = snapshot.child(Mssv).child("lop").getValue(String.class);
-                                ModuleSV moduleSV = new ModuleSV(getSV, getLop, getSDT, Mssv, SoLuong, ThietBi, ngayMuon, ngayTra, tinhtrang, Lydo, key);
-                                if (ThietBi.isEmpty() || SoLuong.isEmpty() | ngayTra.isEmpty() || ngayMuon.isEmpty() || Lydo.isEmpty()) {
+                                ModuleSV moduleThietBi = new ModuleSV(SoLuong, ThietBi, ngayMuon, thoigian, tinhtrang, Lydo, key);
+                                if (ThietBi.isEmpty() || SoLuong.isEmpty() || Lydo.isEmpty()) {
                                     Toast.makeText(PhieuDangKy.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                                 } else {
                                                 int sl = Integer.parseInt(SoLuong);
@@ -244,25 +234,18 @@ public class PhieuDangKy extends AppCompatActivity {
                                                     bdk.setTitle("Thông báo!").setIcon(R.drawable.question);
                                                     bdk.setMessage("Xác nhận mượn thiết bị " + ThietBi
                                                             + "\nSố lượng: " + SoLuong
-                                                            + "\nNgày mượn: " + ngayMuon
-                                                            + "\nHạn trả " + ngayTra);
+                                                            + "\nLý do: " + Lydo);
                                                     bdk.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
-                                                            reference.child("DanhSachDangKy").child(key).setValue(moduleSV);
-
-                                                            thongbao();
-
-
-                                                            lydo.setText(null);
-                                                            soluong.setText("0");
-                                                            String date = sdfD.format(calendar.getTime());
-                                                            ngaymuon.setText(date);
-                                                            hantra.setText(date);
-                                                            chkCamKet.setChecked(false);
-                                                            Toast.makeText(PhieuDangKy.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                                                        }
-
+                                                            FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("mssv").setValue(Mssv);
+                                                            FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").child(key).setValue(moduleThietBi);
+                                                                thongbao();
+                                                                lydo.setText(null);
+                                                                soluong.setText("1");
+                                                                chkCamKet.setChecked(false);
+                                                                Toast.makeText(PhieuDangKy.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                                            }
                                                     });
                                                     bdk.setPositiveButton("NO", null);
                                                     AlertDialog dialog = bdk.create();
@@ -294,7 +277,6 @@ public class PhieuDangKy extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
-
     }
     private void thongbao(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_DK_ID)
@@ -309,29 +291,16 @@ public class PhieuDangKy extends AppCompatActivity {
     }
 
     private void addControls() {
-        btnChon = findViewById(R.id.btnChonTbMuon);
         chkCamKet = findViewById(R.id.chkCamKet);
         soluong = findViewById(R.id.edtSoluong);
         tenthietbi = findViewById(R.id.edtThietBi);
-        ngaymuon = findViewById(R.id.edtNgayMuon);
-        hantra = findViewById(R.id.edtNgayTra);
         lydo = findViewById(R.id.edtLyDo);
         btnBack = findViewById(R.id.btnQuaylaiMenu);
         btnXacNhan = findViewById(R.id.btnXacnhan);
         btnXoa = findViewById(R.id.btnClear);
         btnUp = findViewById(R.id.upDK);
         btnDown = findViewById(R.id.downDK);
-
-//        radGroup = findViewById(R.id.radGroup);
-//        rad1 = findViewById(R.id.rad1);
-//        rad2 = findViewById(R.id.rad2);
-//        rad3 = findViewById(R.id.rad3);
-//        rad4 = findViewById(R.id.rad4);
-//        rad5 = findViewById(R.id.rad5);
-
-        String date = sdfD.format(calendar.getTime());
-        ngaymuon.setText(date);
-        hantra.setText(date);
+        Rule = findViewById(R.id.Rule);
     }
 
     //Kiểm tra kết nối internet

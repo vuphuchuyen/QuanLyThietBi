@@ -18,9 +18,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 
 public class ThemTB extends AppCompatActivity {
@@ -29,8 +28,6 @@ public class ThemTB extends AppCompatActivity {
     ImageButton btnthem, btnBack, btnXoa,  btnUpdate, btnUp, btnDown;
     Button btnCheckImg;
     ImageView checkImg;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
 
 
 
@@ -116,9 +113,8 @@ public class ThemTB extends AppCompatActivity {
 
     private void ThemThietBi(){
         if(isConnected()) {
-            reference = rootNode.getReference("DanhSachThietBi");
             //Get all the values
-            String key = reference.push().getKey();
+            String key = FireBaseHelper.reference.push().getKey();
             String Ten = ten.getText().toString();
             String SoLuong = soluong.getText().toString();
             String ThongTin = thongtin.getText().toString();
@@ -139,7 +135,7 @@ public class ThemTB extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Toast.makeText(ThemTB.this, "Thêm thiết bị thành công!", Toast.LENGTH_SHORT).show();
-                                reference.child(key).setValue(moduleTB);
+                                FireBaseHelper.reference.child(key).setValue(moduleTB);
                                 ten.setText("");
                                 soluong.setText("");
                                 thongtin.setText("");
@@ -186,7 +182,6 @@ public class ThemTB extends AppCompatActivity {
     }
 
     private void addControls(){
-        rootNode = FirebaseDatabase.getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/");
         ten = findViewById(R.id.edtTen);
         soluong = findViewById(R.id.edtSoluong);
         thongtin = findViewById(R.id.edtThongtin);

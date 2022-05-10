@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 import com.karumi.dexter.Dexter;
@@ -20,6 +18,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -27,9 +26,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class ScanHelper extends AppCompatActivity implements ZXingScannerView.ResultHandler{
 
     ZXingScannerView scannerView;
-    DatabaseReference reference = FirebaseDatabase
-            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +63,7 @@ public class ScanHelper extends AppCompatActivity implements ZXingScannerView.Re
         bundleScan.putString("scan", results);
 
         onBackPressed();
-        reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+        FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //Kiểm tra nếu MSSV tồn tại

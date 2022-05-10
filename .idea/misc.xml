@@ -4,28 +4,40 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable-anydpi/ic_ZoomExit.xml" value="0.2703125" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable-anydpi/ic_accept.xml" value="0.2595" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable-anydpi/ic_delete.xml" value="0.2703125" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable-anydpi/ic_menu.xml" value="0.2595" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/custom_button.xml" value="0.2703125" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/design_button_blue.xml" value="0.176" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/design_button_yellow.xml" value="0.2595" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/design_thietbi_1.xml" value="0.2155" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/design_thietbi_2.xml" value="0.221" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/ic_search_black_24dp.xml" value="0.2703125" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/shadow.xml" value="0.2595" />
-        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_chi_tiet_thiet_bi.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/drawable/tron.xml" value="0.2595" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout-w1240dp/activity_lich_su_dang_ky.xml" value="0.16331994645247658" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout-w936dp/activity_lich_su_dang_ky.xml" value="0.190625" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_chi_tiet_dang_ky.xml" value="0.25416666666666665" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_chi_tiet_thiet_bi.xml" value="0.536" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_chinh_sua_hs.xml" value="0.2" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danh_sach_thiet_bi.xml" value="0.264" />
-        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danhsach_sv_dangky.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danhsach_sv_dangky.xml" value="0.22456140350877193" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_danhsach_vn_muon.xml" value="0.264" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_doi_mk.xml" value="0.1" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_history_dk.xml" value="0.25416666666666665" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_ho_so_sv.xml" value="0.4" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_lich_su_dang_ky.xml" value="0.25416666666666665" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_menu.xml" value="0.264" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_open_scan.xml" value="0.24003623188405798" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_phieu_dang_ky.xml" value="0.4" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_scan.xml" value="0.4" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_sua_sdt.xml" value="0.4" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_them.xml" value="0.264" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/activity_update_tb.xml" value="0.2259963768115942" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_chitiet_dangky.xml" value="0.4870259481037924" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_danhsach.xml" value="0.4" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_danhsach_sv.xml" value="0.264" />
-        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_ds_dangky.xml" value="0.264" />
+        <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_ds_dangky.xml" value="0.41379310344827586" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_ds_muon.xml" value="0.264" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_thietbi.xml" value="0.4" />
         <entry key="..\:/New folder (2)/QuanLyThietBi/app/src/main/res/layout/design_view_thietbi.xml" value="0.4" />

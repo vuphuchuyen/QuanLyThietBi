@@ -1,13 +1,17 @@
 package com.vph.qltb.Menu;
 
 
-import static com.vph.qltb.Login.LoginActivity.chkSaveLogin;
-
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,93 +23,128 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.vph.qltb.Login.LoginActivity;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
-import com.vph.qltb.SinhVien.DanhSach.DsMuon;
-import com.vph.qltb.SinhVien.DanhSach.HoSoSV;
+import com.vph.qltb.SinhVien.HoSo.HoSoSV;
 import com.vph.qltb.ThietBi.ThietBi;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Menu extends AppCompatActivity {
 
-    public static TextView login;
-
-    DatabaseReference reference = FirebaseDatabase
-            .getInstance("https://quanlythietbi-b258e-default-rtdb.asia-southeast1.firebasedatabase.app/")
-            .getReference();
+    public static String login;
+    Button btnDSTB, btnDSDK;
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
-    ListView lvMain, lvSub, lvSystem;
-    ArrayList<ItemMenu> dsMain, dsSub, dsSystem;
-    MenuAdapter adapterMain, adapterSub, adapterSystem;
+    ListView lvSystem;
+    ArrayList<ItemMenu> dsSystem;
+    MenuAdapter adapterSystem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        login = findViewById(R.id.MSSV);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
-        navigationView = (NavigationView) findViewById(R.id.navigationView);
-        lvMain = (ListView) findViewById(R.id.lvMain);
+
+        btnDSDK = findViewById(R.id.btnDSDK);
+        btnDSTB = findViewById(R.id.btnDSTB);
+
+        toolbar =  findViewById(R.id.toolbar);
+        drawer = findViewById(R.id.drawerLayout);
+        navigationView = findViewById(R.id.navigationView);
         lvSystem = findViewById(R.id.lvSystem);
         Login();
+        Button();
         actionToolBar();
-        MenuMain();
-        //MenuSub();
+        //MenuMain();
         System();
+    }
+    public class MenuAdapter extends BaseAdapter {
+        private Context context;
+        private int layout;
+        private List<ItemMenu> list;
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        public MenuAdapter(Context context, int layout, List<ItemMenu> list) {
+            this.context = context;
+            this.layout = layout;
+            this.list = list;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+        private class ViewHolder{
+            TextView tv;
+            ImageView img;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder;
+            if(convertView==null){
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(layout,null);
+                viewHolder = new ViewHolder();
+
+                viewHolder.tv = (TextView) convertView.findViewById(R.id.tv);
+                viewHolder.img = (ImageView) convertView.findViewById(R.id.img);
+
+                convertView.setTag(viewHolder);
+            }else{
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            viewHolder.tv.setText(list.get(position).tenItem);
+            viewHolder.img.setImageResource(list.get(position).icon);
+            return convertView;
+        }
     }
     private void Login(){
         Intent intent = getIntent();
         Bundle bundlescan = intent.getBundleExtra("DataScan");
         Bundle bundlelogin = intent.getBundleExtra("Data");
-            if(bundlescan == null && bundlelogin == null && login.getText() == ""){
+            if(bundlescan == null && bundlelogin == null && login == ""){
                 Intent check = new Intent(Menu.this, LoginActivity.class);
                 startActivity(check);
                 finish();
             }
             else {
                  if (bundlescan == null) {
-                    login.setText(bundlelogin.getString("ketqua"));
+                    login = bundlelogin.getString("ketqua");
                 } else if (bundlelogin == null) {
-                    login.setText(bundlescan.getString("scan"));
+                    login = bundlescan.getString("scan");
                 }
             }
     }
 
-
-    private void MenuMain() {
-        dsMain = new ArrayList<>();
-        dsMain.add(new ItemMenu("Danh sách thiết bị", R.drawable.ic_thietbi));
-        dsMain.add(new ItemMenu("Danh sách mượn", R.drawable.ic_list));
-        dsMain.add(new ItemMenu("Danh sách đăng ký", R.drawable.ic_dangky));
-        adapterMain = new MenuAdapter(this, R.layout.item_list_menu, dsMain);
-        lvMain.setAdapter(adapterMain);
-
-        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void Button(){
+        btnDSTB.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int main, long id) {
-                switch (main) {
-                    case 0:
-                        Intent dstb = new Intent(Menu.this, ThietBi.class);
-                        startActivity(dstb);
-                        break;
-                    case 1:
-                        Intent dsnm = new Intent(Menu.this, DsMuon.class);
-                        startActivity(dsnm);
-                        break;
-                    case 2:
-                        Intent dsdk = new Intent(Menu.this, DsDangKy.class);
-                        startActivity(dsdk);
-                        break;
-                }
+            public void onClick(View v) {
+                Intent dstb = new Intent(Menu.this, ThietBi.class);
+                startActivity(dstb);
+            }
+        });
+        btnDSDK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent dsdk = new Intent(Menu.this, DsDangKy.class);
+                startActivity(dsdk);
             }
         });
     }
+
 
 
     public void update() {
@@ -138,7 +177,7 @@ public class Menu extends AppCompatActivity {
                         builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                login.setText("");
+                                login = "";
                                 Bundle bundle = new Bundle();
                                 Intent exit = new Intent(Menu.this, LoginActivity.class);
                                 exit.putExtra("False",bundle);

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SinhVien.DanhSach.ChiTietDangKy">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_quaylai"
+            android:backgroundTint="@color/blue"/>
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Tìm kiếm thiết bị"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@id/btnReload"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_reload"
+            android:backgroundTint="@color/blue"/>
+    </LinearLayout>
+        <ListView
+            android:id="@+id/lvChiTietDangKy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+</LinearLayout>

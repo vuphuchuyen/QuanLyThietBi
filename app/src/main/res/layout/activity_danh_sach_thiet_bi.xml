@@ -10,93 +10,62 @@
     android:fitsSystemWindows="true">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <ImageButton
-            android:backgroundTint="#6A00FF"
+        <androidx.appcompat.widget.AppCompatButton
+            android:backgroundTint="@color/blue"
             android:id="@+id/btnQuaylaiMenu"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:background="@drawable/ic_quaylai" />
 
         <SearchView
             android:id="@+id/search"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="45dp"
             android:iconifiedByDefault="false"
             android:queryHint="Tìm kiếm thiết bị"
-            tools:layout_editor_absoluteY="3dp" />
+           />
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/btnReload"
+            android:background="@drawable/ic_reload"
+            android:backgroundTint="@color/blue"
+            />
     </LinearLayout>
-
-    <TabHost
-        android:id="@+id/TabThietBi"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_button_blue"
+        android:backgroundTint="@color/blue">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/ic_menu"/>
 
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TabWidget
-                android:id="@android:id/tabs"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                >
-
-                <LinearLayout
-
-                    android:id="@+id/tabALL"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/lvtoanbothietbi"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabModule"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/lvmodule"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/tabDientu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <ListView
-                        android:id="@+id/lvdodientu"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Danh sách thiết bị"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+           />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/lvthietbi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

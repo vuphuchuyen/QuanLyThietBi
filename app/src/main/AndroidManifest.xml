@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
@@ -14,16 +15,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
+            android:name=".SinhVien.HoSo.ListDangMuon"
+            android:exported="false" />
+        <activity
+            android:name=".SinhVien.HoSo.ListYeuThich"
+            android:exported="false" />
+        <activity
+            android:name=".SinhVien.DanhSach.HistoryDK"
+            android:exported="true" />
+        <activity
+            android:name=".SinhVien.DanhSach.ChiTietDangKy"
+            android:exported="true" />
+        <activity
             android:name=".ThietBi.ChiTietThietBi"
             android:exported="true" />
         <activity
             android:name=".SinhVien.ChucNang.DoiMK"
             android:exported="true" />
         <activity
-            android:name=".SinhVien.ChucNang.ChinhSuaHS"
-            android:exported="true" />
+            android:name=".SinhVien.ChucNang.SuaSDT"
+            android:exported="true"
+            android:theme="@style/Dialog.NoActionBar" />
         <activity
-            android:name=".SinhVien.DanhSach.HoSoSV"
+            android:name=".SinhVien.HoSo.HoSoSV"
             android:exported="true" />
         <activity
             android:name=".ThietBi.UpdateTB"
@@ -31,7 +45,7 @@
         <activity
             android:name=".ThietBi.ZoomActivity"
             android:exported="true"
-            android:theme="@style/Dialog.NoActionBar"/>
+            android:theme="@style/Dialog.NoActionBar" />
         <activity
             android:name=".Login.ScanHelper"
             android:exported="true" />
@@ -53,19 +67,13 @@
         <activity
             android:name=".Menu.Menu"
             android:exported="true"
-            android:label=""
-            >
-
-        </activity>
+            android:label="" />
         <activity
             android:name=".SinhVien.ChucNang.PhieuDangKy"
             android:exported="true"
             android:theme="@style/Theme.QuanLyThietBi" />
         <activity
             android:name=".SinhVien.DanhSach.DsDangKy"
-            android:exported="true" />
-        <activity
-            android:name=".SinhVien.DanhSach.DsMuon"
             android:exported="true" />
     </application>
 

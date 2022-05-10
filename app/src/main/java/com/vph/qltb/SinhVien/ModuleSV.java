@@ -1,7 +1,7 @@
 package com.vph.qltb.SinhVien;
 
 public class ModuleSV {
-    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,ngaymuon,hantra, tinhtrang,lydo ,id;
+    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,ngaymuon,hantra, tinhtrang,lydo ,id, thoigian;
 
     public ModuleSV(String sinhvien, String lop, String sdt, String mssv, String soluong, String tenthietbi, String ngaymuon, String hantra,String tinhtrang,String lydo, String id) {
         this.sinhvien = sinhvien;
@@ -17,6 +17,23 @@ public class ModuleSV {
         this.id = id;
     }
 
+    public String getThoigian() {
+        return thoigian;
+    }
+
+    public void setThoigian(String thoigian) {
+        this.thoigian = thoigian;
+    }
+
+    public ModuleSV(String soluong, String tenthietbi, String ngaymuon, String thoigian, String tinhtrang, String lydo, String id) {
+        this.thoigian = thoigian;
+        this.soluong = soluong;
+        this.tenthietbi = tenthietbi;
+        this.ngaymuon = ngaymuon;
+        this.tinhtrang = tinhtrang;
+        this.lydo = lydo;
+        this.id = id;
+    }
     public ModuleSV(){
 
     }
