@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/design_button_blue"
-                    android:text="Total_Device"
+                    android:text="0"
                     android:textAlignment="center"
                     android:textColor="@color/blue"
                     android:textSize="16sp"

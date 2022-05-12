@@ -2,16 +2,20 @@ package com.vph.qltb.ThietBi;
 
 public class ModuleTB {
 
-    String  ten, soluong, thongtin, hinhanh, loai, id, role;
-    public ModuleTB(String ten, String soluong, String thongtin, String hinhanh, String loai, String id) {
+    String  ten, soluong, thongtin, hinhanh, loai, role;
+    public ModuleTB(String ten, String soluong, String thongtin, String hinhanh, String loai, String role) {
         this.ten = ten;
         this.soluong = soluong;
         this.thongtin = thongtin;
         this.hinhanh = hinhanh;
         this.loai = loai;
-        this.id = id;
+        this.role = role;
     }
-
+    public ModuleTB(String ten, String loai, String role){
+        this.ten = ten;
+        this.loai = loai;
+        this.role = role;
+    }
     public String getRole() {
         return role;
     }
@@ -36,13 +40,6 @@ public class ModuleTB {
         this.loai = loai;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String key) {
-        this.id = key;
-    }
 
     public void setTen(String ten) {
         this.ten = ten;

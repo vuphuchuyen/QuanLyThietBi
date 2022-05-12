@@ -7,16 +7,17 @@
     tools:context=".Menu.Menu"
     android:fitsSystemWindows="true"
     >
-
     <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:id="@+id/drawerLayout">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:orientation="vertical">
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
@@ -40,16 +41,13 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="200dp"
+                    android:layout_width="250dp"
                     android:layout_height="200dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_lachong" />
 
-
-
-
                 <LinearLayout
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -58,22 +56,47 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnDSTB"
                         android:layout_width="300dp"
+
+                        android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/design_button_blue"
                         android:drawableLeft="@drawable/ic_thietbi"
                         android:drawableRight="@drawable/ic_tenright"
-                        android:text="  Danh sách thiết bị"
-                        android:textAlignment="textStart" />
+                        android:text="Danh sách thiết bị"
+                        android:textAlignment="center" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/btnThem"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/design_button_blue"
+                        android:drawableLeft="@drawable/ic_add"
+                        android:drawableRight="@drawable/ic_tenright"
+                        android:text="Thêm thiết bị"
+                        android:textSize="16sp"
+                        android:textAlignment="center" />
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_marginTop="15dp"
                         android:id="@+id/btnDSDK"
                         android:layout_width="300dp"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content"
                         android:background="@drawable/design_button_blue"
                         android:drawableLeft="@drawable/ic_list"
                         android:drawableRight="@drawable/ic_tenright"
-                        android:text="  Danh sách đăng ký"
-                        android:textAlignment="textStart"/>
+                        android:text="Danh sách đăng ký"
+                        android:textAlignment="center"/>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_marginTop="15dp"
+                        android:id="@+id/btnHistory"
+                        android:layout_width="300dp"
+                        android:textSize="16sp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/design_button_blue"
+                        android:drawableLeft="@drawable/ic_history_check"
+                        android:drawableRight="@drawable/ic_tenright"
+                        android:text="Lịch sử Mượn thiết bị"
+                        android:textAlignment="center"/>
                     <androidx.appcompat.widget.AppCompatButton
                         android:layout_marginTop="15dp"
                         android:layout_width="300dp"
@@ -81,14 +104,14 @@
                         android:background="@drawable/design_button_blue"
                         android:drawableLeft="@drawable/ic_rule"
                         android:drawableRight="@drawable/ic_tenright"
-                        android:text="  Quy tắc mượn thiết bị"
-
-                        android:textAlignment="textStart"/>
+                        android:text="Quy tắc mượn thiết bị"
+                        android:textSize="16sp"
+                        android:textAlignment="center"/>
                 </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
-
+        </ScrollView>
         <com.google.android.material.navigation.NavigationView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -107,5 +130,4 @@
         </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
-
 </LinearLayout>

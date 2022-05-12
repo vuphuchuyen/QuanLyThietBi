@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:ignore="MissingConstraints"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/design_button_blue">
+
+        <LinearLayout
+            android:id="@+id/expand_CTDK"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+
+                android:id="@+id/Device_Image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/arduino"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="@+id/Device_Image"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="155dp"
+                    tools:layout_editor_absoluteY="326dp">
+
+                    <TextView
+                        android:id="@+id/txtDevice_Name"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/design_button_blue"
+                        android:text="Device_Name"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:text="Tên thiết bị"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="0dp" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:layout_editor_absoluteX="145dp"
+                    tools:layout_editor_absoluteY="5dp">
+
+                    <TextView
+                        android:id="@+id/txtTotal_Number"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/design_button_blue"
+                        android:text="Total_Number"
+                        android:textAlignment="center"
+                        android:textColor="@color/blue"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:text="Số lần mượn"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="1dp" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnXacnhan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/design_button_blue"
+                android:backgroundTint="@color/blue"
+                android:drawableLeft="@drawable/ic_done"
+                android:drawableTint="@color/white"
+                android:text="Xác nhận"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="88dp"
+                android:background="@drawable/design_button_blue"
+                android:backgroundTint="@color/blue"
+                android:drawableLeft="@drawable/ic_fix"
+                android:drawableTint="@color/white"
+                android:text="Chỉnh sửa"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnTra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="88dp"
+                android:background="@drawable/design_button_blue"
+                android:backgroundTint="@color/blue"
+                android:drawableLeft="@drawable/ic_done"
+                android:drawableTint="@color/white"
+                android:text="Trả"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/design_button_blue"
+            android:backgroundTint="@color/blue"
+            android:text="Chi tiết"
+            android:id="@+id/btnChiTiet"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="130dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

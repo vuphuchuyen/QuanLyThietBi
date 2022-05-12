@@ -1,7 +1,6 @@
 package com.vph.qltb.SinhVien.ChucNang;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -10,18 +9,12 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +32,8 @@ import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class PhieuDangKy extends AppCompatActivity {
     TextView Rule;
@@ -205,8 +196,8 @@ public class PhieuDangKy extends AppCompatActivity {
         if (isConnected()) {
             if (chkCamKet.isChecked()) {
                 //values
-                String ngayMuon = currentDate.format(calendar.getTime());
-                String thoigian = currentTime.format(calendar.getTime());
+                String dateDK = currentDate.format(calendar.getTime());
+                String timeDK = currentTime.format(calendar.getTime());
                 String key = FireBaseHelper.reference.push().getKey();
                 String ThietBi = tenthietbi.getText().toString();
                 String SoLuong = soluong.getText().toString();
@@ -217,7 +208,7 @@ public class PhieuDangKy extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(Mssv)) {
-                                ModuleSV moduleThietBi = new ModuleSV(SoLuong, ThietBi, ngayMuon, thoigian, tinhtrang, Lydo, key);
+                                ModuleSV moduleThietBi = new ModuleSV(SoLuong, ThietBi, dateDK, timeDK, tinhtrang, Lydo, key);
                                 if (ThietBi.isEmpty() || SoLuong.isEmpty() || Lydo.isEmpty()) {
                                     Toast.makeText(PhieuDangKy.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -292,10 +283,10 @@ public class PhieuDangKy extends AppCompatActivity {
 
     private void addControls() {
         chkCamKet = findViewById(R.id.chkCamKet);
-        soluong = findViewById(R.id.edtSoluong);
-        tenthietbi = findViewById(R.id.edtThietBi);
-        lydo = findViewById(R.id.edtLyDo);
-        btnBack = findViewById(R.id.btnQuaylaiMenu);
+        soluong = findViewById(R.id.editDevice_Number);
+        tenthietbi = findViewById(R.id.editDevice_Name);
+        lydo = findViewById(R.id.editReason);
+        btnBack = findViewById(R.id.btnBack);
         btnXacNhan = findViewById(R.id.btnXacnhan);
         btnXoa = findViewById(R.id.btnClear);
         btnUp = findViewById(R.id.upDK);

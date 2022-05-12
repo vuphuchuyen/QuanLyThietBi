@@ -111,7 +111,6 @@ public class DsDangKy extends AppCompatActivity {
                             textNoti.setVisibility(View.INVISIBLE);
                         }
                     }
-
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -174,7 +173,7 @@ public class DsDangKy extends AppCompatActivity {
     }
 
     private void addControls() {
-        btnBack = findViewById(R.id.btnQuaylaiMenu);
+        btnBack = findViewById(R.id.btnBack);
         btnRestartDK = findViewById(R.id.btnRestartDK);
 
         lvDanKy = findViewById(R.id.lvNguoiMuon);

@@ -26,7 +26,7 @@ import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 public class ChiTietThietBi extends AppCompatActivity {
 
     Button btnMuon, btnZoom, btnExit , btnReload;
-    TextView TenThietBi, ThongTin, Number_Love, Soluong, LoaiTB;
+    TextView TenThietBi, ThongTin, Number_Love, Soluong, LoaiTB, RoleTB;
     ImageView img, Love;
     TabHost tabHost;
     @Override
@@ -69,7 +69,7 @@ public class ChiTietThietBi extends AppCompatActivity {
                                 .setBackgroundResource(
                                         R.color.yellow);
                         TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                        tv.setTextColor(R.color.black);
+                        tv.setTextColor(R.color.white);
                     } else {
                         tabHost.getTabWidget()
                                 .getChildAt(i)
@@ -96,6 +96,7 @@ public class ChiTietThietBi extends AppCompatActivity {
         btnReload = findViewById(R.id.btnRestart);
         Number_Love = findViewById(R.id.Number_Love);
         Love = findViewById(R.id.imgLove);
+        RoleTB = findViewById(R.id.txtDevice_Role);
     }
 
     private void Events() {
@@ -141,10 +142,12 @@ public class ChiTietThietBi extends AppCompatActivity {
                     final String getHinhAnhTB = snapshot.child(key).child("hinhanh").getValue(String.class);
                     final String getSL = snapshot.child(key).child("soluong").getValue(String.class);
                     final String getType = snapshot.child(key).child("loai").getValue(String.class);
+                    final String getRole = snapshot.child(key).child("role").getValue(String.class);
                     TenThietBi.setText(getTenTB);
                     ThongTin.setText(getThongtinTB);
                     Soluong.setText(getSL);
                     LoaiTB.setText(getType);
+                    RoleTB.setText(getRole);
                     Picasso.get().load(getHinhAnhTB)
                             .placeholder(R.drawable.ic_holder)
                             .error(R.drawable.ic_error)

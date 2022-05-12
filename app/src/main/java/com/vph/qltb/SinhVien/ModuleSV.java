@@ -1,73 +1,68 @@
 package com.vph.qltb.SinhVien;
 
 public class ModuleSV {
-    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,ngaymuon,hantra, tinhtrang,lydo ,id, thoigian;
-
-    public ModuleSV(String sinhvien, String lop, String sdt, String mssv, String soluong, String tenthietbi, String ngaymuon, String hantra,String tinhtrang,String lydo, String id) {
-        this.sinhvien = sinhvien;
-        this.lop = lop;
-        this.sdt = sdt;
-        this.mssv = mssv;
+    String sinhvien, lop,sdt,mssv,soluong,tenthietbi,hantra, tinhtrang,lydo ,id;
+    String timeDK, timeMuon, timeTra;
+    String dateDK, dateMuon, dateTra;
+    //Đăng ký
+    public ModuleSV(String soluong, String  tenthietbi, String dateDK, String timeDK, String tinhtrang, String lydo, String id) {
+        this.timeDK = timeDK;
         this.soluong = soluong;
         this.tenthietbi = tenthietbi;
-        this.ngaymuon = ngaymuon;
-        this.hantra = hantra;
+        this.dateDK = dateDK;
+        this.tinhtrang = tinhtrang;
+        this.lydo = lydo;
+        this.id = id;
+    }
+    //Trả
+    public ModuleSV(String soluong, String  tenthietbi, String dateDK, String timeDK, String dateMuon, String timeMuon, String tinhtrang, String lydo, String id) {
+        this.timeMuon = timeMuon;
+        this.timeDK = timeDK;
+        this.dateMuon = dateMuon;
+        this.soluong = soluong;
+        this.tenthietbi = tenthietbi;
+        this.dateDK = dateDK;
         this.tinhtrang = tinhtrang;
         this.lydo = lydo;
         this.id = id;
     }
 
-    public String getThoigian() {
-        return thoigian;
-    }
 
-    public void setThoigian(String thoigian) {
-        this.thoigian = thoigian;
-    }
+    //Lịch sử trả + mượn
+    public ModuleSV(String mssv, String soluong, String  tenthietbi, String dateDK, String timeDK, String dateMuon, String timeMuon, String dateTra, String timeTra,  String lydo, String id) {
+        this.mssv = mssv;
 
-    public ModuleSV(String soluong, String tenthietbi, String ngaymuon, String thoigian, String tinhtrang, String lydo, String id) {
-        this.thoigian = thoigian;
+        this.timeDK = timeDK;
+        this.timeMuon = timeMuon;
+        this.timeTra = timeTra;
+
+        this.dateTra = dateTra;
+        this.dateMuon = dateMuon;
+        this.dateDK = dateDK;
         this.soluong = soluong;
+
         this.tenthietbi = tenthietbi;
-        this.ngaymuon = ngaymuon;
-        this.tinhtrang = tinhtrang;
+
         this.lydo = lydo;
         this.id = id;
     }
     public ModuleSV(){
 
     }
-
-    public String getLydo() {
-        return lydo;
-    }
-
-    public void setLydo(String lydo) {
-        this.lydo = lydo;
-    }
-
-    public String getTinhtrang() {
-        return tinhtrang;
-    }
-
-    public void setTinhtrang(String tinhtrang) {
-        this.tinhtrang = tinhtrang;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getSinhvien() {
         return sinhvien;
     }
 
     public void setSinhvien(String sinhvien) {
         this.sinhvien = sinhvien;
+    }
+
+    public String getLop() {
+        return lop;
+    }
+
+    public void setLop(String lop) {
+        this.lop = lop;
     }
 
     public String getSdt() {
@@ -86,14 +81,6 @@ public class ModuleSV {
         this.mssv = mssv;
     }
 
-    public String getTenthietbi() {
-        return tenthietbi;
-    }
-
-    public void setTenthietbi(String tenthietbi) {
-        this.tenthietbi = tenthietbi;
-    }
-
     public String getSoluong() {
         return soluong;
     }
@@ -102,12 +89,12 @@ public class ModuleSV {
         this.soluong = soluong;
     }
 
-    public String getNgaymuon() {
-        return ngaymuon;
+    public String getTenthietbi() {
+        return tenthietbi;
     }
 
-    public void setNgaymuon(String ngaymuon) {
-        this.ngaymuon = ngaymuon;
+    public void setTenthietbi(String tenthietbi) {
+        this.tenthietbi = tenthietbi;
     }
 
     public String getHantra() {
@@ -118,11 +105,75 @@ public class ModuleSV {
         this.hantra = hantra;
     }
 
-    public String getLop() {
-        return lop;
+    public String getTinhtrang() {
+        return tinhtrang;
     }
 
-    public void setLop(String lop) {
-        this.lop = lop;
+    public void setTinhtrang(String tinhtrang) {
+        this.tinhtrang = tinhtrang;
+    }
+
+    public String getLydo() {
+        return lydo;
+    }
+
+    public void setLydo(String lydo) {
+        this.lydo = lydo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTimeDK() {
+        return timeDK;
+    }
+
+    public void setTimeDK(String timeDK) {
+        this.timeDK = timeDK;
+    }
+
+    public String getTimeMuon() {
+        return timeMuon;
+    }
+
+    public void setTimeMuon(String timeMuon) {
+        this.timeMuon = timeMuon;
+    }
+
+    public String getTimeTra() {
+        return timeTra;
+    }
+
+    public void setTimeTra(String timeTra) {
+        this.timeTra = timeTra;
+    }
+
+    public String getDateDK() {
+        return dateDK;
+    }
+
+    public void setDateDK(String dateDK) {
+        this.dateDK = dateDK;
+    }
+
+    public String getDateMuon() {
+        return dateMuon;
+    }
+
+    public void setDateMuon(String dateMuon) {
+        this.dateMuon = dateMuon;
+    }
+
+    public String getDateTra() {
+        return dateTra;
+    }
+
+    public void setDateTra(String dateTra) {
+        this.dateTra = dateTra;
     }
 }

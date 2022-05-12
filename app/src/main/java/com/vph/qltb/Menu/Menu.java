@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,10 +24,16 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Login.LoginActivity;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
+import com.vph.qltb.SinhVien.DanhSach.HistoryDK;
 import com.vph.qltb.SinhVien.HoSo.HoSoSV;
+import com.vph.qltb.ThietBi.ThemTB;
 import com.vph.qltb.ThietBi.ThietBi;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +41,7 @@ import java.util.List;
 public class Menu extends AppCompatActivity {
 
     public static String login;
-    Button btnDSTB, btnDSDK;
+    Button btnDSTB, btnDSDK, btnThem, btnRule, btnHistory;
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
@@ -46,10 +53,10 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
+        btnHistory = findViewById(R.id.btnHistory);
         btnDSDK = findViewById(R.id.btnDSDK);
         btnDSTB = findViewById(R.id.btnDSTB);
-
+        btnThem = findViewById(R.id.btnThem);
         toolbar =  findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
@@ -129,6 +136,13 @@ public class Menu extends AppCompatActivity {
     }
 
     private void Button(){
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent history = new Intent(Menu.this, HistoryDK.class);
+                startActivity(history);
+            }
+        });
         btnDSTB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +155,13 @@ public class Menu extends AppCompatActivity {
             public void onClick(View v) {
                 Intent dsdk = new Intent(Menu.this, DsDangKy.class);
                 startActivity(dsdk);
+            }
+        });
+        btnThem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent them = new Intent(Menu.this, ThemTB.class);
+                startActivity(them);
             }
         });
     }
@@ -192,7 +213,29 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
+        //Hiển thị button
+        FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild(login)) {
+                    final String getRole = snapshot.child(login).child("role").getValue(String.class);
+                    if (getRole.equals("admin")) {
 
+                        btnHistory.setVisibility(View.VISIBLE);
+                        btnThem.setVisibility(View.VISIBLE);
+                    } else{
+                        btnHistory.setVisibility(View.GONE);
+                        btnThem.setVisibility(View.GONE);
+                    }
+
+
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 

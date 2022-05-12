@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
-            android:name=".SinhVien.HoSo.ListDangMuon"
+            android:name=".Login.DangKy"
             android:exported="false" />
         <activity
             android:name=".SinhVien.HoSo.ListYeuThich"
@@ -30,10 +30,10 @@
             android:name=".ThietBi.ChiTietThietBi"
             android:exported="true" />
         <activity
-            android:name=".SinhVien.ChucNang.DoiMK"
+            android:name=".SinhVien.HoSo.DoiMK"
             android:exported="true" />
         <activity
-            android:name=".SinhVien.ChucNang.SuaSDT"
+            android:name=".SinhVien.HoSo.SuaSDT"
             android:exported="true"
             android:theme="@style/Dialog.NoActionBar" />
         <activity

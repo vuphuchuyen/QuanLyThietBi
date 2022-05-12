@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +16,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:backgroundTint="@color/blue"
-            android:id="@+id/btnQuaylaiMenu"
+            android:id="@+id/btnBack"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
@@ -25,6 +24,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
 
 
             <EditText
-                android:id="@+id/edtThietBi"
+                android:id="@+id/editDevice_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -92,7 +92,7 @@
             android:layout_marginTop="15dp">
 
             <EditText
-                android:id="@+id/edtSoluong"
+                android:id="@+id/editDevice_Number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -123,7 +123,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/edtLyDo"
+                android:id="@+id/editReason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -213,7 +213,6 @@
 
 
     </LinearLayout>
-
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"

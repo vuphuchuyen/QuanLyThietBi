@@ -1,4 +1,4 @@
-package com.vph.qltb.SinhVien.ChucNang;
+package com.vph.qltb.SinhVien.HoSo;
 
 import androidx.appcompat.app.AppCompatActivity;
 

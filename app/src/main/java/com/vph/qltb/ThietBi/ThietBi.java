@@ -25,8 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.vph.qltb.FireBaseHelper;
@@ -38,8 +36,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ThietBi extends AppCompatActivity {
-    public static DatabaseReference reference;
-    Button btnSelect, btnBack, btnReload;
+    Button btnSelect, btnBack, btnReload, btnLoc;
     SearchView searchView;
     ListView listALL;
     ArrayList<ModuleTB> dsThietBi;
@@ -56,8 +53,9 @@ public class ThietBi extends AppCompatActivity {
 
 
     private void addControls() {
+        btnLoc = findViewById(R.id.btnLoc);
         searchView = findViewById(R.id.search);
-        btnBack = findViewById(R.id.btnQuaylaiMenu);
+        btnBack = findViewById(R.id.btnBack);
         listALL = findViewById(R.id.lvthietbi);
         dsThietBi = new ArrayList<>();
         btnReload = findViewById(R.id.btnReload);
@@ -120,6 +118,85 @@ public class ThietBi extends AppCompatActivity {
                 return false;
             }
         });
+        //Lọc thiết bị
+        btnLoc.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                PopupMenu dropDownMenu = new PopupMenu(getApplicationContext(), btnLoc);
+                dropDownMenu.getMenuInflater().inflate(R.menu.menu_filter, dropDownMenu.getMenu());
+
+                dropDownMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        //Lọc theo Module
+                        if(menuItem.getItemId()==R.id.Module){
+                            String s = "Module";
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
+                            for(ModuleTB moduleTB: dsThietBi){
+                                if(moduleTB.getLoai().toLowerCase().contains(s.toLowerCase())){
+                                    filterTB.add(moduleTB);
+                                }
+                            }
+                            Toast.makeText(ThietBi.this,"Đã lọc theo Module",Toast.LENGTH_SHORT).show();
+                            AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
+                            listALL.setAdapter(adapterTB);
+                            return false;
+
+                            //Lọc theo Laptop
+                        }else if(menuItem.getItemId()==R.id.DienTu) {
+                            String s = "Điện tử";
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
+                            for(ModuleTB moduleTB: dsThietBi){
+                                if(moduleTB.getLoai().toLowerCase().contains(s.toLowerCase())){
+                                    filterTB.add(moduleTB);
+                                }
+                            }
+                            Toast.makeText(ThietBi.this,"Đã lọc theo Thiết bị điện tử",Toast.LENGTH_SHORT).show();
+                            AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
+                            listALL.setAdapter(adapterTB);
+                            return false;
+                        }else if(menuItem.getItemId()==R.id.Lab) {
+                            String s = "Dùng tại Lab";
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
+                            for(ModuleTB moduleTB: dsThietBi){
+                                if(moduleTB.getRole().toLowerCase().contains(s.toLowerCase())){
+                                    filterTB.add(moduleTB);
+                                }
+                            }
+                            Toast.makeText(ThietBi.this,"Đã lọc theo Thiết bị chỉ sử dụng tại phòng Lab",Toast.LENGTH_SHORT).show();
+                            AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
+                            listALL.setAdapter(adapterTB);
+                            return false;
+                        }else if(menuItem.getItemId()==R.id.Home) {
+                            String s = "Có thể mượn về";
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
+                            for(ModuleTB moduleTB: dsThietBi){
+                                if(moduleTB.getRole().toLowerCase().contains(s.toLowerCase())){
+                                    filterTB.add(moduleTB);
+                                }
+                            }
+                            Toast.makeText(ThietBi.this,"Đã lọc theo Thiết bị có thể mượn về nhà",Toast.LENGTH_SHORT).show();
+                            AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
+                            listALL.setAdapter(adapterTB);
+                            return false;
+                        }
+                        else if(menuItem.getItemId()==R.id.Off){
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
+                            for(ModuleTB moduleTB:dsThietBi){
+                                filterTB.add(moduleTB);
+                            }
+                            Toast.makeText(ThietBi.this,"Đã tắt lọc",Toast.LENGTH_SHORT).show();
+                            AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
+                            listALL.setAdapter(adapterTB);
+                        }
+                        return true;
+                    }
+                });
+                dropDownMenu.show();
+            }
+        });
+
     }
 
     public void Restart() {
@@ -209,6 +286,7 @@ public class ThietBi extends AppCompatActivity {
             TextView Role = convertView.findViewById(R.id.txtDevice_Role);
             ImageView img = convertView.findViewById(R.id.Device_Image);
 
+            Button btnFix = convertView.findViewById(R.id.btnFix);
             Button btnZoom = convertView.findViewById(R.id.btnZoom);
             Button btnLove = convertView.findViewById(R.id.btnLove);
             Button btnUnLove = convertView.findViewById(R.id.btnUnLove);
@@ -246,7 +324,8 @@ public class ThietBi extends AppCompatActivity {
                                         }else {
                                             Bundle bundle = new Bundle();
                                             bundle.putString("KQMuon", moduleTB.getTen());
-                                            Intent intent = new Intent(context, PhieuDangKy.class);intent.putExtra("Muon", bundle);
+                                            Intent intent = new Intent(context, PhieuDangKy.class);
+                                            intent.putExtra("Muon", bundle);
                                             startActivity(intent);
                                                 }
 
@@ -264,9 +343,9 @@ public class ThietBi extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.hasChild(String.valueOf(Menu.login))){
                         btnLove.setVisibility(View.VISIBLE);
-                        btnUnLove.setVisibility(View.INVISIBLE);
+                        btnUnLove.setVisibility(View.GONE);
                     }else {
-                        btnLove.setVisibility(View.INVISIBLE);
+                        btnLove.setVisibility(View.GONE);
                         btnUnLove.setVisibility(View.VISIBLE);
                     }
                 }
@@ -287,7 +366,10 @@ public class ThietBi extends AppCompatActivity {
                                     @Override
                                     public void onClick(View v) {
                                         if (snapshot.hasChild(moduleTB.getTen())) {
-                                            ModuleTB moduleTBlove = new ModuleTB(moduleTB.getTen());
+                                            String ten = moduleTB.getTen();
+                                            String loai = moduleTB.getLoai();
+                                            String role = moduleTB.getRole();
+                                            ModuleTB moduleTBlove = new ModuleTB(ten, loai, role);
                                             FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").child(MSSV).setValue(MSSV);
                                             FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTen()).setValue(moduleTBlove);
                                             btnLove.setVisibility(View.VISIBLE);
@@ -328,9 +410,38 @@ public class ThietBi extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+            //Sửa TB
+            btnFix.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("UpdateKQ", String.valueOf(moduleTB.getTen()));
+                        Intent intent = new Intent(context, UpdateTB.class);
+                        intent.putExtra("Update", bundle);
+                        context.startActivity(intent);
 
+                }
+            });
 
+            //Hiển thị button
+            FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild(Menu.login)) {
+                        final String getRole = snapshot.child(Menu.login).child("role").getValue(String.class);
+                        if (getRole.equals("admin")) {
 
+                            btnFix.setVisibility(View.VISIBLE);
+                        } else{
+                            btnFix.setVisibility(View.GONE);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             return convertView;
         }
 

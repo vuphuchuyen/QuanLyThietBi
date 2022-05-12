@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:ignore="MissingConstraints"
-    tools:context=".SinhVien.ChucNang.SuaSDT">
+    tools:context=".SinhVien.HoSo.SuaSDT">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,9 +51,9 @@
             android:id="@+id/btnXacnhan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Xác nhận"
+            android:text=" Xác nhận"
             android:background="@drawable/design_button_blue"
-            android:drawableLeft="@drawable/ic_addlist"
+            android:drawableLeft="@drawable/ic_done"
             android:textColor="@color/white"
             android:drawableTint="@color/white"
             android:backgroundTint="@color/blue" />

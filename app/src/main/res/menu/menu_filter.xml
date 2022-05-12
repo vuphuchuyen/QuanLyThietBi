@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/Module"
+        android:title="Module"/>
+    <item android:id="@+id/DienTu"
+        android:title="Thiết bị điện tử"/>
+    <item android:id="@+id/Lab"
+        android:title="Dùng tại Lab"/>
+    <item android:id="@+id/Home"
+        android:title="Có thể mượn về"/>
+    <item android:id="@+id/Off"
+        android:title="Tắt lọc"/>
+</menu>

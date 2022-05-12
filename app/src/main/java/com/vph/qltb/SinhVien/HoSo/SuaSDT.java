@@ -1,4 +1,4 @@
-package com.vph.qltb.SinhVien.ChucNang;
+package com.vph.qltb.SinhVien.HoSo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -64,13 +63,13 @@ public class SuaSDT extends AppCompatActivity {
             //Get all the values
             String MSSV = Menu.login;
             String Sdt = sdt.getText().toString();
-            FireBaseHelper.reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (Sdt.isEmpty()) {
                         Toast.makeText(SuaSDT.this, "SĐT không được phép trống!", Toast.LENGTH_SHORT).show();
                     } else {
-                        FireBaseHelper.reference.child(MSSV).child("sdt").setValue(Sdt);
+                        FireBaseHelper.reference.child("Account").child(MSSV).child("sdt").setValue(Sdt);
                         Toast.makeText(SuaSDT.this, "Chỉnh sửa thành công!", Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     }

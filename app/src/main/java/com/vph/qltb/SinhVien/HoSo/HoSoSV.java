@@ -3,14 +3,19 @@ package com.vph.qltb.SinhVien.HoSo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
-import com.vph.qltb.SinhVien.ChucNang.SuaSDT;
+import com.vph.qltb.SinhVien.DanhSach.ChiTietDangKy;
+import com.vph.qltb.SinhVien.DanhSach.HistoryDK;
 
 import java.util.Map;
 
@@ -28,7 +34,9 @@ public class HoSoSV extends AppCompatActivity {
 
     TextView mssv, ten, lop, sdt, total_device;
     String MSSV = Menu.login;
-    Button btnFixSDT, btnBack, btnReload;
+    Button btnFixSDT, btnBack, btnReload, btnListDangMuon, btnLove, btnHistory, btnOpenHS, btnOpenCN;
+    LinearLayout ExpandHS, ExpandCN;
+    CardView cardViewHS, cardViewCN;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +73,14 @@ public class HoSoSV extends AppCompatActivity {
     }
 
     private void xuLyButton() {
+        //List yêu thích
+        btnLove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HoSoSV.this, ListYeuThich.class);
+                startActivity(intent);
+            }
+        });
         //Quay lại Menu
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +97,56 @@ public class HoSoSV extends AppCompatActivity {
 
             }
         });
+        //Hiển thị chi tiết mượn
+        btnListDangMuon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("ChiTiet", MSSV);
+                Intent intent = new Intent(HoSoSV.this, ChiTietDangKy.class);
+                intent.putExtra("ThongTin", bundle);
+                startActivity(intent);
+            }
+        });
+        //Hiển thị lịch sử
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HoSoSV.this, HistoryDK.class);
+                startActivity(intent);
+            }
+        });
+        //Expand HoSo
+        btnOpenHS.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View v) {
+                if(ExpandHS.getVisibility() == View.GONE){
+                    btnOpenHS.setBackground(getResources().getDrawable(R.drawable.ic_open));
+                    TransitionManager.beginDelayedTransition(cardViewHS, new AutoTransition());
+                    ExpandHS.setVisibility(View.VISIBLE);
+                }else{
+                    btnOpenHS.setBackground(getResources().getDrawable(R.drawable.ic_close));
+                    ExpandHS.setVisibility(View.GONE);
+                }
+            }
+        });
+        //Expand ChucNang
+        btnOpenCN.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View v) {
+                if(ExpandCN.getVisibility() == View.GONE){
+                    btnOpenCN.setBackground(getResources().getDrawable(R.drawable.ic_open));
+                    TransitionManager.beginDelayedTransition(cardViewCN, new AutoTransition());
+                    ExpandCN.setVisibility(View.VISIBLE);
+                }else{
+                    btnOpenCN.setBackground(getResources().getDrawable(R.drawable.ic_close));
+                    ExpandCN.setVisibility(View.GONE);
+                }
+            }
+        });
     }
-
     private void HienThiHoSo() {
 
             FireBaseHelper.reference
@@ -109,13 +173,24 @@ public class HoSoSV extends AppCompatActivity {
 
 
     private void Controls() {
+        btnHistory = findViewById(R.id.btnHistory);
+        btnListDangMuon = findViewById(R.id.btnlistTBMuon);
         mssv = findViewById(R.id.txtStudent_ID);
         ten = findViewById(R.id.txtStudent_Name);
         lop = findViewById(R.id.txtStudent_Class);
         sdt = findViewById(R.id.txtStudent_Phone);
         total_device = findViewById(R.id.txtTotal_Device);
 
+        ExpandHS = findViewById(R.id.expand_HoSo);
+        btnOpenHS = findViewById(R.id.btnOpenHS);
+        cardViewHS = findViewById(R.id.CV_Expand_HoSo);
+        ExpandCN = findViewById(R.id.expand_ChucNang);
+        btnOpenCN = findViewById(R.id.btnOpenCN);
+        cardViewCN = findViewById(R.id.CV_Expand_CN);
+
+        btnLove = findViewById(R.id.btnListLove);
         btnBack = findViewById(R.id.btnBack);
+
         btnFixSDT = findViewById(R.id.btnFixSDT);
         btnReload = findViewById(R.id.btnReload);
 

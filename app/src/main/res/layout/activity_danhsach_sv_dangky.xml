@@ -12,7 +12,7 @@
         android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
             android:backgroundTint="@color/blue"
-            android:id="@+id/btnQuaylaiMenu"
+            android:id="@+id/btnBack"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:background="@drawable/ic_quaylai" />
@@ -37,7 +37,8 @@
 
     </LinearLayout>
     <LinearLayout
-
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"

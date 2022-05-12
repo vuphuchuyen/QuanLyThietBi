@@ -33,8 +33,7 @@ import com.vph.qltb.R;
 public class LoginActivity extends AppCompatActivity {
 
     EditText editMSSV, editMK;
-    ImageButton btnQuestion;
-    Button btnScan, btnLogin;
+    Button btnScan, btnLogin, btnQuestion, btnDangKy;
     CheckBox chkHienThi, chkSave;
     public static CheckBox chkSaveLogin;
     String mssv = "mssv";
@@ -47,24 +46,49 @@ public class LoginActivity extends AppCompatActivity {
         chkHienThi = findViewById(R.id.chkHienThi);
         editMK = findViewById(R.id.editMatKhau);
         editMSSV = findViewById(R.id.editMSSV);
-        scanError= (TextView) findViewById(R.id.ScanError);
-        btnScan=(Button) findViewById(R.id.btnScan);
-        btnQuestion = (ImageButton) findViewById(R.id.btnQuestion);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        scanError= findViewById(R.id.ScanError);
+        btnScan= findViewById(R.id.btnScan);
+        btnQuestion = findViewById(R.id.btnQuestion);
+        btnLogin = findViewById(R.id.btnLogin);
         chkSaveLogin = findViewById(R.id.chkSaveLogin);
         chkSave = findViewById(R.id.chkSave);
+        btnDangKy = findViewById(R.id.btnDangKy);
         ChucNang();
+        DangKytoLogin();
+    }
+
+    private void DangKytoLogin() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("DangKy");
+        if(bundle==null){
+
+        }else {
+            editMSSV.setText(bundle.getString("MSSV"));
+            editMK.setText(bundle.getString("MK"));
+        }
     }
 
 
-
     private void ChucNang() {
-
+        //Đăng ký
+        btnDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, DangKy.class);
+                startActivity(intent);
+            }
+        });
 
         btnQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showtext();
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                builder.setTitle("Hướng dẫn").setIcon(R.drawable.question);
+                builder.setMessage("Cách 1: Bấm nút 'Quét mã vạch' và sử dụng thẻ sinh viên của bạn " +
+                        "\n\nCách 2: bạn có thể sử dụng MSSV và mật khẩu để đăng nhập");
+                builder.setPositiveButton("OK",null);
+                AlertDialog dialog = builder.create() ;
+                dialog.show();
             }
         });
 
@@ -147,15 +171,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
-            private void showtext() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Hướng dẫn").setIcon(R.drawable.question);
-        builder.setMessage("Cách 1: Bấm nút 'Quét mã vạch' và sử dụng thẻ sinh viên của bạn " +
-                "\n\nCách 2: bạn có thể sử dụng MSSV và mật khẩu để đăng nhập");
-        builder.setPositiveButton("OK",null);
-        AlertDialog dialog = builder.create() ;
-        dialog.show();
-    }
+
 
     public void scanner(View view) {
         if (isConnected()) {

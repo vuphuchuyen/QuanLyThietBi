@@ -1,9 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="MissingConstraints"
+    android:orientation="vertical"
     tools:context=".SinhVien.DanhSach.HistoryDK">
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_quaylai"
+            android:backgroundTint="@color/blue"/>
+        <SearchView
+            android:id="@+id/search"
+            android:layout_width="300dp"
+            android:layout_height="45dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Tìm kiếm thiết bị"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@id/btnReload"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_reload"
+            android:backgroundTint="@color/blue"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:background="@drawable/design_button_blue"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lịch sử mượn thiết bị"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="1dp" />
+    </LinearLayout>
+    <ListView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lvHistory"/>
+</LinearLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,14 +29,18 @@ public class ZoomActivity extends AppCompatActivity {
         xuly();
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void xuly() {
        Intent intent = getIntent();
        Bundle bundle = intent.getBundleExtra("ZoomIMG");
-        String url = bundle.getString("ZoomKQ").toString();
-        Picasso.get().load(String.valueOf(url))
-                .placeholder(R.drawable.ic_holder)
-                .error(R.drawable.ic_error)
-                .into(Zoom);
+       if(bundle== null){
+       }else {
+           String url = bundle.getString("ZoomKQ").toString();
+           Picasso.get().load(String.valueOf(url))
+                   .placeholder(R.drawable.ic_holder)
+                   .error(R.drawable.ic_error)
+                   .into(Zoom);
+       }
     }
 
 }

@@ -43,12 +43,12 @@
                 android:id="@+id/txtDevice_Name"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="22dp"
 
                 android:inputType="textMultiLine"
                 android:text="Device_Name"
                 android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textSize="18dp"
                 android:textStyle="bold" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
@@ -140,15 +140,15 @@
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLove"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/love"
-                    android:visibility="invisible" />
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnUnLove"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/unlove" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
@@ -161,7 +161,19 @@
             android:background="@drawable/ic_zoom_in"
             android:backgroundTint="@color/blue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintHorizontal_bias="0.02"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnFix"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/ic_fix"
+            android:backgroundTint="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.178"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
     </androidx.constraintlayout.widget.ConstraintLayout>

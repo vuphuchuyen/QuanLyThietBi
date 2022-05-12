@@ -3,7 +3,7 @@ package com.vph.qltb.SinhVien;
 public class ModuleHSSV {
     String sinhvien, lop, sdt, mssv, role, matkhau;
 
-    public ModuleHSSV(String sinhvien, String lop, String sdt, String mssv, String role, String matkhau) {
+    public ModuleHSSV(String mssv, String sinhvien, String lop, String sdt, String matkhau,String role) {
         this.sinhvien = sinhvien;
         this.lop = lop;
         this.sdt = sdt;
