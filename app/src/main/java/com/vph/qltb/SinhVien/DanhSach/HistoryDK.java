@@ -71,16 +71,16 @@ public class HistoryDK extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 recreate();
+                Toast.makeText(HistoryDK.this, "Trang đã dược tải lại!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-    public class AdapterHistory extends ArrayAdapter<ModuleSV> {
+    public static class AdapterHistory extends ArrayAdapter<ModuleSV> {
         Context context;
         public AdapterHistory(@NonNull Context context, int resource, @NonNull List<ModuleSV> objects) {
             super(context, resource, objects);
             this.context = context;
         }
-        @SuppressLint("UseCompatLoadingForDrawables")
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -92,9 +92,12 @@ public class HistoryDK extends AppCompatActivity {
             TextView ten  = convertView.findViewById(R.id.txtDevice_Name);
             TextView total = convertView.findViewById(R.id.txtTotal_Number);
             ten.setText(moduleSV.getTenthietbi());
+            //Hiển thị
+            String key = moduleSV.getId();
+
             FireBaseHelper.reference.child("LichSuMuonThietBi")
-                    .child("keymuon")
                     .child(moduleSV.getTenthietbi())
+                    .child("keymuon")
                     .addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,7 +115,7 @@ public class HistoryDK extends AppCompatActivity {
         }
     }
     private void hienthidanhsach(){
-        FireBaseHelper.reference.child("LichSuMuonThietBi").child("keymuon").addValueEventListener(new ValueEventListener() {
+        FireBaseHelper.reference.child("LichSuMuonThietBi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 dsHistory.clear();

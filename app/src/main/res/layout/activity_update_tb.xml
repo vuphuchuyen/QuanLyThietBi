@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context=".ThietBi.UpdateTB"
+    tools:context=".ThietBi.ChucNang.UpdateTB"
     tools:ignore="MissingConstraints" >
 
     <ScrollView

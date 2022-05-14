@@ -244,13 +244,12 @@ public class ChiTietDangKy extends AppCompatActivity {
                                                                 .child(keygoc).setValue(null);
                                                         FireBaseHelper.reference.child("LichSuMuonThietBI")
                                                                 .child(tenthietbi)
-                                                                .child(keygoc)
                                                                 .child("tenthietbi")
-                                                                .setValue(TenTB);
+                                                                .setValue(tenthietbi);
                                                         FireBaseHelper.reference.child("LichSuMuonThietBI")
                                                                 .child(tenthietbi)
-                                                                .child(keygoc)
                                                                 .child("keymuon")
+                                                                .child(keygoc)
                                                                 .setValue(moduleTra);
                                                         FireBaseHelper.reference.child("DanhSachDangKy")
                                                                 .child(Mssv).setValue(null);
@@ -263,13 +262,12 @@ public class ChiTietDangKy extends AppCompatActivity {
                                                                 .child(keygoc).setValue(null);
                                                         FireBaseHelper.reference.child("LichSuMuonThietBI")
                                                                 .child(tenthietbi)
-                                                                .child(keygoc)
                                                                 .child("tenthietbi")
-                                                                .setValue(TenTB);
+                                                                .setValue(tenthietbi);
                                                         FireBaseHelper.reference.child("LichSuMuonThietBI")
                                                                 .child(tenthietbi)
-                                                                .child(keygoc)
                                                                 .child("keymuon")
+                                                                .child(keygoc)
                                                                 .setValue(moduleTra);
                                                         Toast.makeText(ChiTietDangKy.this,"Đã ghi nhận trả thiết bị",Toast.LENGTH_SHORT).show();
                                                     }

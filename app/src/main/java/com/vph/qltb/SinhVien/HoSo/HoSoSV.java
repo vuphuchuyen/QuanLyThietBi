@@ -34,9 +34,9 @@ public class HoSoSV extends AppCompatActivity {
 
     TextView mssv, ten, lop, sdt, total_device;
     String MSSV = Menu.login;
-    Button btnFixSDT, btnBack, btnReload, btnListDangMuon, btnLove, btnHistory, btnOpenHS, btnOpenCN;
-    LinearLayout ExpandHS, ExpandCN;
-    CardView cardViewHS, cardViewCN;
+    Button btnFixSDT, btnBack, btnReload, btnListDangMuon, btnLove, btnHistory, btnOpenHS, btnOpenCN, btnOpenDM, btnPassWord;
+    LinearLayout ExpandHS, ExpandCN, ExpandDM;
+    CardView cardViewHS, cardViewCN, cardViewDM;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +73,7 @@ public class HoSoSV extends AppCompatActivity {
     }
 
     private void xuLyButton() {
+
         //List yêu thích
         btnLove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,9 +93,17 @@ public class HoSoSV extends AppCompatActivity {
         btnFixSDT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HoSoSV.this, SuaSDT.class);
-                startActivity(intent);
+                Intent sdt = new Intent(HoSoSV.this, SuaSDT.class);
+                startActivity(sdt);
 
+            }
+        });
+        //Đổi MK
+        btnPassWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mk = new Intent(HoSoSV.this, DoiMK.class);
+                startActivity(mk);
             }
         });
         //Hiển thị chi tiết mượn
@@ -131,7 +140,24 @@ public class HoSoSV extends AppCompatActivity {
                 }
             }
         });
+        //Expand DanhMuc
+        ExpandDM.setVisibility(View.GONE);
+        btnOpenDM.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View v) {
+                if(ExpandDM.getVisibility() == View.GONE){
+                    btnOpenDM.setBackground(getResources().getDrawable(R.drawable.ic_open));
+                    TransitionManager.beginDelayedTransition(cardViewDM, new AutoTransition());
+                    ExpandDM.setVisibility(View.VISIBLE);
+                }else{
+                    btnOpenDM.setBackground(getResources().getDrawable(R.drawable.ic_close));
+                    ExpandDM.setVisibility(View.GONE);
+                }
+            }
+        });
         //Expand ChucNang
+        ExpandCN.setVisibility(View.GONE);
         btnOpenCN.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
@@ -187,10 +213,13 @@ public class HoSoSV extends AppCompatActivity {
         ExpandCN = findViewById(R.id.expand_ChucNang);
         btnOpenCN = findViewById(R.id.btnOpenCN);
         cardViewCN = findViewById(R.id.CV_Expand_CN);
+        ExpandDM = findViewById(R.id.expand_DanhMuc);
+        btnOpenDM = findViewById(R.id.btnOpenDM);
+        cardViewDM = findViewById(R.id.CV_Expand_DM);
 
         btnLove = findViewById(R.id.btnListLove);
         btnBack = findViewById(R.id.btnBack);
-
+        btnPassWord = findViewById(R.id.btnDoiMatKhau);
         btnFixSDT = findViewById(R.id.btnFixSDT);
         btnReload = findViewById(R.id.btnReload);
 

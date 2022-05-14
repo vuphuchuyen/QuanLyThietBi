@@ -21,12 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
-import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 import com.vph.qltb.SinhVien.ModuleHSSV;
-import com.vph.qltb.SinhVien.ModuleSV;
-import com.vph.qltb.ThietBi.ThemTB;
 
-public class DangKy extends AppCompatActivity {
+public class DangKyAccount extends AppCompatActivity {
     Button btnQuestion, btnBack, btnXoa, btnXacNhan,  btnCheckMSSV, btnReCheckMSSV;
     EditText editMSSV, editTen, editLop, editPhone, editMatKhau, editXacNhanMatKhau;
     CheckBox checkMK, checkXacNhanMK;
@@ -115,7 +112,7 @@ public class DangKy extends AppCompatActivity {
                 btnQuestion.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(DangKy.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DangKyAccount.this);
                         builder.setTitle("Lưu ý").setIcon(R.drawable.question);
                         builder.setMessage("MSSV dùng để đăng nhập" + "\nVui lòng bấm vào Icon bên cạnh MSSV để kiểm tra!");
                         builder.setPositiveButton("OK", null);
@@ -155,16 +152,16 @@ public class DangKy extends AppCompatActivity {
     public void checkTen() {
         String MSSV = editMSSV.getText().toString();
         if(MSSV.equals("")){
-            Toast.makeText(DangKy.this, "MSSV trống!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DangKyAccount.this, "MSSV trống!", Toast.LENGTH_SHORT).show();
         }else {
             if (MSSV.length()<9) {
-                Toast.makeText(DangKy.this, "MSSV có 9 kí tự", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DangKyAccount.this, "MSSV có 9 kí tự", Toast.LENGTH_SHORT).show();
             } else {
-                FireBaseHelper.reference.child("Account").addValueEventListener(new ValueEventListener() {
+                FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.hasChild(MSSV)) {
-                            AlertDialog.Builder tontai = new AlertDialog.Builder(DangKy.this)
+                            AlertDialog.Builder tontai = new AlertDialog.Builder(DangKyAccount.this)
                                     .setTitle("Thông báo!")
                                     .setIcon(R.drawable.ic_warning)
                                     .setMessage("MSSV đã tồn tại trong hệ thống!")
@@ -198,13 +195,13 @@ public class DangKy extends AppCompatActivity {
         String role = "sinhvien";
         ModuleHSSV dangky = new ModuleHSSV(MSSV, Ten, Lop, Phone, MatKhau, role);
         if (MSSV.equals("") || Ten.equals("") || Lop.equals("") || Phone.equals("") || MatKhau.equals("") || XacNhanMatKhau.equals("")) {
-            Toast.makeText(DangKy.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DangKyAccount.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
         } else {
             if (MatKhau.length() < 5) {
-                Toast.makeText(DangKy.this, "Vui lòng nhập mật khẩu có độ dài 6 trở lên!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DangKyAccount.this, "Vui lòng nhập mật khẩu có độ dài 6 trở lên!", Toast.LENGTH_SHORT).show();
             } else {
                 if (MatKhau.equals(XacNhanMatKhau)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(DangKy.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(DangKyAccount.this);
                     builder.setTitle("Thông báo").setIcon(R.drawable.question);
                     builder.setMessage("Xác nhận đăng ký" +
                             "\nMSSV: "+ MSSV +
@@ -215,7 +212,7 @@ public class DangKy extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             FireBaseHelper.reference.child("Account").child(MSSV).setValue(dangky);
-                            Toast.makeText(DangKy.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(DangKyAccount.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                             dangnhap();
                         }
                     });
@@ -223,14 +220,14 @@ public class DangKy extends AppCompatActivity {
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
-                    Toast.makeText(DangKy.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DangKyAccount.this, "Mật khẩu không khớp!", Toast.LENGTH_SHORT).show();
                 }
             }
         }
     }
 
     public void dangnhap(){
-        AlertDialog.Builder dangnhap = new AlertDialog.Builder(DangKy.this);
+        AlertDialog.Builder dangnhap = new AlertDialog.Builder(DangKyAccount.this);
         dangnhap.setTitle("Thông báo").setIcon(R.drawable.question);
         dangnhap.setMessage("Đăng nhập ngay?");
         dangnhap.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -239,7 +236,7 @@ public class DangKy extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("MSSV", editMSSV.getText().toString());
                 bundle.putString("MK", editMatKhau.getText().toString());
-                Intent intent = new Intent(DangKy.this, LoginActivity.class);
+                Intent intent = new Intent(DangKyAccount.this, LoginActivity.class);
                 intent.putExtra("DangKy", bundle);
                 startActivity(intent);
             }

@@ -1,4 +1,4 @@
-package com.vph.qltb.ThietBi;
+package com.vph.qltb.ThietBi.ChucNang;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -30,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
+import com.vph.qltb.ThietBi.ModuleTB;
+import com.vph.qltb.ThietBi.ZoomActivity;
 
 public class UpdateTB extends AppCompatActivity {
 

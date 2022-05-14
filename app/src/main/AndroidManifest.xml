@@ -15,11 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
-            android:name=".Login.DangKy"
-            android:exported="false" />
+            android:name=".Login.DangKyAccount"
+            android:exported="true" />
         <activity
             android:name=".SinhVien.HoSo.ListYeuThich"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.DanhSach.HistoryDK"
             android:exported="true" />
@@ -31,7 +31,8 @@
             android:exported="true" />
         <activity
             android:name=".SinhVien.HoSo.DoiMK"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Dialog.NoActionBar"/>
         <activity
             android:name=".SinhVien.HoSo.SuaSDT"
             android:exported="true"
@@ -40,7 +41,7 @@
             android:name=".SinhVien.HoSo.HoSoSV"
             android:exported="true" />
         <activity
-            android:name=".ThietBi.UpdateTB"
+            android:name=".ThietBi.ChucNang.UpdateTB"
             android:exported="true" />
         <activity
             android:name=".ThietBi.ZoomActivity"
@@ -62,7 +63,7 @@
             android:name=".ThietBi.ThietBi"
             android:exported="true" />
         <activity
-            android:name=".ThietBi.ThemTB"
+            android:name=".ThietBi.ChucNang.ThemTB"
             android:exported="true" />
         <activity
             android:name=".Menu.Menu"

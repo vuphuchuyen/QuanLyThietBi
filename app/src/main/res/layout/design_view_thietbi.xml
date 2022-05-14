@@ -166,6 +166,7 @@
             app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
             android:id="@+id/btnFix"
             android:layout_width="40dp"
             android:layout_height="40dp"

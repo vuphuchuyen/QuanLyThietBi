@@ -33,7 +33,7 @@ import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
 import com.vph.qltb.SinhVien.DanhSach.HistoryDK;
 import com.vph.qltb.SinhVien.HoSo.HoSoSV;
-import com.vph.qltb.ThietBi.ThemTB;
+import com.vph.qltb.ThietBi.ChucNang.ThemTB;
 import com.vph.qltb.ThietBi.ThietBi;
 import java.util.ArrayList;
 import java.util.List;

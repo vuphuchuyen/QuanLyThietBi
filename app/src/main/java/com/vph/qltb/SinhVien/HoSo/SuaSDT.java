@@ -26,7 +26,7 @@ public class SuaSDT extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sua_sdt);
+        setContentView(R.layout.activity_doi_sdt);
         Controls();
         xulyButton();
         autofill();
@@ -71,7 +71,7 @@ public class SuaSDT extends AppCompatActivity {
                     } else {
                         FireBaseHelper.reference.child("Account").child(MSSV).child("sdt").setValue(Sdt);
                         Toast.makeText(SuaSDT.this, "Chỉnh sửa thành công!", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        finish();
                     }
                 }
 
