@@ -33,7 +33,9 @@ import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 import com.vph.qltb.ThietBi.ChiTietThietBi;
+import com.vph.qltb.ThietBi.ChucNang.UpdateTB;
 import com.vph.qltb.ThietBi.ModuleTB;
+import com.vph.qltb.ThietBi.ThietBi;
 import com.vph.qltb.ThietBi.ZoomActivity;
 
 import java.util.ArrayList;
@@ -79,11 +81,13 @@ public class ListYeuThich extends AppCompatActivity {
             TextView Role = convertView.findViewById(R.id.txtDevice_Role);
             ImageView img = convertView.findViewById(R.id.Device_Image);
 
+            Button btnFix = convertView.findViewById(R.id.btnFix);
+            Button btnXoa = convertView.findViewById(R.id.btnXoa);
             Button btnZoom = convertView.findViewById(R.id.btnZoom);
             Button btnLove = convertView.findViewById(R.id.btnLove);
             Button btnUnLove = convertView.findViewById(R.id.btnUnLove);
             //Hiển thị danh sách
-            Ten.setText(moduleTB.getTen());
+            Ten.setText(moduleTB.getTenthietbi());
             Role.setText(moduleTB.getRole());
             //Menu
             btnSelect = convertView.findViewById(R.id.btnSelect);
@@ -98,7 +102,7 @@ public class ListYeuThich extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             if (menuItem.getItemId() == R.id.Thongtin) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("thietbi", moduleTB.getTen());
+                                bundle.putString("thietbi", moduleTB.getTenthietbi());
                                 bundle.putString("soluong", moduleTB.getSoluong());
                                 Intent intent = new Intent(ListYeuThich.this, ChiTietThietBi.class);
                                 intent.putExtra("TB", bundle);
@@ -110,7 +114,7 @@ public class ListYeuThich extends AppCompatActivity {
                                     Toast.makeText(ListYeuThich.this,"Thiết bị đã hết!",Toast.LENGTH_SHORT).show();
                                 }else {
                                     Bundle bundle = new Bundle();
-                                    bundle.putString("KQMuon", moduleTB.getTen());
+                                    bundle.putString("KQMuon", moduleTB.getTenthietbi());
                                     Intent intent = new Intent(context, PhieuDangKy.class);intent.putExtra("Muon", bundle);
                                     startActivity(intent);
                                 }
@@ -123,8 +127,40 @@ public class ListYeuThich extends AppCompatActivity {
                     dropDownMenu.show();
                 }
             });
+            //Xóa thiết bị
+            btnXoa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String Tentb = Ten.getText().toString();
+                            if(snapshot.hasChild(Tentb)){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ListYeuThich.this);
+                                builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_warning);
+                                builder.setMessage("Xác nhận xóa thiết bị " + Tentb);
+                                builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FireBaseHelper.reference.child("DanhSachThietBi").child(Tentb).setValue(null);
+                                        Toast.makeText(ListYeuThich.this,"Thiết bị " + Tentb + " đã bị xóa khỏi danh sách", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                builder.setPositiveButton("NO", null);
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            });
             //Hiện trạng thái yêu thích
-            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").addValueEventListener(new ValueEventListener() {
+            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTenthietbi()).child("yeuthich").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.hasChild(String.valueOf(Menu.login))){
@@ -151,15 +187,15 @@ public class ListYeuThich extends AppCompatActivity {
                     btnLove.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (snapshot.hasChild(moduleTB.getTen())) {
+                            if (snapshot.hasChild(moduleTB.getTenthietbi())) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(ListYeuThich.this);
                                 builder.setTitle("Thông báo!").setIcon(R.drawable.question);
-                                builder.setMessage("Xác nhận hủy yêu thích thiết bị " + moduleTB.getTen());
+                                builder.setMessage("Xác nhận hủy yêu thích thiết bị " + moduleTB.getTenthietbi()+" ?");
                                 builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").child(MSSV).setValue(null);
-                                        FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTen()).setValue(null);
+                                        FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTenthietbi()).child("yeuthich").child(MSSV).setValue(null);
+                                        FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTenthietbi()).setValue(null);
                                         Toast.makeText(ListYeuThich.this,"Đã bỏ " + Ten.getText() + " khỏi danh sách yêu thích!",Toast.LENGTH_SHORT).show();
                                     }
                                 });
@@ -178,7 +214,18 @@ public class ListYeuThich extends AppCompatActivity {
 
                 }
             });
+            //Sửa TB
+            btnFix.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("UpdateKQ", String.valueOf(moduleTB.getTenthietbi()));
+                    Intent intent = new Intent(context, UpdateTB.class);
+                    intent.putExtra("Update", bundle);
+                    context.startActivity(intent);
 
+                }
+            });
             //Hiển thị chi tiết
             String key = Ten.getText().toString();
             FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -214,7 +261,26 @@ public class ListYeuThich extends AppCompatActivity {
                 }
             });
 
+            //Hiển thị button
+            FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild(Menu.login)) {
+                        final String getRole = snapshot.child(Menu.login).child("role").getValue(String.class);
+                        if (getRole.equals("admin")) {
+                            btnXoa.setVisibility(View.VISIBLE);
+                            btnFix.setVisibility(View.VISIBLE);
+                        } else{
+                            btnXoa.setVisibility(View.INVISIBLE);
+                            btnFix.setVisibility(View.GONE);
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
+                }
+            });
 
             return convertView;
         }
@@ -249,7 +315,7 @@ public class ListYeuThich extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 ArrayList<ModuleTB> filterTB = new ArrayList<>();
                 for (ModuleTB moduleTB : dsThietBi) {
-                    if (moduleTB.getTen().toLowerCase().contains(s.toLowerCase())) {
+                    if (moduleTB.getTenthietbi().toLowerCase().contains(s.toLowerCase())) {
                         filterTB.add(moduleTB);
                     }
                 }
@@ -320,10 +386,7 @@ public class ListYeuThich extends AppCompatActivity {
                             lvYeuThich.setAdapter(adapterYeuThich);
                             return false;
                         } else if (menuItem.getItemId() == R.id.Off) {
-                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for (ModuleTB moduleTB : dsThietBi) {
-                                filterTB.add(moduleTB);
-                            }
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>(dsThietBi);
                             Toast.makeText(ListYeuThich.this, "Đã tắt lọc", Toast.LENGTH_SHORT).show();
                             AdapterYeuThich adapterYeuThich = new AdapterYeuThich(getApplicationContext(), 0, filterTB);
                             lvYeuThich.setAdapter(adapterYeuThich);

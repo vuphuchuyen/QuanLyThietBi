@@ -131,11 +131,19 @@
                 android:layout_height="40dp"
                 android:background="@drawable/ic_menu"
                 android:backgroundTint="@color/yellow" />
-
+            <androidx.appcompat.widget.AppCompatButton
+                android:visibility="invisible"
+                android:id="@+id/btnXoa"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/ic_delete"
+                android:backgroundTint="@color/yellow" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="45dp"
                 android:layout_marginLeft="2dp">
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -151,6 +159,8 @@
                     android:layout_height="45dp"
                     android:background="@drawable/unlove" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton

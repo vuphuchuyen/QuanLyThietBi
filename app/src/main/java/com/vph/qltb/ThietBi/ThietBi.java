@@ -1,6 +1,7 @@
 package com.vph.qltb.ThietBi;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -34,7 +35,6 @@ import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
 import com.vph.qltb.ThietBi.ChucNang.UpdateTB;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ThietBi extends AppCompatActivity {
     Button btnSelect, btnBack, btnReload, btnLoc;
@@ -110,7 +110,7 @@ public class ThietBi extends AppCompatActivity {
             public boolean onQueryTextChange(String s) {
                 ArrayList<ModuleTB> filterTB = new ArrayList<>();
                 for (ModuleTB moduleTB : dsThietBi) {
-                    if (moduleTB.getTen().toLowerCase().contains(s.toLowerCase())) {
+                    if (moduleTB.getTenthietbi().toLowerCase().contains(s.toLowerCase())) {
                         filterTB.add(moduleTB);
                     }
                 }
@@ -130,16 +130,16 @@ public class ThietBi extends AppCompatActivity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //Lọc theo Module
+                        //Lọc theo ModuleTB
                         if(menuItem.getItemId()==R.id.Module){
                             String s = "Module";
                             ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for(ModuleTB moduleTB: dsThietBi){
+                            for(ModuleTB moduleTB : dsThietBi){
                                 if(moduleTB.getLoai().toLowerCase().contains(s.toLowerCase())){
                                     filterTB.add(moduleTB);
                                 }
                             }
-                            Toast.makeText(ThietBi.this,"Đã lọc theo Module",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ThietBi.this,"Đã lọc theo ModuleTB",Toast.LENGTH_SHORT).show();
                             AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
                             listALL.setAdapter(adapterTB);
                             return false;
@@ -148,7 +148,7 @@ public class ThietBi extends AppCompatActivity {
                         }else if(menuItem.getItemId()==R.id.DienTu) {
                             String s = "Điện tử";
                             ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for(ModuleTB moduleTB: dsThietBi){
+                            for(ModuleTB moduleTB : dsThietBi){
                                 if(moduleTB.getLoai().toLowerCase().contains(s.toLowerCase())){
                                     filterTB.add(moduleTB);
                                 }
@@ -160,7 +160,7 @@ public class ThietBi extends AppCompatActivity {
                         }else if(menuItem.getItemId()==R.id.Lab) {
                             String s = "Dùng tại Lab";
                             ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for(ModuleTB moduleTB: dsThietBi){
+                            for(ModuleTB moduleTB : dsThietBi){
                                 if(moduleTB.getRole().toLowerCase().contains(s.toLowerCase())){
                                     filterTB.add(moduleTB);
                                 }
@@ -172,7 +172,7 @@ public class ThietBi extends AppCompatActivity {
                         }else if(menuItem.getItemId()==R.id.Home) {
                             String s = "Có thể mượn về";
                             ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for(ModuleTB moduleTB: dsThietBi){
+                            for(ModuleTB moduleTB : dsThietBi){
                                 if(moduleTB.getRole().toLowerCase().contains(s.toLowerCase())){
                                     filterTB.add(moduleTB);
                                 }
@@ -183,10 +183,7 @@ public class ThietBi extends AppCompatActivity {
                             return false;
                         }
                         else if(menuItem.getItemId()==R.id.Off){
-                            ArrayList<ModuleTB> filterTB = new ArrayList<>();
-                            for(ModuleTB moduleTB:dsThietBi){
-                                filterTB.add(moduleTB);
-                            }
+                            ArrayList<ModuleTB> filterTB = new ArrayList<>(dsThietBi);
                             Toast.makeText(ThietBi.this,"Đã tắt lọc",Toast.LENGTH_SHORT).show();
                             AdapterTB adapterTB = new AdapterTB(getApplicationContext(),0,filterTB);
                             listALL.setAdapter(adapterTB);
@@ -269,7 +266,7 @@ public class ThietBi extends AppCompatActivity {
 
         Context context;
 
-        public AdapterTB(@NonNull Context context, int resource, @NonNull List<ModuleTB> objects) {
+        public AdapterTB(@NonNull Context context, int resource, @NonNull ArrayList<ModuleTB> objects) {
             super(context, resource, objects);
             this.context = context;
         }
@@ -287,12 +284,13 @@ public class ThietBi extends AppCompatActivity {
             TextView Role = convertView.findViewById(R.id.txtDevice_Role);
             ImageView img = convertView.findViewById(R.id.Device_Image);
 
+            Button btnXoa = convertView.findViewById(R.id.btnXoa);
             Button btnFix = convertView.findViewById(R.id.btnFix);
             Button btnZoom = convertView.findViewById(R.id.btnZoom);
             Button btnLove = convertView.findViewById(R.id.btnLove);
             Button btnUnLove = convertView.findViewById(R.id.btnUnLove);
             //Hiển thị danh sách
-            Ten.setText(moduleTB.getTen());
+            Ten.setText(moduleTB.getTenthietbi());
             Role.setText(moduleTB.getRole());
             SL.setText(moduleTB.getSoluong());
             Picasso.get().load(moduleTB.getHinhanh())
@@ -312,7 +310,7 @@ public class ThietBi extends AppCompatActivity {
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             if (menuItem.getItemId() == R.id.Thongtin) {
                                 Bundle bundle = new Bundle();
-                                bundle.putString("thietbi", moduleTB.getTen());
+                                bundle.putString("thietbi", moduleTB.getTenthietbi());
                                 bundle.putString("soluong", moduleTB.getSoluong());
                                 Intent intent = new Intent(ThietBi.this, ChiTietThietBi.class);
                                 intent.putExtra("TB", bundle);
@@ -324,11 +322,11 @@ public class ThietBi extends AppCompatActivity {
                                             Toast.makeText(ThietBi.this,"Thiết bị đã hết!",Toast.LENGTH_SHORT).show();
                                         }else {
                                             Bundle bundle = new Bundle();
-                                            bundle.putString("KQMuon", moduleTB.getTen());
+                                            bundle.putString("KQMuon", moduleTB.getTenthietbi());
                                             Intent intent = new Intent(context, PhieuDangKy.class);
                                             intent.putExtra("Muon", bundle);
                                             startActivity(intent);
-                                                }
+                                        }
 
                                 return false;
                             }
@@ -338,8 +336,41 @@ public class ThietBi extends AppCompatActivity {
                     dropDownMenu.show();
                 }
             });
+            //Xóa thiết bị
+            btnXoa.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String Tentb = Ten.getText().toString();
+                            if(snapshot.hasChild(Tentb)){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(ThietBi.this);
+                                builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_warning);
+                                builder.setMessage("Xác nhận xóa thiết bị " + Tentb);
+                                builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FireBaseHelper.reference.child("DanhSachThietBi").child(Tentb).setValue(null);
+                                        Toast.makeText(ThietBi.this,"Thiết bị " + Tentb + " đã bị xóa khỏi danh sách", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                builder.setPositiveButton("NO", null);
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            });
+
             //Hiện trạng thái yêu thích
-            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").addValueEventListener(new ValueEventListener() {
+            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTenthietbi()).child("yeuthich").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if(snapshot.hasChild(String.valueOf(Menu.login))){
@@ -356,23 +387,24 @@ public class ThietBi extends AppCompatActivity {
 
                 }
             });
+
         //Thả Love/ Hủy Love
             String MSSV = Menu.login;
 
-            FireBaseHelper.reference.child("DanhSachThietBi").addValueEventListener(new ValueEventListener() {
+            FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
                        @Override
                        public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 //Thêm vào yêu thích
                                 btnUnLove.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        if (snapshot.hasChild(moduleTB.getTen())) {
-                                            String ten = moduleTB.getTen();
+                                        if (snapshot.hasChild(moduleTB.getTenthietbi())) {
+                                            String ten = moduleTB.getTenthietbi();
                                             String loai = moduleTB.getLoai();
                                             String role = moduleTB.getRole();
-                                            ModuleTB moduleTBlove = new ModuleTB(ten, loai, role);
-                                            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").child(MSSV).setValue(MSSV);
-                                            FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTen()).setValue(moduleTBlove);
+                                            ModuleTB moduleTBTBlove = new ModuleTB(ten, loai, role);
+                                            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTenthietbi()).child("yeuthich").child(MSSV).setValue(MSSV);
+                                            FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTenthietbi()).setValue(moduleTBTBlove);
                                             btnLove.setVisibility(View.VISIBLE);
                                             btnUnLove.setVisibility(View.INVISIBLE);
                                             Toast.makeText(ThietBi.this, "Đã thêm " + Ten.getText() + " vào danh sách yêu thích!", Toast.LENGTH_SHORT).show();
@@ -383,9 +415,9 @@ public class ThietBi extends AppCompatActivity {
                                 btnLove.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        if (snapshot.hasChild(moduleTB.getTen())) {
-                                            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTen()).child("yeuthich").child(MSSV).setValue(null);
-                                            FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTen()).setValue(null);
+                                        if (snapshot.hasChild(moduleTB.getTenthietbi())) {
+                                            FireBaseHelper.reference.child("DanhSachThietBi").child(moduleTB.getTenthietbi()).child("yeuthich").child(MSSV).setValue(null);
+                                            FireBaseHelper.reference.child("Account").child(MSSV).child("yeuthich").child(moduleTB.getTenthietbi()).setValue(null);
                                             btnLove.setVisibility(View.INVISIBLE);
                                             btnUnLove.setVisibility(View.VISIBLE);
                                             Toast.makeText(ThietBi.this,"Đã bỏ " + Ten.getText() + " khỏi danh sách yêu thích!",Toast.LENGTH_SHORT).show();
@@ -416,7 +448,7 @@ public class ThietBi extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("UpdateKQ", String.valueOf(moduleTB.getTen()));
+                    bundle.putString("UpdateKQ", String.valueOf(moduleTB.getTenthietbi()));
                         Intent intent = new Intent(context, UpdateTB.class);
                         intent.putExtra("Update", bundle);
                         context.startActivity(intent);
@@ -431,9 +463,10 @@ public class ThietBi extends AppCompatActivity {
                     if(snapshot.hasChild(Menu.login)) {
                         final String getRole = snapshot.child(Menu.login).child("role").getValue(String.class);
                         if (getRole.equals("admin")) {
-
+                            btnXoa.setVisibility(View.VISIBLE);
                             btnFix.setVisibility(View.VISIBLE);
                         } else{
+                            btnXoa.setVisibility(View.INVISIBLE);
                             btnFix.setVisibility(View.GONE);
                         }
                     }

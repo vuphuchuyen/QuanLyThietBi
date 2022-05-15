@@ -1,16 +1,23 @@
 package com.vph.qltb.ThietBi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +29,13 @@ import com.squareup.picasso.Picasso;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ChucNang.PhieuDangKy;
+import com.vph.qltb.SinhVien.DanhSach.ChiTietDangKy;
+import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
+import com.vph.qltb.SinhVien.ModuleSV;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ChiTietThietBi extends AppCompatActivity {
 
@@ -29,6 +43,9 @@ public class ChiTietThietBi extends AppCompatActivity {
     TextView TenThietBi, ThongTin, Number_Love, Soluong, LoaiTB, RoleTB;
     ImageView img, Love;
     TabHost tabHost;
+    ListView listdanhsach;
+
+    ArrayList<ModuleSV> dsDangMuon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +53,10 @@ public class ChiTietThietBi extends AppCompatActivity {
         addControls();
         Events();
         createTab();
+        hienthidanhsach();
     }
+
+
 
     private void createTab() {
         tabHost.setup();
@@ -44,18 +64,18 @@ public class ChiTietThietBi extends AppCompatActivity {
         TabHost.TabSpec tabThongTin;
         tabThongTin = tabHost.newTabSpec("tabThongTin");
         tabThongTin.setContent(R.id.tabThongTin);
-        tabThongTin.setIndicator("Thông tin thiết bị");
+        tabThongTin.setIndicator("Thông tin");
         tabHost.addTab(tabThongTin);
         //Tab 2
         TabHost.TabSpec tabDanhSach;
         tabDanhSach = tabHost.newTabSpec("tabDanhSach");
         tabDanhSach.setContent(R.id.tabDanhSachMuon);
-        tabDanhSach.setIndicator("Danh sách đang mượn");
+        tabDanhSach.setIndicator("Đang mượn");
 
         tabHost.addTab(tabDanhSach);
 
-        tabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.color.yellow);
-        tabHost.getTabWidget().setBackgroundResource(R.color.blue);
+        tabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.color.white);
+        tabHost.getTabWidget().setBackgroundResource(R.color.gray);
 
         //Đổi màu khi pick
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -67,16 +87,13 @@ public class ChiTietThietBi extends AppCompatActivity {
                         tabHost.getTabWidget()
                                 .getChildAt(i)
                                 .setBackgroundResource(
-                                        R.color.yellow);
-                        TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                        tv.setTextColor(R.color.white);
+                                        R.color.white);
+
                     } else {
                         tabHost.getTabWidget()
                                 .getChildAt(i)
                                 .setBackgroundResource(
-                                        R.color.blue);
-                        TextView tv = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title); //Unselected Tabs
-                        tv.setTextColor(R.color.white);
+                                        R.color.gray);
                     }
                 }
             }
@@ -97,6 +114,8 @@ public class ChiTietThietBi extends AppCompatActivity {
         Number_Love = findViewById(R.id.Number_Love);
         Love = findViewById(R.id.imgLove);
         RoleTB = findViewById(R.id.txtDevice_Role);
+        listdanhsach = findViewById(R.id.lvDanhSachMuon);
+        dsDangMuon = new ArrayList<>();
     }
 
     private void Events() {
@@ -133,11 +152,11 @@ public class ChiTietThietBi extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("TB");
         String key = bundle.getString("thietbi");
         String soluong = bundle.getString("soluong");
-        FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
+        FireBaseHelper.reference.child("DanhSachThietBi").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(key)) {
-                    final String getTenTB = snapshot.child(key).child("ten").getValue(String.class);
+                    final String getTenTB = snapshot.child(key).child("tenthietbi").getValue(String.class);
                     final String getThongtinTB = snapshot.child(key).child("thongtin").getValue(String.class);
                     final String getHinhAnhTB = snapshot.child(key).child("hinhanh").getValue(String.class);
                     final String getSL = snapshot.child(key).child("soluong").getValue(String.class);
@@ -230,6 +249,91 @@ public class ChiTietThietBi extends AppCompatActivity {
     }
     private void yeuthichline(){
         Toast.makeText(this,"Thiết bị có " + Number_Love.getText() + " lượt yêu thích",Toast.LENGTH_SHORT).show();
+    }
+    public class AdapterListMuon extends ArrayAdapter<ModuleSV> {
+
+        Context context;
+
+        public AdapterListMuon(@NonNull Context context, int resource, @NonNull List<ModuleSV> objects) {
+            super(context, resource, objects);
+            this.context = context;
+        }
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            ModuleSV moduleSV = getItem(position);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.design_dangmuon, parent, false);
+            }
+            TextView SV = convertView.findViewById(R.id.txtStudent_Name);
+            TextView ID = convertView.findViewById(R.id.txtStudent_ID);
+            TextView timeMuon = convertView.findViewById(R.id.txtDevice_Time);
+            TextView dateMuon = convertView.findViewById(R.id.txtDevice_Date);
+            TextView SL = convertView.findViewById(R.id.txtTotal_Number);
+            TextView Pos = convertView.findViewById(R.id.txtDevice_Position_Number);
+            //Hiển thị
+            int stt = position + 1;
+            Pos.setText("" + stt);
+            Intent intent = getIntent();
+            Bundle bundle = intent.getBundleExtra("TB");
+            String ten = bundle.getString("thietbi");
+            String key = moduleSV.getId();
+            FireBaseHelper.reference.child("DanhSachThietBi").child(ten).child("Đang mượn").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild(key)){
+                        final String getID = snapshot.child(key).child("mssv").getValue(String.class);
+                        final String getTimeMuon = snapshot.child(key).child("timeMuon").getValue(String.class);
+                        final String getDateMuon = snapshot.child(key).child("dateMuon").getValue(String.class);
+                        final String getSL = snapshot.child(key).child("soluong").getValue(String.class);
+                        ID.setText(getID);
+                        timeMuon.setText(getTimeMuon);
+                        dateMuon.setText(getDateMuon);
+                        SL.setText(getSL);
+                        FireBaseHelper.reference.child("Account").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if(snapshot.hasChild(getID)){
+                                    final String getSV = snapshot.child(getID).child("sinhvien").getValue(String.class);
+                                    SV.setText(getSV);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return convertView;
+        }
+    }
+    private void hienthidanhsach() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("TB");
+        String key = bundle.getString("thietbi");
+        FireBaseHelper.reference.child("DanhSachThietBi").child(key).child("Đang mượn").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dsDangMuon.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    ModuleSV moduleSV = ds.getValue(ModuleSV.class);
+                    dsDangMuon.add(moduleSV);
+                }
+                AdapterListMuon adapter = new AdapterListMuon(ChiTietThietBi.this, R.layout.design_dangmuon, dsDangMuon);
+                listdanhsach.setAdapter(adapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
     public void Restart(){
         recreate();

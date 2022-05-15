@@ -87,6 +87,8 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@drawable/ic_nguoimuon"
+                android:drawableTint="@color/blue"
                 android:id="@+id/txtStudent_Name"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -117,12 +119,14 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@drawable/ic_class"
+                android:drawableTint="@color/blue"
                 android:id="@+id/txtStudent_Class"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/design_button_blue"
-                android:text="Student_Name"
+                android:text="Student_CLass"
                 android:textAlignment="center"
                 android:textColor="@color/blue"
                 android:textStyle="bold"
@@ -147,6 +151,8 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@drawable/ic_maso"
+                android:drawableTint="@color/blue"
                 android:id="@+id/txtStudent_ID"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -177,6 +183,8 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@drawable/ic_phone"
+                android:drawableTint="@color/blue"
                 android:id="@+id/txtStudent_Phone"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -202,22 +210,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnFixSDT"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/ic_fix"
-                android:backgroundTint="@color/blue"
-                app:layout_constraintStart_toEndOf="@+id/txtStudent_Phone"
-                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
+                android:drawableLeft="@drawable/ic_thietbi"
+                android:drawableTint="@color/blue"
                 android:id="@+id/txtTotal_Device"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
@@ -298,7 +299,8 @@
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/love"
+                    android:backgroundTint="@color/blue"
+                    android:background="@drawable/love"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -350,7 +352,7 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/design_button_blue"
-                android:text="Lịch sử mượn thiết bị"/>
+                android:text="Lịch sử mượn"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -394,6 +396,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -401,13 +404,37 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
                     <ImageView
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
-                        android:src="@drawable/ic_key"
+                        android:backgroundTint="@color/blue"
+                        android:background="@drawable/ic_phone"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnFixSDT"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/design_button_blue"
+                        android:text="Đổi số điện thoại"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="0dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:backgroundTint="@color/blue"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/ic_key"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 

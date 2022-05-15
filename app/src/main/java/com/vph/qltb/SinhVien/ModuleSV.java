@@ -14,35 +14,31 @@ public class ModuleSV {
         this.lydo = lydo;
         this.id = id;
     }
-    //Trả
-    public ModuleSV(String soluong, String  tenthietbi, String dateDK, String timeDK, String dateMuon, String timeMuon, String tinhtrang, String lydo, String id) {
+    //Xác nhận mượn
+    public ModuleSV(String mssv, String soluong,  String dateDK, String timeDK, String dateMuon, String timeMuon, String tinhtrang ,String id) {
+        this.mssv = mssv;
         this.timeMuon = timeMuon;
         this.timeDK = timeDK;
         this.dateMuon = dateMuon;
         this.soluong = soluong;
-        this.tenthietbi = tenthietbi;
-        this.dateDK = dateDK;
         this.tinhtrang = tinhtrang;
-        this.lydo = lydo;
+        this.dateDK = dateDK;
         this.id = id;
     }
 
 
     //Lịch sử trả + mượn
-    public ModuleSV(String mssv, String soluong, String  tenthietbi, String dateDK, String timeDK, String dateMuon, String timeMuon, String dateTra, String timeTra,  String lydo, String id) {
+    public ModuleSV(String mssv, String sinhvien, String soluong, String  tenthietbi, String dateDK, String timeDK, String dateMuon, String timeMuon, String dateTra, String timeTra,  String lydo, String id) {
         this.mssv = mssv;
-
+        this.sinhvien = sinhvien;
         this.timeDK = timeDK;
         this.timeMuon = timeMuon;
         this.timeTra = timeTra;
-
         this.dateTra = dateTra;
         this.dateMuon = dateMuon;
         this.dateDK = dateDK;
         this.soluong = soluong;
-
         this.tenthietbi = tenthietbi;
-
         this.lydo = lydo;
         this.id = id;
     }

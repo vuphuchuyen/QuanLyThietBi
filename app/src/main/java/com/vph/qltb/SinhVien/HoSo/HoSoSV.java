@@ -26,7 +26,6 @@ import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.DanhSach.ChiTietDangKy;
-import com.vph.qltb.SinhVien.DanhSach.HistoryDK;
 
 import java.util.Map;
 
@@ -110,10 +109,7 @@ public class HoSoSV extends AppCompatActivity {
         btnListDangMuon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("ChiTiet", MSSV);
                 Intent intent = new Intent(HoSoSV.this, ChiTietDangKy.class);
-                intent.putExtra("ThongTin", bundle);
                 startActivity(intent);
             }
         });
@@ -121,7 +117,10 @@ public class HoSoSV extends AppCompatActivity {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HoSoSV.this, HistoryDK.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("MSSV", Menu.login);
+                Intent intent = new Intent(HoSoSV.this, History.class);
+                intent.putExtra("History", bundle);
                 startActivity(intent);
             }
         });
@@ -177,7 +176,7 @@ public class HoSoSV extends AppCompatActivity {
 
             FireBaseHelper.reference
                     .child("Account")
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                    .addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.hasChild(MSSV)) {

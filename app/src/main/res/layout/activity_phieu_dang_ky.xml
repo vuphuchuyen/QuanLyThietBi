@@ -33,7 +33,7 @@
         android:background="@drawable/design_button_blue"
         android:backgroundTint="@color/blue">
         <TextView
-
+            android:id="@+id/txtDangKy"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:layout_width="wrap_content"
@@ -190,6 +190,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <CheckBox
+                android:visibility="gone"
                 android:id="@+id/chkCamKet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -198,6 +199,7 @@
                 android:text="Tôi cam kết giữ gìn thiết bị cẩn thận"/>
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

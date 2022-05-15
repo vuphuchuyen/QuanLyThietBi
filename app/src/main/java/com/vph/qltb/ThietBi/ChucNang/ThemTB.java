@@ -35,7 +35,7 @@ import com.vph.qltb.ThietBi.ZoomActivity;
 public class ThemTB extends AppCompatActivity {
 
     EditText ten, soluong, thongtin, hinhanh, role, type;
-    Button btnthem, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg, btnZoom, btnSelect_Type, btnSelect_Role, btnCheckTen, btnReCheckTen;
+    Button btnthem, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg,  btnSelect_Type, btnSelect_Role, btnCheckTen, btnReCheckTen;
 
     CardView cardView;
     LinearLayout expand_them;
@@ -148,9 +148,9 @@ public class ThemTB extends AppCompatActivity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //Chọn Module
+                        //Chọn ModuleTB
                         if(menuItem.getItemId()==R.id.Module){
-                            type.setText("Module");
+                            type.setText("ModuleTB");
                         }else if(menuItem.getItemId()==R.id.DienTu){
                             type.setText("Điện tử");
                         }
@@ -171,7 +171,7 @@ public class ThemTB extends AppCompatActivity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //Chọn Module
+                        //Chọn ModuleTB
                         if(menuItem.getItemId()==R.id.Lab){
                             role.setText("Dùng tại Lab");
                         }else if(menuItem.getItemId()==R.id.Home){
@@ -183,17 +183,7 @@ public class ThemTB extends AppCompatActivity {
                 dropDownMenu.show();
             }
         });
-        //Zoom thiết bị
-        Bundle bundle = new Bundle();
-        bundle.putString("ZoomKQ", hinhanh.getText().toString());
-        btnZoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ThemTB.this, ZoomActivity.class);
-                intent.putExtra("ZoomIMG", bundle);
-                startActivity(intent);
-            }
-        });
+
         btnOpenThem.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("UseCompatLoadingForDrawables")
             @Override
@@ -221,7 +211,6 @@ public class ThemTB extends AppCompatActivity {
                 Glide.with(ThemTB.this)
                         .load(R.drawable.ic_holder)
                         .into(checkImg);
-                btnZoom.setVisibility(View.GONE);
                 btnthem.setVisibility(View.GONE);
                 btnCheckTen.setVisibility(View.VISIBLE);
                 btnReCheckTen.setVisibility(View.GONE);
@@ -241,11 +230,15 @@ public class ThemTB extends AppCompatActivity {
             String HinhAnh = hinhanh.getText().toString();
             String Role = role.getText().toString();
             String Type = type.getText().toString();
-            ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh, Type, Role);
+            ModuleTB moduleTB = new ModuleTB(Ten, SoLuong, ThongTin, HinhAnh,Type, Role);
 
             if (Ten.isEmpty() || SoLuong.isEmpty() || ThongTin.isEmpty() || HinhAnh.isEmpty() || Role.isEmpty() || Type.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-            } else {
+            } else if(Integer.parseInt(SoLuong)<=0) {
+                Toast.makeText(ThemTB.this,"Số lượng phải lớn hơn 0",Toast.LENGTH_SHORT).show();
+            } else
+             {
+
                             AlertDialog.Builder builder =new AlertDialog.Builder(ThemTB.this)
                                     .setTitle("Thông báo!")
                                     .setIcon(R.drawable.question)
@@ -253,7 +246,7 @@ public class ThemTB extends AppCompatActivity {
                                             + "\nSố lượng: "+SoLuong
                                             +"\nThông tin: "+ThongTin
                                             +"\nLoại: " +Type
-                                            +"\nThiết bị sử dụng tại " + Role)
+                                            +"\nThiết bị " + Role)
                                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -265,7 +258,6 @@ public class ThemTB extends AppCompatActivity {
                                             hinhanh.setText("");
                                             role.setText("");
                                             type.setText("");
-                                            btnZoom.setVisibility(View.GONE);
                                             btnthem.setVisibility(View.GONE);
                                             btnCheckTen.setVisibility(View.VISIBLE);
                                             btnReCheckTen.setVisibility(View.GONE);
@@ -291,18 +283,13 @@ public class ThemTB extends AppCompatActivity {
     public void CheckInImg(){
         if(isConnected()) {
             String url = hinhanh.getText().toString();
-            if (url.isEmpty()) {
-                Toast.makeText(this, "Địa chỉ trống!", Toast.LENGTH_SHORT).show();
-                btnZoom.setVisibility(View.GONE);
-            } else {
+
                 Glide.with(ThemTB.this)
                         .load(url)
                         .centerCrop()
                         .error(R.drawable.ic_error)
                         .placeholder(R.drawable.ic_error)
                         .into(checkImg);
-                btnZoom.setVisibility(View.VISIBLE);
-            }
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(ThemTB.this);
             builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
@@ -359,7 +346,6 @@ public class ThemTB extends AppCompatActivity {
         btnOpenThem = findViewById(R.id.btnOpenThem);
         cardView = findViewById(R.id.CV_Expand_Them);
         expand_them = findViewById(R.id.expand_them);
-        btnZoom = findViewById(R.id.btnZoom);
         btnSelect_Role = findViewById(R.id.btnSelect_Role);
         btnSelect_Type = findViewById(R.id.btnSelect_Type);
         role = findViewById(R.id.editDeivce_Role);

@@ -208,7 +208,7 @@ public class DangKyAccount extends AppCompatActivity {
                             "\nTên: "+ Ten +
                             "\nLớp: "+ Lop +
                             "\nSĐT: "+ Phone);
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             FireBaseHelper.reference.child("Account").child(MSSV).setValue(dangky);
@@ -216,7 +216,7 @@ public class DangKyAccount extends AppCompatActivity {
                             dangnhap();
                         }
                     });
-                    builder.setNegativeButton("NO",null);
+                    builder.setPositiveButton("NO",null);
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 } else {
@@ -230,7 +230,7 @@ public class DangKyAccount extends AppCompatActivity {
         AlertDialog.Builder dangnhap = new AlertDialog.Builder(DangKyAccount.this);
         dangnhap.setTitle("Thông báo").setIcon(R.drawable.question);
         dangnhap.setMessage("Đăng nhập ngay?");
-        dangnhap.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        dangnhap.setNegativeButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Bundle bundle = new Bundle();
@@ -241,7 +241,7 @@ public class DangKyAccount extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        dangnhap.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        dangnhap.setPositiveButton("No", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 editMSSV.setText("");

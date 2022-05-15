@@ -43,9 +43,10 @@
             android:layout_height="30dp"
             android:textStyle="bold"
             android:backgroundTint="@color/white"
-            android:background="@drawable/ic_close"
+            android:background="@drawable/ic_open"
             android:id="@+id/btnOpenThem" />
         <TextView
+            android:id="@+id/txtThem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thêm thiết bị"
@@ -360,18 +361,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:visibility="gone"
-                        android:id="@+id/btnZoom"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_zoom_in"
-                        android:backgroundTint="@color/blue"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.9"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:layout_editor_absoluteY="16dp" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout

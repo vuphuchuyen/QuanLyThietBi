@@ -34,6 +34,7 @@ public class ZoomActivity extends AppCompatActivity {
        Intent intent = getIntent();
        Bundle bundle = intent.getBundleExtra("ZoomIMG");
        if(bundle== null){
+           Zoom.setImageDrawable(getResources().getDrawable(R.drawable.ic_error));
        }else {
            String url = bundle.getString("ZoomKQ").toString();
            Picasso.get().load(String.valueOf(url))

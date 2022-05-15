@@ -31,7 +31,7 @@ import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Login.LoginActivity;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
-import com.vph.qltb.SinhVien.DanhSach.HistoryDK;
+import com.vph.qltb.SinhVien.DanhSach.HistoryALL;
 import com.vph.qltb.SinhVien.HoSo.HoSoSV;
 import com.vph.qltb.ThietBi.ChucNang.ThemTB;
 import com.vph.qltb.ThietBi.ThietBi;
@@ -139,7 +139,7 @@ public class Menu extends AppCompatActivity {
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent history = new Intent(Menu.this, HistoryDK.class);
+                Intent history = new Intent(Menu.this, HistoryALL.class);
                 startActivity(history);
             }
         });

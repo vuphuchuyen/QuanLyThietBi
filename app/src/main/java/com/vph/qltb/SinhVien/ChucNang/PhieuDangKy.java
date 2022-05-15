@@ -29,8 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.Menu.Menu;
-import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
+import com.vph.qltb.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -208,6 +208,7 @@ public class PhieuDangKy extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(Mssv)) {
+                                final String getSV = snapshot.child(Mssv).child("sinhvien").getValue(String.class);
                                 ModuleSV moduleThietBi = new ModuleSV(SoLuong, ThietBi, dateDK, timeDK, tinhtrang, Lydo, key);
                                 if (ThietBi.isEmpty() || SoLuong.isEmpty() || Lydo.isEmpty()) {
                                     Toast.makeText(PhieuDangKy.this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
@@ -229,6 +230,7 @@ public class PhieuDangKy extends AppCompatActivity {
                                                     bdk.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                                         @Override
                                                         public void onClick(DialogInterface dialog, int which) {
+                                                            FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("sinhvien").setValue(getSV);
                                                             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("mssv").setValue(Mssv);
                                                             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").child(key).setValue(moduleThietBi);
                                                                 thongbao();
@@ -283,6 +285,7 @@ public class PhieuDangKy extends AppCompatActivity {
 
     private void addControls() {
         chkCamKet = findViewById(R.id.chkCamKet);
+        chkCamKet.setVisibility(View.VISIBLE);
         soluong = findViewById(R.id.editDevice_Number);
         tenthietbi = findViewById(R.id.editDevice_Name);
         lydo = findViewById(R.id.editReason);

@@ -91,6 +91,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TabHost
+
         android:id="@+id/TabHostTB"
         android:textAlignment="center"
         android:layout_width="match_parent"
@@ -106,7 +107,6 @@
 
             <TabWidget
 
-                app:tabIndicatorGravity="center"
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -123,6 +123,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginBottom="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_marginLeft="10dp"
@@ -255,6 +263,8 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
+                    </ScrollView>
                 </LinearLayout>
 
                 <LinearLayout

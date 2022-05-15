@@ -2,17 +2,11 @@ package com.vph.qltb.SinhVien.DanhSach;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +23,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.vph.qltb.FireBaseHelper;
-import com.vph.qltb.Menu.Menu;
-import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
+import com.vph.qltb.R;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
-public class HistoryDK extends AppCompatActivity {
+public class HistoryALL extends AppCompatActivity {
     Button btnBack, btnReload;
     SearchView searchView;
     ListView lvhistory;
@@ -71,13 +61,33 @@ public class HistoryDK extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 recreate();
-                Toast.makeText(HistoryDK.this, "Trang đã dược tải lại!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HistoryALL.this, "Trang đã dược tải lại!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //Tìm kiếm thiết bị theo tên
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<ModuleSV> filterTB = new ArrayList<>();
+                for (ModuleSV moduleSV : dsHistory) {
+                    if (moduleSV.getTenthietbi().toLowerCase().contains(s.toLowerCase())) {
+                        filterTB.add(moduleSV);
+                    }
+                }
+                AdapterHistory adapterChiTiet = new AdapterHistory(getApplicationContext(), 0, filterTB);
+                lvhistory.setAdapter(adapterChiTiet);
+                return false;
             }
         });
     }
-    public static class AdapterHistory extends ArrayAdapter<ModuleSV> {
+    public class AdapterHistory extends ArrayAdapter<ModuleSV> {
         Context context;
-        public AdapterHistory(@NonNull Context context, int resource, @NonNull List<ModuleSV> objects) {
+        public AdapterHistory(@NonNull Context context, int resource, @NonNull ArrayList<ModuleSV> objects) {
             super(context, resource, objects);
             this.context = context;
         }
@@ -91,10 +101,27 @@ public class HistoryDK extends AppCompatActivity {
             Button btnChiTiet = convertView.findViewById(R.id.btnChiTiet);
             TextView ten  = convertView.findViewById(R.id.txtDevice_Name);
             TextView total = convertView.findViewById(R.id.txtTotal_Number);
+            ImageView img = convertView.findViewById(R.id.Device_Image);
             ten.setText(moduleSV.getTenthietbi());
             //Hiển thị
-            String key = moduleSV.getId();
+            String tentb = ten.getText().toString();
+            FireBaseHelper.reference.child("DanhSachThietBi").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.hasChild(tentb)){
+                        final String getIMG = snapshot.child(tentb).child("hinhanh").getValue(String.class);
+                        Picasso.get().load(getIMG)
+                                .placeholder(R.drawable.ic_holder)
+                                .error(R.drawable.ic_error)
+                                .into(img);
+                    }
+                }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             FireBaseHelper.reference.child("LichSuMuonThietBi")
                     .child(moduleSV.getTenthietbi())
                     .child("keymuon")
@@ -111,6 +138,18 @@ public class HistoryDK extends AppCompatActivity {
 
                 }
             });
+
+            //Chi tiết
+            btnChiTiet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Ten", moduleSV.getTenthietbi());
+                    Intent intent = new Intent(context, ChiTietHistoryALL.class);
+                    intent.putExtra("History", bundle);
+                    startActivity(intent);
+                }
+            });
             return convertView;
         }
     }
@@ -123,7 +162,7 @@ public class HistoryDK extends AppCompatActivity {
                     ModuleSV moduleSV = ds.getValue(ModuleSV.class);
                     dsHistory.add(moduleSV);
                 }
-                AdapterHistory adapter = new AdapterHistory(HistoryDK.this, R.layout.design_history, dsHistory);
+                AdapterHistory adapter = new AdapterHistory(HistoryALL.this, R.layout.design_history, dsHistory);
                 lvhistory.setAdapter(adapter);
             }
             @Override

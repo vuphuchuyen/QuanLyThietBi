@@ -15,13 +15,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
+            android:name=".SinhVien.HoSo.ChiTietHistory"
+            android:exported="false" />
+        <activity
+            android:name=".SinhVien.HoSo.History"
+            android:exported="false" />
+        <activity
+            android:name=".SinhVien.DanhSach.ChiTietHistoryALL"
+            android:exported="false" />
+        <activity
+            android:name=".SinhVien.ChucNang.SuaDK"
+            android:exported="true" />
+        <activity
             android:name=".Login.DangKyAccount"
             android:exported="true" />
         <activity
             android:name=".SinhVien.HoSo.ListYeuThich"
             android:exported="true" />
         <activity
-            android:name=".SinhVien.DanhSach.HistoryDK"
+            android:name=".SinhVien.DanhSach.HistoryALL"
             android:exported="true" />
         <activity
             android:name=".SinhVien.DanhSach.ChiTietDangKy"
@@ -32,7 +44,7 @@
         <activity
             android:name=".SinhVien.HoSo.DoiMK"
             android:exported="true"
-            android:theme="@style/Dialog.NoActionBar"/>
+            android:theme="@style/Dialog.NoActionBar" />
         <activity
             android:name=".SinhVien.HoSo.SuaSDT"
             android:exported="true"

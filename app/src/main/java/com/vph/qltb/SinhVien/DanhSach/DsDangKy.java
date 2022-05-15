@@ -16,12 +16,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vph.qltb.FireBaseHelper;
-import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleSV;
+import com.vph.qltb.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -33,6 +34,7 @@ import java.util.Map;
 public class DsDangKy extends AppCompatActivity {
     Button btnRestartDK, btnBack;
     ListView lvDanKy;
+    SearchView searchView;
     ArrayList<ModuleSV> dsDangKy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +70,7 @@ public class DsDangKy extends AppCompatActivity {
             Student_ID.setText(moduleSV.getMssv());
             //
              String ID = Student_ID.getText().toString();
-            FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
+            FireBaseHelper.reference.child("Account").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.hasChild(ID)) {
@@ -99,13 +101,12 @@ public class DsDangKy extends AppCompatActivity {
                         Total_Device.setText(String.valueOf(sumSL));
                     }
                     //Tình trạng
-                    int sumStatus = 0;
                     for(DataSnapshot ds : snapshot.getChildren()) {
                         Map<String, Object> map = (Map<String, Object>) ds.getValue();
                         Object st = map.get("tinhtrang");
                         int pValue = Integer.parseInt(String.valueOf(st));
-                        sumStatus += pValue;
-                        if(sumStatus > 0){
+
+                        if(pValue == 1){
                             textNoti.setVisibility(View.VISIBLE);
                         }else{
                             textNoti.setVisibility(View.INVISIBLE);
@@ -149,7 +150,26 @@ public class DsDangKy extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        //Tìm kiếm thiết bị theo tên
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<ModuleSV> filterTB = new ArrayList<>();
+                for (ModuleSV moduleSV : dsDangKy) {
+                    if (moduleSV.getSinhvien().toLowerCase().contains(s.toLowerCase())) {
+                        filterTB.add(moduleSV);
+                    }
+                }
+                AdapterDK adapterChiTiet = new AdapterDK(getApplicationContext(), 0, filterTB);
+                lvDanKy.setAdapter(adapterChiTiet);
+                return false;
+            }
+        });
     }
 
 
@@ -175,7 +195,7 @@ public class DsDangKy extends AppCompatActivity {
     private void addControls() {
         btnBack = findViewById(R.id.btnBack);
         btnRestartDK = findViewById(R.id.btnRestartDK);
-
+        searchView = findViewById(R.id.search);
         lvDanKy = findViewById(R.id.lvNguoiMuon);
         dsDangKy = new ArrayList<>();
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/SV"
+        android:title="Tìm kiếm theo tên"/>
+    <item android:id="@+id/MSSV"
+        android:title="Tìm kiếm theo MSSV"/>
+    <item android:id="@+id/DateTra"
+        android:title="Tìm kiếm theo ngày trả"/>
+    <item android:id="@+id/Close"
+        android:title="Đóng tìm kiếm"/>
+</menu>

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -35,8 +36,9 @@ import com.vph.qltb.ThietBi.ZoomActivity;
 public class UpdateTB extends AppCompatActivity {
 
     EditText ten, soluong, thongtin, hinhanh, role, type;
-    Button btnXacNhan, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg, btnZoom, btnSelect_Type, btnSelect_Role;
+    Button btnXacNhan, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg, btnSelect_Type, btnSelect_Role;
     CardView cardView;
+    TextView txtThem;
     LinearLayout expand_them;
     ImageView checkImg;
 
@@ -44,7 +46,7 @@ public class UpdateTB extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_tb);
+        setContentView(R.layout.activity_them);
         update();
         addControls();
         addEvents();
@@ -83,7 +85,7 @@ public class UpdateTB extends AppCompatActivity {
 
     private void addControls() {
 
-
+        txtThem = findViewById(R.id.txtThem);
         ten = findViewById(R.id.editDevice_Name);
         soluong = findViewById(R.id.editDeivce_Number);
         thongtin = findViewById(R.id.editDevice_Info);
@@ -98,7 +100,6 @@ public class UpdateTB extends AppCompatActivity {
         btnOpenThem = findViewById(R.id.btnOpenThem);
         cardView = findViewById(R.id.CV_Expand_Them);
         expand_them = findViewById(R.id.expand_them);
-        btnZoom = findViewById(R.id.btnZoom);
         btnSelect_Role = findViewById(R.id.btnSelect_Role);
         btnSelect_Type = findViewById(R.id.btnSelect_Type);
         role = findViewById(R.id.editDeivce_Role);
@@ -106,6 +107,8 @@ public class UpdateTB extends AppCompatActivity {
     }
 
     private void addEvents() {
+        //set tên
+        txtThem.setText("Chỉnh sửa thiết bị");
         //Tăng số lượng
         btnUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,9 +154,9 @@ public class UpdateTB extends AppCompatActivity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //Chọn Module
+                        //Chọn ModuleTB
                         if(menuItem.getItemId()==R.id.Module){
-                            type.setText("Module");
+                            type.setText("ModuleTB");
                         }else if(menuItem.getItemId()==R.id.DienTu){
                             type.setText("Điện tử");
                         }
@@ -174,7 +177,7 @@ public class UpdateTB extends AppCompatActivity {
 
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        //Chọn Module
+                        //Chọn ModuleTB
                         if(menuItem.getItemId()==R.id.Lab){
                             role.setText("Dùng tại Lab");
                         }else if(menuItem.getItemId()==R.id.Home){
@@ -198,7 +201,6 @@ public class UpdateTB extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CheckInImg();
-                btnZoom.setVisibility(View.VISIBLE);
             }
         });
         btnOpenThem.setOnClickListener(new View.OnClickListener() {
@@ -215,17 +217,7 @@ public class UpdateTB extends AppCompatActivity {
                 }
             }
         });
-        //Zoom thiết bị
-        Bundle bundle = new Bundle();
-        bundle.putString("ZoomKQ", hinhanh.getText().toString());
-        btnZoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UpdateTB.this, ZoomActivity.class);
-                intent.putExtra("ZoomIMG", bundle);
-                startActivity(intent);
-            }
-        });
+
         //Xóa dữ liệu vừa nhập
         btnXoa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,7 +230,6 @@ public class UpdateTB extends AppCompatActivity {
                 Glide.with(UpdateTB.this)
                         .load(R.drawable.ic_holder)
                         .into(checkImg);
-                btnZoom.setVisibility(View.GONE);
             }
         });
     }
@@ -264,12 +255,12 @@ public class UpdateTB extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(UpdateTB.this)
                         .setIcon(R.drawable.question)
                         .setTitle("Thông báo!")
-                        .setMessage("Xác nhận chỉnh sửa" + Ten
+                        .setMessage("Xác nhận chỉnh sửa " + Ten
                                 + "\nSố lượng: "+SoLuong
                                 +"\nThông tin: "+ThongTin
                                 +"\nLoại: " +Type
-                                +"\nThiết bị sử dụng tại " + Role)
-                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                +"\nThiết bị " + Role)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FireBaseHelper.reference.child("DanhSachThietBi").child(String.valueOf(key)).setValue(moduleTB);
@@ -277,7 +268,7 @@ public class UpdateTB extends AppCompatActivity {
                                 finish();
                             }
                         })
-                        .setPositiveButton("No", null);
+                        .setNegativeButton("No", null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
@@ -294,18 +285,13 @@ public class UpdateTB extends AppCompatActivity {
     public void CheckInImg() {
         if (isConnected()) {
             String url = hinhanh.getText().toString();
-            if (url.isEmpty()) {
-                Toast.makeText(this, "Địa chỉ trống!", Toast.LENGTH_SHORT).show();
-                btnZoom.setVisibility(View.GONE);
-            } else {
                 Glide.with(UpdateTB.this)
                         .load(url)
                         .centerCrop()
                         .error(R.drawable.ic_error)
                         .placeholder(R.drawable.ic_error)
                         .into(checkImg);
-                btnZoom.setVisibility(View.VISIBLE);
-            }
+
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(UpdateTB.this);
             builder.setTitle("Cảnh báo!").setIcon(R.drawable.ic_wifiout);
