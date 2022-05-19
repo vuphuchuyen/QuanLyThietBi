@@ -99,6 +99,7 @@ public class ChiTietDangKy extends AppCompatActivity {
             Button btnXacNhan = convertView.findViewById(R.id.btnXacnhan);
             Button btnTra = convertView.findViewById(R.id.btnTra);
             Button btnOpenCTDK = convertView.findViewById(R.id.btnOpenCTDK);
+            Button btnYeuCauTra = convertView.findViewById(R.id.btnYeuCauTra);
             TextView txtTime = convertView.findViewById(R.id.txtTime);
             ConstraintLayout ExpandCTDK = convertView.findViewById(R.id.expand_CTDK);
             CardView cardViewCTDK = convertView.findViewById(R.id.CV_Expand_CTDK);
@@ -126,7 +127,14 @@ public class ChiTietDangKy extends AppCompatActivity {
                                         time.setText(moduleSV.getTimeMuon());
                                         imgAlert.setVisibility(View.GONE);
                                         StatusTB.setText("ĐANG MƯỢN");
-                                    }else if(Integer.parseInt(String.valueOf(StatusTB.getText())) == 3){
+                                    }else if(Integer.parseInt(String.valueOf(StatusTB.getText()))== 3){
+                                        date.setText(moduleSV.getDateMuon());
+                                        time.setText(moduleSV.getTimeMuon());
+                                        txtTime.setText("Thời gian mượn");
+                                        imgAlert.setVisibility(View.VISIBLE);
+                                        StatusTB.setText("YÊU CẦU TRẢ");
+                                    }
+                                    else if(Integer.parseInt(String.valueOf(StatusTB.getText())) == 4){
                                         date.setText(moduleSV.getDateTra());
                                         time.setText(moduleSV.getTimeTra());
                                         txtTime.setText("Thời gian trả");
@@ -165,83 +173,106 @@ public class ChiTietDangKy extends AppCompatActivity {
                     String keygoc = moduleSV.getId();
                     String tentb = moduleSV.getTenthietbi();
                     if(StatusTB.getText().toString().equals("ĐĂNG KÝ")){
-                                String timeMuon = currentTime.format(calendar.getTime());
-                                String dateMuon = currentDate.format(calendar.getTime());
-                                String statusxacnhan = "2";
-                                String statusTuchoi = "0";
-                                ModuleSV modulexacnhan = new ModuleSV(Mssv, moduleSV.getSoluong(), moduleSV.getDateDK(), moduleSV.getTimeDK(), dateMuon, timeMuon, statusxacnhan, keygoc);
-                                btnXacNhan.setOnClickListener(new View.OnClickListener() {
+                        String timeMuon = currentTime.format(calendar.getTime());
+                        String dateMuon = currentDate.format(calendar.getTime());
+                        String statusxacnhan = "2";
+                        String statusTuchoi = "0";
+                        ModuleSV modulexacnhan = new ModuleSV(Mssv, moduleSV.getSoluong(), moduleSV.getDateDK(), moduleSV.getTimeDK(), dateMuon, timeMuon, statusxacnhan, keygoc);
+                        btnXacNhan.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder xacnhan = new AlertDialog.Builder(ChiTietDangKy.this);
+                                xacnhan.setTitle("Thông báo!").setIcon(R.drawable.question);
+                                xacnhan.setMessage("Xác nhận cho mượn thiết bị?");
+                                xacnhan.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     @Override
-                                    public void onClick(View v) {
-                                        AlertDialog.Builder xacnhan = new AlertDialog.Builder(ChiTietDangKy.this);
-                                        xacnhan.setTitle("Thông báo!").setIcon(R.drawable.question);
-                                        xacnhan.setMessage("Xác nhận cho mượn thiết bị?");
-                                        xacnhan.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                .child(Mssv)
+                                                .child("Thiết bị")
+                                                .child(keygoc)
+                                                .child("timeMuon")
+                                                .setValue(timeMuon);
+                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                .child(Mssv)
+                                                .child("Thiết bị")
+                                                .child(keygoc)
+                                                .child("dateMuon")
+                                                .setValue(dateMuon);
+                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                .child(Mssv)
+                                                .child("Thiết bị")
+                                                .child(keygoc)
+                                                .child("tinhtrang")
+                                                .setValue(statusxacnhan);
+                                        FireBaseHelper.reference.child("DanhSachThietBi")
+                                                .child(tentb)
+                                                .child("Đang mượn")
+                                                .child(keygoc)
+                                                .setValue(modulexacnhan);
+                                        //xác nhận mượn -> giảm thiết bị danh sách
+                                        FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                        .child(Mssv)
-                                                        .child("Thiết bị")
-                                                        .child(keygoc)
-                                                        .child("timeMuon")
-                                                        .setValue(timeMuon);
-                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                        .child(Mssv)
-                                                        .child("Thiết bị")
-                                                        .child(keygoc)
-                                                        .child("dateMuon")
-                                                        .setValue(dateMuon);
-                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                        .child(Mssv)
-                                                        .child("Thiết bị")
-                                                        .child(keygoc)
-                                                        .child("tinhtrang")
-                                                        .setValue(statusxacnhan);
-                                                FireBaseHelper.reference.child("DanhSachThietBi")
-                                                        .child(tentb)
-                                                        .child("Đang mượn")
-                                                        .child(keygoc)
-                                                        .setValue(modulexacnhan);
-                                                //xác nhận mượn -> giảm thiết bị danh sách
-                                                FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        if(snapshot.hasChild(tentb)){
-                                                                final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
-                                                                int num;
-                                                                num = Integer.parseInt(getSL) - Integer.parseInt(moduleSV.getSoluong());
-                                                                FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
-                                                                Toast.makeText(ChiTietDangKy.this,"Đã xác nhận cho sinh viên mượn thiết bị",Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    }
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if(snapshot.hasChild(tentb)){
+                                                    final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
+                                                    int num;
+                                                    num = Integer.parseInt(getSL) - Integer.parseInt(moduleSV.getSoluong());
+                                                    FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
+                                                    Toast.makeText(ChiTietDangKy.this,"Đã xác nhận cho sinh viên mượn thiết bị",Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
 
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
 
-                                                    }
-                                                });
                                             }
                                         });
-                                        xacnhan.setPositiveButton("NO", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                        .child(Mssv)
-                                                        .child("Thiết bị")
-                                                        .child(keygoc)
-                                                        .child("tinhtrang")
-                                                        .setValue(statusTuchoi);
-                                                Toast.makeText(ChiTietDangKy.this,"Đã từ chối cho sinh viên mượn thiết bị",Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                        AlertDialog dialogxacnhan = xacnhan.create();
-                                        dialogxacnhan.show();
                                     }
                                 });
-
-                        }
-                    else if(StatusTB.getText().toString().equals("ĐANG MƯỢN")){
-                        FireBaseHelper.reference.child("Account").addValueEventListener(new ValueEventListener() {
+                                xacnhan.setPositiveButton("NO", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                .child(Mssv)
+                                                .child("Thiết bị")
+                                                .child(keygoc)
+                                                .setValue(null);
+                                        Toast.makeText(ChiTietDangKy.this,"Đã từ chối cho sinh viên mượn thiết bị",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                AlertDialog dialogxacnhan = xacnhan.create();
+                                dialogxacnhan.show();
+                            }
+                        });
+                    }
+                    else if(StatusTB.getText().toString().equals("ĐANG MƯỢN")) {
+                        String statusyeucau = "3";
+                        btnYeuCauTra.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder yeucau = new AlertDialog.Builder(ChiTietDangKy.this);
+                                yeucau.setTitle("Thông báo!").setIcon(R.drawable.question);
+                                yeucau.setMessage("Gửi yêu cầu trả thiết bị?");
+                                yeucau.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                .child(Mssv)
+                                                .child("Thiết bị")
+                                                .child(keygoc)
+                                                .child("tinhtrang")
+                                                .setValue(statusyeucau);
+                                    }
+                                });
+                                yeucau.setPositiveButton("NO", null);
+                                AlertDialog dialogxacnhan = yeucau.create();
+                                dialogxacnhan.show();
+                            }
+                        });
+                    }
+                    else if(StatusTB.getText().toString().equals("YÊU CẦU TRẢ")){
+                        FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if(snapshot.hasChild(Mssv)){
@@ -445,7 +476,7 @@ public class ChiTietDangKy extends AppCompatActivity {
                             if(StatusTB.getText() == "ĐĂNG KÝ") {
                                 btnXacNhan.setVisibility(View.VISIBLE);
                             }
-                                if (StatusTB.getText() == "ĐANG MƯỢN") {
+                                if (StatusTB.getText() == "YÊU CẦU TRẢ") {
                                     btnTra.setVisibility(View.VISIBLE);
                                 }
                         } else{
@@ -469,7 +500,11 @@ public class ChiTietDangKy extends AppCompatActivity {
                         if(StatusTB.getText() == "ĐĂNG KÝ") {
                             btnFix.setVisibility(View.VISIBLE);
                         }
+                        if(StatusTB.getText() == "ĐANG MƯỢN") {
+                            btnYeuCauTra.setVisibility(View.VISIBLE);
+                        }
                     }else{
+                        btnYeuCauTra.setVisibility(View.GONE);
                         btnFix.setVisibility(View.GONE);
                     }
                 }

@@ -34,6 +34,7 @@ import com.vph.qltb.SinhVien.DanhSach.DsDangKy;
 import com.vph.qltb.SinhVien.DanhSach.HistoryALL;
 import com.vph.qltb.SinhVien.HoSo.HoSoSV;
 import com.vph.qltb.ThietBi.ChucNang.ThemTB;
+import com.vph.qltb.ThietBi.QuyTac;
 import com.vph.qltb.ThietBi.ThietBi;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         btnHistory = findViewById(R.id.btnHistory);
+        btnRule = findViewById(R.id.btnRule);
         btnDSDK = findViewById(R.id.btnDSDK);
         btnDSTB = findViewById(R.id.btnDSTB);
         btnThem = findViewById(R.id.btnThem);
@@ -136,6 +138,13 @@ public class Menu extends AppCompatActivity {
     }
 
     private void Button(){
+        btnRule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rule = new Intent(Menu.this, QuyTac.class);
+                startActivity(rule);
+            }
+        });
         btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

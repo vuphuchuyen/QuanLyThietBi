@@ -128,6 +128,8 @@ public class History extends AppCompatActivity {
             FireBaseHelper.reference.child("Account")
                     .child(Menu.login)
                     .child("LichSuMuon")
+                    .child(moduleSV.getTenthietbi())
+                    .child("keymuon")
                     .addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {

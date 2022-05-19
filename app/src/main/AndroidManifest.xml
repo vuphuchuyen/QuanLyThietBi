@@ -15,14 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyThietBi">
         <activity
+            android:name=".ThietBi.QuyTac"
+            android:exported="true" />
+        <activity
             android:name=".SinhVien.HoSo.ChiTietHistory"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.HoSo.History"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.DanhSach.ChiTietHistoryALL"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".SinhVien.ChucNang.SuaDK"
             android:exported="true" />

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ThietBi.QuyTac">
+
+    <androidx.appcompat.widget.AppCompatButton
+            android:backgroundTint="@color/blue"
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/ic_quaylai" />
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_button_blue"
+        android:backgroundTint="@color/blue">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quy tắc mượn thiết bị"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/design_button_blue"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trước khi bắt đầu mượn, kiểm tra xem thiết bị có vấn đề gì hay không. Nếu thiết bị có vấn đề hay lỗi phải lập tức báo cáo cho giảng viên tại phòng."
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2."
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trước khi đăng ký phải luôn ghi lý do mượn rõ ràng, đối với những lý do không hợp lệ sẽ ngay lập tức bị từ chối không cho mượn."
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3."
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đối với những thiết bị sử dụng tại phòng Lab thì tuyệt đối không được phép mang ra ngoài."
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4."
+            android:textColor="@color/red"
+            android:textStyle="bold"
+            android:textSize="22sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vì thiết bị không phải mình sinh viên mượn nên khi mượn cần phải bảo quản kỹ thiết bị mình đang mượn.Trường hợp sinh viên làm hỏng thiết bị thì phải đi mua lại thiết bị y hệt với thiết bị mà mình đã làm hỏng."
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
+</LinearLayout>

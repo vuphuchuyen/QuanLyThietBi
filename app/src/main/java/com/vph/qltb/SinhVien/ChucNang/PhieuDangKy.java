@@ -1,9 +1,6 @@
 package com.vph.qltb.SinhVien.ChucNang;
 
 import android.annotation.SuppressLint;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -21,8 +18,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,28 +42,18 @@ public class PhieuDangKy extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy"); //Format hiển thị ngày/tháng/năm
     SimpleDateFormat currentTime = new SimpleDateFormat("hh:mm a");
-    String CHANNEL_DK_ID = "Thông báo đăng ký";
-    NotificationManagerCompat notificationManagerCompat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phieu_dang_ky);
-        Noti();
         addControls();
         addEvents();
         ChonTB();
 
     }
 
-    private void Noti() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(CHANNEL_DK_ID, "Đăng ký", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Đăng ký");
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
 
     private void ChonTB() {
         //TB mượn
@@ -160,18 +145,18 @@ public class PhieuDangKy extends AppCompatActivity {
                 Muon();
             }
         });
-        this.notificationManagerCompat = NotificationManagerCompat.from(this);
         //Tăng số lượng
         btnUp.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String num = soluong.getText().toString();
                 if (num.isEmpty()) {
                     soluong.setText("1");
                 } else {
-                    int plus = Integer.parseInt(num);
-                    plus += 1;
-                    soluong.setText(String.valueOf(plus));
+                    int up = Integer.parseInt(num);
+                    up += 1;
+                    soluong.setText(String.valueOf(up));
                 }
             }
         });
@@ -233,7 +218,7 @@ public class PhieuDangKy extends AppCompatActivity {
                                                             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("sinhvien").setValue(getSV);
                                                             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("mssv").setValue(Mssv);
                                                             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").child(key).setValue(moduleThietBi);
-                                                                thongbao();
+
                                                                 lydo.setText(null);
                                                                 soluong.setText("1");
                                                                 chkCamKet.setChecked(false);
@@ -246,7 +231,6 @@ public class PhieuDangKy extends AppCompatActivity {
                                                 }
 
                                             }
-
                                 }
 
                             }
@@ -271,17 +255,7 @@ public class PhieuDangKy extends AppCompatActivity {
             dialog.show();
         }
     }
-    private void thongbao(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_DK_ID)
-                .setSmallIcon(R.drawable.ic_noti)
-                .setContentTitle("Thông báo!")
-                .setContentText("Có sinh viên mượn thiết bị")
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setDefaults(NotificationCompat.DEFAULT_SOUND + NotificationCompat.DEFAULT_VIBRATE)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        this.notificationManagerCompat.notify(1, builder.build());
 
-    }
 
     private void addControls() {
         chkCamKet = findViewById(R.id.chkCamKet);
@@ -299,7 +273,7 @@ public class PhieuDangKy extends AppCompatActivity {
 
     //Kiểm tra kết nối internet
     boolean isConnected() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(PhieuDangKy.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null) {

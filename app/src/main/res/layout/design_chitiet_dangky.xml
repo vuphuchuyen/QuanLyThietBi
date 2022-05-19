@@ -269,51 +269,73 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnXacnhan"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:background="@drawable/design_button_blue"
-                    android:backgroundTint="@color/blue"
-                    android:drawableLeft="@drawable/ic_done"
-                    android:drawableTint="@color/white"
-                    android:text="Xác nhận"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/Device_Image"
+                    tools:layout_editor_absoluteX="2dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnFix"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="88dp"
-                    android:background="@drawable/design_button_blue"
-                    android:backgroundTint="@color/blue"
-                    android:drawableLeft="@drawable/ic_fix"
-                    android:drawableTint="@color/white"
-                    android:text="Chỉnh sửa"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnXacnhan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/design_button_blue"
+                        android:backgroundTint="@color/blue"
+                        android:drawableLeft="@drawable/ic_done"
+                        android:drawableTint="@color/white"
+                        android:text="Xác nhận"
+                        android:textColor="@color/white"
+                        android:visibility="gone" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnTra"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="88dp"
-                    android:background="@drawable/design_button_blue"
-                    android:backgroundTint="@color/blue"
-                    android:drawableLeft="@drawable/ic_done"
-                    android:drawableTint="@color/white"
-                    android:text="Trả"
-                    android:visibility="gone"
-                    android:textColor="@color/white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/Device_Image" />
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:visibility="gone"
+                        android:id="@+id/btnFix"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="70dp"
+                        android:background="@drawable/design_button_blue"
+                        android:backgroundTint="@color/blue"
+                        android:drawableLeft="@drawable/ic_fix"
+                        android:drawableTint="@color/white"
+                        android:text="Chỉnh sửa"
+                        android:textColor="@color/white"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnYeuCauTra"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="70dp"
+                        android:background="@drawable/design_button_blue"
+                        android:backgroundTint="@color/blue"
+                        android:drawableLeft="@drawable/ic_thietbi"
+                        android:drawableTint="@color/white"
+                        android:text="Trả"
+                        android:textColor="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnTra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="70dp"
+                        android:background="@drawable/design_button_blue"
+                        android:backgroundTint="@color/blue"
+                        android:drawableLeft="@drawable/ic_done"
+                        android:drawableTint="@color/white"
+                        android:text="Trả"
+                        android:layout_marginStart="20dp"
+                        android:textColor="@color/white"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

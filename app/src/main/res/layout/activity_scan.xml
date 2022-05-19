@@ -57,12 +57,11 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
+        android:layout_width="1000dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:maxLines="1"
-        android:text="-----------------------------------------------------"
+        android:text="---------------------------------------------------------------------------------------------------------"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"

@@ -36,7 +36,7 @@ import com.vph.qltb.ThietBi.ZoomActivity;
 public class UpdateTB extends AppCompatActivity {
 
     EditText ten, soluong, thongtin, hinhanh, role, type;
-    Button btnXacNhan, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg, btnSelect_Type, btnSelect_Role;
+    Button btnXacNhan, btnBack, btnXoa, btnUp, btnDown, btnOpenThem, btnCheckImg, btnSelect_Type, btnSelect_Role, btnCheckTen;
     CardView cardView;
     TextView txtThem;
     LinearLayout expand_them;
@@ -84,7 +84,7 @@ public class UpdateTB extends AppCompatActivity {
     }
 
     private void addControls() {
-
+        btnCheckTen = findViewById(R.id.btnCheckTen);
         txtThem = findViewById(R.id.txtThem);
         ten = findViewById(R.id.editDevice_Name);
         soluong = findViewById(R.id.editDeivce_Number);
@@ -107,6 +107,8 @@ public class UpdateTB extends AppCompatActivity {
     }
 
     private void addEvents() {
+        btnCheckTen.setVisibility(View.GONE);
+        btnXacNhan.setVisibility(View.VISIBLE);
         //set tên
         txtThem.setText("Chỉnh sửa thiết bị");
         //Tăng số lượng
@@ -260,7 +262,7 @@ public class UpdateTB extends AppCompatActivity {
                                 +"\nThông tin: "+ThongTin
                                 +"\nLoại: " +Type
                                 +"\nThiết bị " + Role)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 FireBaseHelper.reference.child("DanhSachThietBi").child(String.valueOf(key)).setValue(moduleTB);
@@ -268,7 +270,7 @@ public class UpdateTB extends AppCompatActivity {
                                 finish();
                             }
                         })
-                        .setNegativeButton("No", null);
+                        .setPositiveButton("No", null);
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
