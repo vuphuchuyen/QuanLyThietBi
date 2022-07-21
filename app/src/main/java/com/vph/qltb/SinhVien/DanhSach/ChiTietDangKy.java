@@ -165,14 +165,12 @@ public class ChiTietDangKy extends AppCompatActivity {
 
                 }
             });
-
+            String keygoc = moduleSV.getId();
+            String tentb = moduleSV.getTenthietbi();
             //Xác nhận đăng ký
             FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    String keygoc = moduleSV.getId();
-                    String tentb = moduleSV.getTenthietbi();
-                    if(StatusTB.getText().toString().equals("ĐĂNG KÝ")){
                         String timeMuon = currentTime.format(calendar.getTime());
                         String dateMuon = currentDate.format(calendar.getTime());
                         String statusxacnhan = "2";
@@ -246,7 +244,18 @@ public class ChiTietDangKy extends AppCompatActivity {
                             }
                         });
                     }
-                    else if(StatusTB.getText().toString().equals("ĐANG MƯỢN")) {
+
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            //Yêu cầu trả
+            FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String statusyeucau = "3";
                         btnYeuCauTra.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -263,6 +272,7 @@ public class ChiTietDangKy extends AppCompatActivity {
                                                 .child(keygoc)
                                                 .child("tinhtrang")
                                                 .setValue(statusyeucau);
+                                        Toast.makeText(ChiTietDangKy.this, "Đã yêu cầu trả thiết bị", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                                 yeucau.setPositiveButton("NO", null);
@@ -270,12 +280,22 @@ public class ChiTietDangKy extends AppCompatActivity {
                                 dialogxacnhan.show();
                             }
                         });
+
                     }
-                    else if(StatusTB.getText().toString().equals("YÊU CẦU TRẢ")){
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            //Xác nhận trả
+            FireBaseHelper.reference.child("DanhSachDangKy").child(Mssv).child("Thiết bị").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
                         FireBaseHelper.reference.child("Account").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if(snapshot.hasChild(Mssv)){
+                                if (snapshot.hasChild(Mssv)) {
                                     final String getTenSV = snapshot.child(Mssv).child("sinhvien").getValue(String.class);
                                     String soluong = moduleSV.getSoluong();
                                     String tenthietbi = moduleSV.getTenthietbi();
@@ -286,7 +306,7 @@ public class ChiTietDangKy extends AppCompatActivity {
                                     String dateMuon = moduleSV.getDateMuon();
                                     String dateTra = currentDate.format(calendar.getTime());
                                     String timeMuon = moduleSV.getTimeMuon();
-                                    ModuleSV moduleTBTra = new ModuleSV(Mssv, getTenSV, soluong, tenthietbi, dateDK, timeDK ,dateMuon, timeMuon, dateTra,timeTra, lydo, keygoc);
+                                    ModuleSV moduleTBTra = new ModuleSV(Mssv, getTenSV, soluong, tenthietbi, dateDK, timeDK, dateMuon, timeMuon, dateTra, timeTra, lydo, keygoc);
                                     btnTra.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
@@ -296,13 +316,13 @@ public class ChiTietDangKy extends AppCompatActivity {
                                             xacnhan.setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    FireBaseHelper.reference.child("DanhSachDangKy")
-                                                            .child(Mssv).child("Thiết bị").addValueEventListener(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            long total;
-                                                            total = snapshot.getChildrenCount();
-                                                            if(total==0){
+                                                    long total;
+                                                    total = snapshot.getChildrenCount();
+                                                    if (total == 0) {
+                                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                .child(Mssv).child("Thiết bị").addValueEventListener(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                                 //Lưu chung
                                                                 FireBaseHelper.reference.child("DanhSachDangKy")
                                                                         .child(Mssv)
@@ -322,6 +342,11 @@ public class ChiTietDangKy extends AppCompatActivity {
                                                                         .child("keymuon")
                                                                         .child(keygoc)
                                                                         .setValue(moduleTBTra);
+                                                                FireBaseHelper.reference.child("DanhSachThietBi")
+                                                                        .child(tentb)
+                                                                        .child("Đang mượn")
+                                                                        .child(keygoc)
+                                                                        .setValue(null);
                                                                 //Lưu riêng theo Account
                                                                 FireBaseHelper.reference.child("Account")
                                                                         .child(Mssv)
@@ -336,71 +361,20 @@ public class ChiTietDangKy extends AppCompatActivity {
                                                                         .child("keymuon")
                                                                         .child(keygoc)
                                                                         .setValue(moduleTBTra);
-                                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                                        .child(Mssv).setValue(null);
-                                                                //xác nhận trả -> tăng thiết bị danh sách
-                                                                FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if(snapshot.hasChild(tentb)){
-                                                                            final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
-                                                                            int num;
-                                                                            num = Integer.parseInt(getSL) + Integer.parseInt(moduleSV.getSoluong());
-                                                                            FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                                    }
-                                                                });
+                                                                    FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                                    .child(Mssv).setValue(null);
                                                                 finish();
-                                                                Toast.makeText(ChiTietDangKy.this,"Đã ghi nhận trả thiết bị",Toast.LENGTH_SHORT).show();
-                                                            }
-                                                            else{
-                                                                //Lưu chung
-                                                                FireBaseHelper.reference.child("DanhSachDangKy")
-                                                                        .child(Mssv)
-                                                                        .child("Thiết bị")
-                                                                        .child(keygoc).setValue(null);
-                                                                FireBaseHelper.reference.child("DanhSachThietBi")
-                                                                        .child(tentb)
-                                                                        .child("Đang mượn")
-                                                                        .child(keygoc)
-                                                                        .setValue(null);
-                                                                FireBaseHelper.reference.child("LichSuMuonThietBi")
-                                                                        .child(tenthietbi)
-                                                                        .child("tenthietbi")
-                                                                        .setValue(tenthietbi);
-                                                                FireBaseHelper.reference.child("LichSuMuonThietBi")
-                                                                        .child(tenthietbi)
-                                                                        .child("keymuon")
-                                                                        .child(keygoc)
-                                                                        .setValue(moduleTBTra);
-                                                                //Lưu riêng theo Account
-                                                                FireBaseHelper.reference.child("Account")
-                                                                        .child(Mssv)
-                                                                        .child("LichSuMuon")
-                                                                        .child(tenthietbi)
-                                                                        .child("tenthietbi")
-                                                                        .setValue(tenthietbi);
-                                                                FireBaseHelper.reference.child("Account")
-                                                                        .child(Mssv)
-                                                                        .child("LichSuMuon")
-                                                                        .child(tenthietbi)
-                                                                        .child("keymuon")
-                                                                        .child(keygoc)
-                                                                        .setValue(moduleTBTra);
+
                                                                 //xác nhận trả -> tăng thiết bị danh sách
                                                                 FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
                                                                     @Override
                                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if(snapshot.hasChild(tentb)){
+                                                                        if (snapshot.hasChild(tentb)) {
                                                                             final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
                                                                             int num;
                                                                             num = Integer.parseInt(getSL) + Integer.parseInt(moduleSV.getSoluong());
                                                                             FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
+                                                                            Toast.makeText(ChiTietDangKy.this, "Đã ghi nhận trả thiết bị", Toast.LENGTH_SHORT).show();
                                                                         }
                                                                     }
 
@@ -409,41 +383,169 @@ public class ChiTietDangKy extends AppCompatActivity {
 
                                                                     }
                                                                 });
-                                                                Toast.makeText(ChiTietDangKy.this,"Đã ghi nhận trả thiết bị",Toast.LENGTH_SHORT).show();
+
+
                                                             }
-                                                        }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
 
-                                                        }
-                                                    });
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
 
+                                                            }
+                                                        });
+                                                    } else {
+                                                        FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                .child(Mssv).child("Thiết bị").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                long total;
+                                                                total = snapshot.getChildrenCount();
+                                                                if (total == 0) {
+                                                                    //Lưu chung
+                                                                    FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                            .child(Mssv)
+                                                                            .child("Thiết bị")
+                                                                            .child(keygoc).setValue(null);
+                                                                    FireBaseHelper.reference.child("DanhSachThietBi")
+                                                                            .child(tentb)
+                                                                            .child("Đang mượn")
+                                                                            .child(keygoc)
+                                                                            .setValue(null);
+                                                                    FireBaseHelper.reference.child("LichSuMuonThietBi")
+                                                                            .child(tenthietbi)
+                                                                            .child("tenthietbi")
+                                                                            .setValue(tenthietbi);
+                                                                    FireBaseHelper.reference.child("LichSuMuonThietBi")
+                                                                            .child(tenthietbi)
+                                                                            .child("keymuon")
+                                                                            .child(keygoc)
+                                                                            .setValue(moduleTBTra);
+                                                                    FireBaseHelper.reference.child("DanhSachThietBi")
+                                                                            .child(tentb)
+                                                                            .child("Đang mượn")
+                                                                            .child(keygoc)
+                                                                            .setValue(null);
+                                                                    //Lưu riêng theo Account
+                                                                    FireBaseHelper.reference.child("Account")
+                                                                            .child(Mssv)
+                                                                            .child("LichSuMuon")
+                                                                            .child(tenthietbi)
+                                                                            .child("tenthietbi")
+                                                                            .setValue(tenthietbi);
+                                                                    FireBaseHelper.reference.child("Account")
+                                                                            .child(Mssv)
+                                                                            .child("LichSuMuon")
+                                                                            .child(tenthietbi)
+                                                                            .child("keymuon")
+                                                                            .child(keygoc)
+                                                                            .setValue(moduleTBTra);
+                                                                    FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                            .child(Mssv).setValue(null);
+                                                                    //xác nhận trả -> tăng thiết bị danh sách
+                                                                    FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                            if (snapshot.hasChild(tentb)) {
+                                                                                final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
+                                                                                int num;
+                                                                                num = Integer.parseInt(getSL) + Integer.parseInt(moduleSV.getSoluong());
+
+                                                                                FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
+                                                                                Toast.makeText(ChiTietDangKy.this, "Đã ghi nhận trả thiết bị", Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                        }
+                                                                    });
+                                                                    finish();
+
+                                                                } else {
+                                                                    //Lưu chung
+                                                                    FireBaseHelper.reference.child("DanhSachDangKy")
+                                                                            .child(Mssv)
+                                                                            .child("Thiết bị")
+                                                                            .child(keygoc).setValue(null);
+                                                                    FireBaseHelper.reference.child("DanhSachThietBi")
+                                                                            .child(tentb)
+                                                                            .child("Đang mượn")
+                                                                            .child(keygoc)
+                                                                            .setValue(null);
+                                                                    FireBaseHelper.reference.child("LichSuMuonThietBi")
+                                                                            .child(tenthietbi)
+                                                                            .child("tenthietbi")
+                                                                            .setValue(tenthietbi);
+                                                                    FireBaseHelper.reference.child("LichSuMuonThietBi")
+                                                                            .child(tenthietbi)
+                                                                            .child("keymuon")
+                                                                            .child(keygoc)
+                                                                            .setValue(moduleTBTra);
+                                                                    //Lưu riêng theo Account
+                                                                    FireBaseHelper.reference.child("Account")
+                                                                            .child(Mssv)
+                                                                            .child("LichSuMuon")
+                                                                            .child(tenthietbi)
+                                                                            .child("tenthietbi")
+                                                                            .setValue(tenthietbi);
+                                                                    FireBaseHelper.reference.child("Account")
+                                                                            .child(Mssv)
+                                                                            .child("LichSuMuon")
+                                                                            .child(tenthietbi)
+                                                                            .child("keymuon")
+                                                                            .child(keygoc)
+                                                                            .setValue(moduleTBTra);
+                                                                    //xác nhận trả -> tăng thiết bị danh sách
+                                                                    FireBaseHelper.reference.child("DanhSachThietBi").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                        @Override
+                                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                            if (snapshot.hasChild(tentb)) {
+                                                                                final String getSL = snapshot.child(tentb).child("soluong").getValue(String.class);
+                                                                                int num;
+                                                                                num = Integer.parseInt(getSL) + Integer.parseInt(moduleSV.getSoluong());
+                                                                                FireBaseHelper.reference.child("DanhSachThietBi").child(tentb).child("soluong").setValue(String.valueOf(num));
+                                                                                Toast.makeText(ChiTietDangKy.this, "Đã ghi nhận trả thiết bị", Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        }
+
+                                                                        @Override
+                                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                                            }
+                                                        });
+                                                    }
                                                 }
                                             });
-                                            xacnhan.setPositiveButton("NO",null);
+                                            xacnhan.setPositiveButton("NO", null);
                                             AlertDialog dialogxacnhan = xacnhan.create();
                                             dialogxacnhan.show();
                                         }
                                     });
                                 }
                             }
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
                         });
 
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+                });
             //Sửa đăng ký
             btnFix.setOnClickListener(new View.OnClickListener() {
                 @Override

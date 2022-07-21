@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,10 +23,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.vph.qltb.FireBaseHelper;
 import com.vph.qltb.R;
 import com.vph.qltb.SinhVien.ModuleHSSV;
+import com.vph.qltb.ThietBi.QuyTac;
 
 public class DangKyAccount extends AppCompatActivity {
     Button btnQuestion, btnBack, btnXoa, btnXacNhan,  btnCheckMSSV, btnReCheckMSSV;
     EditText editMSSV, editTen, editLop, editPhone, editMatKhau, editXacNhanMatKhau;
+    TextView Rule;
     CheckBox checkMK, checkXacNhanMK;
 
     @Override
@@ -47,7 +50,7 @@ public class DangKyAccount extends AppCompatActivity {
         editPhone = findViewById(R.id.editStudent_Phone);
         editMatKhau = findViewById(R.id.editStudent_PassWord);
         editXacNhanMatKhau = findViewById(R.id.editStudent_PassWordXacNhan);
-
+        Rule = findViewById(R.id.Rule);
         btnCheckMSSV = findViewById(R.id.btnCheckTen);
         btnReCheckMSSV = findViewById(R.id.btnReCheckTen);
         checkMK = findViewById(R.id.chkHienThi);
@@ -55,6 +58,13 @@ public class DangKyAccount extends AppCompatActivity {
     }
 
     private void Events() {
+        Rule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent rule = new Intent(DangKyAccount.this, QuyTac.class);
+                startActivity(rule);
+            }
+        });
         //Check trước mới được nhập
         btnCheckMSSV.setOnClickListener(new View.OnClickListener() {
             @Override
